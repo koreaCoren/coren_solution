@@ -8,30 +8,30 @@ const SignUp = () => {
     const [email, setEmail] = usestate('');
 
     return (
-        <div>
-            <div>아이디 
-                <input 
-                type="text"
-                value={uid}
-                onChange={(e) => {
-                    setUid(e.target.value);
-                }}
+        <>
+            <div>아이디
+                <input
+                    type="text"
+                    value={uid}
+                    onChange={(e) => {
+                        setUid(e.target.value);
+                    }}
                 />
             </div>
             <div>비밀번호
-                <input 
-                type="password"
-                value={upw}
-                oncChange={(e) => {
-                    setUpw(e.target.value);
-                }} />
+                <input
+                    type="password"
+                    value={upw}
+                    oncChange={(e) => {
+                        setUpw(e.target.value);
+                    }} />
             </div>
             <div>비밀번호 재확인
-                <input 
-                type="text"
-                 />                
+                <input
+                    type="text"
+                />
             </div>
-        </div>
+        </>
     );
 };
 
