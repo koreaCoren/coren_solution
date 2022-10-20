@@ -10,18 +10,23 @@ const Login = () => {
     const [getId, setId] = useState();
     const [getPassword, setPassword] = useState();
 
-    axios({
-        url: "MVC/backend/user/sel_user",
-        method: "post",
-        data: {
-            id: getId,
-            password: getPassword,
-        }
-    }).then((res) => {
-        console.log(res);
-    }).catch((error) => {
-        console.log(error);
-    })
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        await axios({
+            url: "MVC/backend/user/sel_user",
+            method: "post",
+            data: {
+                id: getId,
+                password: getPassword,
+            }
+        }).then((res) => {
+            console.log(res);
+            console.log("성공");
+        }).catch((error) => {
+            console.log(error);
+            console.log("응 안됨 돌아가");
+        })
+    }
 
     const onChange = (e) => {
         const value = e.target.value;
@@ -41,7 +46,7 @@ const Login = () => {
             <div className="loginContainer">
                 <h2>LOGIN</h2>
 
-                <form>
+                <form onSubmit={onSubmit}>
                     <input type="text" onChange={onChange} name="id" placeholder='아이디' />
                     <input type="password" onChange={onChange} name="password" placeholder='비밀번호' />
 
