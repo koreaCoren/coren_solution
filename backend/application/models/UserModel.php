@@ -5,7 +5,7 @@ use PDO;
 class UserModel extends Model {
     //테스트용
     public function ins_user(&$param) {
-        $sql = "INSERT INTO test
+        $sql = "INSERT INTO member
                 (
                     id, pw
                 )
@@ -21,14 +21,14 @@ class UserModel extends Model {
     }
 
     public function sel_user(){
-        $sql = "SELECT * FROM test";
+        $sql = "SELECT * FROM member";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
     public function upd_user(&$param){
-        $sql = "UPDATE test SET id = :cid
+        $sql = "UPDATE member SET id = :cid
                 WHERE id = :id";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(":cid", $param["cid"]);
@@ -38,7 +38,7 @@ class UserModel extends Model {
     }
 
     public function del_user(&$param){
-        $sql = "DELETE FROM test WHERE id = :id";
+        $sql = "DELETE FROM member WHERE id = :id";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(":id", $param["id"]);        
         $stmt->execute();

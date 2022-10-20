@@ -13,7 +13,7 @@ const Login = () => {
     const onSubmit = async (e) => {
         e.preventDefault();
         await axios({
-            url: "MVC/backend/user/sel_user",
+            url: "MVC/backend/user/ins_user",
             method: "post",
             data: {
                 id: getId,
