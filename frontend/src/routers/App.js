@@ -1,21 +1,17 @@
 import React, { useState } from "react";
-import { Routes, Route } from "react-router-dom";
-import Index from "../components/Layout/Index";
-import Header from "../components/Layout/Header";
-import Footer from "../components/Layout/Footer";
-import UserRouter from "./UserRouter";
+import { Routes, Route, Link } from "react-router-dom";
+import Login from "pages/login/Login";
+
+import "asset/css/common.css";
 
 const App = () => {
-  return (
-    <>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Index />}></Route>
-        <Route path="/User/*" element={<UserRouter />}></Route>
-      </Routes>
-      <Footer />
-    </>
-  );
+    return (
+        <>
+            <Routes>
+                <Route path="/*" element={<Login />}></Route>
+            </Routes>
+        </>
+    );
 };
 
 export default App;
