@@ -35,7 +35,7 @@ const Login = () => {
             case "id":
                 setId(value);
             case "password":
-                setId(value);
+                setPassword(value);
             default:
                 break;
         }
