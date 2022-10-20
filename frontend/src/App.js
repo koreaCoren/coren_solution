@@ -15,7 +15,7 @@ const App = () => {
     }
     console.log(param);
     try {
-      const result = await axios.post("MVC/backend/user/ins_user", param);
+      const result = await axios.post("backend/user/ins_user", param);
       setId('');
       setPw('');
       console.log(result);
