@@ -12,11 +12,13 @@ const Login = () => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
+
         const url = "MVC/backend/user/userLogin";
         const loginData = {
             id: getId,
             password: getPassword,
         }
+
         await axios.post(url, loginData).then((res) => {
             console.log(res);
             console.log("성공");

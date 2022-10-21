@@ -12,13 +12,15 @@ const Modify = () => {
     const [getEamil, setEmail] = useState();
 
     const onSubmit = async (e) => {
+        e.preventDefault();
+
         const emailRegex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
         if (!emailRegex.test(getEamil)) {
             alert("이메일 형식이 아님 다시 적으셈");
             return;
         }
 
-        const url = "MVC/backend/user/ins_user";
+        const url = "http://localhost/MVC/backend/user/ins_user";
         const loginData = {
             id: getId,
             password: getPassword,
@@ -32,8 +34,6 @@ const Modify = () => {
             console.log(error);
             console.log("되겠냐?");
         })
-
-        e.preventDefault();
     }
 
     const onChange = (e) => {
