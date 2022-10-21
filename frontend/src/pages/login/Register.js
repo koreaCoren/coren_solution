@@ -48,8 +48,10 @@ const Modify = () => {
                 setId(value);
             case "pw":
                 setPassword(value);
+                break;
             case "email":
                 setEmail(value);
+                break;
             default:
                 break;
         }
