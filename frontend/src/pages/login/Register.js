@@ -20,10 +20,11 @@ const Modify = () => {
             return;
         }
 
-        const url = "/MVC/backend/user/ins_user";
+        // const url = "/MVC/backend/user/ins_user";
+        const url = "http://192.168.0.86/MVC/backend/user/ins_user";
         const loginData = {
             id: getId,
-            password: getPassword,
+            pw: getPassword,
             email: getEamil,
         };
 
@@ -45,7 +46,7 @@ const Modify = () => {
         switch (name) {
             case "id":
                 setId(value);
-            case "password":
+            case "pw":
                 setPassword(value);
             case "email":
                 setEmail(value);
@@ -69,7 +70,7 @@ const Modify = () => {
                     <input
                         type="password"
                         onChange={onChange}
-                        name="password"
+                        name="pw"
                         placeholder="비밀번호"
                     />
                     <input

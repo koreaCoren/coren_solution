@@ -1,12 +1,16 @@
 <?php
-    define('_ROOT', $_SERVER['DOCUMENT_ROOT']);
-    define('_DBTYPE', 'mysql'); //mysql, mariadb 등
-    define('_DBHOST', 'localhost'); //DB접속 주소
-    define('_DBNAME', 'Server'); //DB명
-    define('_DBUSER', 'root'); //아이디
-    define('_DBPASSWORD', '1234'); //비번
-    define('_CHARSET', 'utf8');
-    define("_VIEW", "application/views/");
+define('_ROOT', $_SERVER['DOCUMENT_ROOT']);
+define('_DBTYPE', 'mysql'); //mysql, mariadb 등
+define('_DBHOST', '192.168.0.115'); //DB접속 주소
+define('_DBNAME', 'test'); //DB명
+define('_DBUSER', 'root'); //아이디
+define('_DBPASSWORD', '1234'); //비번
+// define('_DBHOST', '192.168.0.86'); //DB접속 주소
+// define('_DBNAME', 'test'); //DB명
+// define('_DBUSER', 'coren'); //아이디
+// define('_DBPASSWORD', 'coren'); //비번
+define('_CHARSET', 'utf8');
+define("_VIEW", "application/views/");
 
 define("_HEADER", "header");
 define("_MAIN", "main");
