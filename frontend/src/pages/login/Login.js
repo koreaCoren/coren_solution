@@ -13,7 +13,7 @@ const Login = () => {
     const onSubmit = async (e) => {
         e.preventDefault();
 
-        const url = "MVC/backend/user/userLogin";
+        const url = "/MVC/backend/user/userLogin";
         const loginData = {
             id: getId,
             password: getPassword,
