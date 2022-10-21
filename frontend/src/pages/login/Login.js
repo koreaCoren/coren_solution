@@ -12,7 +12,7 @@ const Login = () => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        const url = "https://0d56cdb4-a231-4fc7-9510-bd3644fbdcd2.mock.pstmn.io/login";
+        const url = "MVC/backend/user/userLogin";
         const loginData = {
             id: getId,
             password: getPassword,
