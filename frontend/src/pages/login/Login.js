@@ -13,10 +13,10 @@ const Login = () => {
     const onSubmit = async (e) => {
         e.preventDefault();
 
-        const url = "/MVC/backend/user/userLogin";
+        const url = "http://192.168.0.86/MVC/backend/user/userLogin";
         const loginData = {
             id: getId,
-            password: getPassword,
+            pw: getPassword,
         }
 
         await axios.post(url, loginData).then((res) => {
@@ -34,7 +34,7 @@ const Login = () => {
         switch (name) {
             case "id":
                 setId(value);
-            case "password":
+            case "pw":
                 setPassword(value);
             default:
                 break;
@@ -48,7 +48,7 @@ const Login = () => {
 
                 <form onSubmit={onSubmit}>
                     <input type="text" onChange={onChange} name="id" placeholder='아이디' />
-                    <input type="password" onChange={onChange} name="password" placeholder='비밀번호' />
+                    <input type="password" onChange={onChange} name="pw" placeholder='비밀번호' />
 
                     <button type='submit'>로그인</button>
                     <Link to="/login/register" className='modify'>회원가입</Link>

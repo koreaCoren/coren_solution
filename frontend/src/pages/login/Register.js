@@ -19,10 +19,10 @@ const Register = () => {
             return;
         }
 
-        const url = "/MVC/backend/user/ins_user";
+        const url = "http://192.168.0.86/MVC/backend/user/ins_user";
         const loginData = {
             id: getId,
-            password: getPassword,
+            pw: getPassword,
             email: getEamil,
         }
 
@@ -41,10 +41,13 @@ const Register = () => {
         switch (name) {
             case "id":
                 setId(value);
-            case "password":
+                break;
+            case "pw":
                 setPassword(value);
+                break;
             case "email":
                 setEmail(value);
+                break;
             default:
                 break;
         }
@@ -57,7 +60,7 @@ const Register = () => {
 
                 <form onSubmit={onSubmit}>
                     <input type="text" onChange={onChange} name="id" placeholder='아이디' />
-                    <input type="password" onChange={onChange} name="password" placeholder='비밀번호' />
+                    <input type="password" onChange={onChange} name="pw" placeholder='비밀번호' />
                     <input type="text" onChange={onChange} name="email" placeholder='이메일' />
 
                     <button type='submit'>가입하기</button>
