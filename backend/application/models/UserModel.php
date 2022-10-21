@@ -21,9 +21,11 @@ class UserModel extends Model {
          return intval($this->pdo->lastInsertId());
     }
 
-    public function sel_user(){
-        $sql = "SELECT * FROM member";
+    public function sel_user(&$param){
+        $sql = "SELECT * FROM member
+                WHERE id = :id";
         $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(":id", $param["id"]);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
