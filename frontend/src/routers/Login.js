@@ -7,7 +7,7 @@ const Login = () => {
     return (
         <>
             <Routes>
-                <Route path='/login' element={<UserLogin />}></Route>
+                <Route path='/' element={<UserLogin />}></Route>
                 <Route path='/register' element={<UserRegister />}></Route>
             </Routes>
         </>

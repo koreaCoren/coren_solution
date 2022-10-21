@@ -13,7 +13,7 @@ const Login = () => {
     const onSubmit = async (e) => {
         e.preventDefault();
 
-        const url = "MVC/backend/user/userLogin";
+        const url = "/MVC/backend/user/userLogin";
         const loginData = {
             id: getId,
             password: getPassword,
@@ -51,7 +51,7 @@ const Login = () => {
                     <input type="password" onChange={onChange} name="password" placeholder='비밀번호' />
 
                     <button type='submit'>로그인</button>
-                    <Link to="/register" className='modify'>회원가입</Link>
+                    <Link to="/login/register" className='modify'>회원가입</Link>
                     <Link to="/recover" className='recover'>아이디 / 비밀번호 찾기</Link>
                 </form>
             </div>
@@ -59,4 +59,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Login; 

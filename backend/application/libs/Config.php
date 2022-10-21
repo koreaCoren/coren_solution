@@ -8,22 +8,21 @@
     define('_CHARSET', 'utf8');
     define("_VIEW", "application/views/");
 
-    define("_HEADER", "header");
-    define("_MAIN", "main");
-    define("_FOOTER", "footer");
+define("_HEADER", "header");
+define("_MAIN", "main");
+define("_FOOTER", "footer");
 
-    define("_CSS", "css");
-    define("_JS", "js");
+define("_CSS", "css");
+define("_JS", "js");
 
-    define("_LOGINUSER", "loginUser");
+define("_LOGINUSER", "loginUser");
 
-    define("_LIST", "list");
-    define("_DATA", "data");
-    define("_ITEM", "item");
-    define("_RESULT", "result");
+define("_LIST", "list");
+define("_DATA", "data");
+define("_ITEM", "item");
+define("_RESULT", "result");
 
-    define("_POST", "POST");
-    define("_GET", "GET");
-    define("_PUT", "PUT");
-    define("_DELETE", "DELETE");
-    
+define("_POST", "POST");
+define("_GET", "GET");
+define("_PUT", "PUT");
+define("_DELETE", "DELETE");
