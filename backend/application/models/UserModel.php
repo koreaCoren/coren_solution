@@ -23,11 +23,18 @@ class UserModel extends Model {
 
     public function sel_user(&$param){
         $sql = "SELECT * FROM member
-                WHERE id = :id";
+                WHERE id = :id AND pw = :pw";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(":id", $param["id"]);
+        $stmt->bindValue(":pw", $param["pw"]);
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_OBJ);
+        if(empty($stmt->fetchAll(PDO::FETCH_OBJ))){
+            return "fail";
+        } else {
+            return "success";
+        }
+        
+        //return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
     public function upd_user(&$param){
