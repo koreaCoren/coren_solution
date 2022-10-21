@@ -21,7 +21,7 @@ const Login = () => {
         await axios
             .post(url, loginData)
             .then((res) => {
-                console.log(res);
+                console.log(res.data);
                 console.log("성공");
             })
             .catch((error) => {
