@@ -19,10 +19,10 @@ const Register = () => {
             return;
         }
 
-        const url = "MVC/backend/user/ins_user";
+        const url = "/MVC/backend/user/ins_user";
         const loginData = {
             id: getId,
-            password: getPassword,
+            pw: getPassword,
             email: getEamil,
         }
 
