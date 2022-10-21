@@ -12,14 +12,12 @@ const Login = () => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        await axios({
-            url: "https://0d56cdb4-a231-4fc7-9510-bd3644fbdcd2.mock.pstmn.io/login",
-            method: "POST",
-            data: {
-                id: getId,
-                password: getPassword,
-            }
-        }).then((res) => {
+        const url = "https://0d56cdb4-a231-4fc7-9510-bd3644fbdcd2.mock.pstmn.io/login";
+        const loginData = {
+            id: getId,
+            password: getPassword,
+        }
+        await axios.post(url, loginData).then((res) => {
             console.log(res);
             console.log("성공");
         }).catch((error) => {
