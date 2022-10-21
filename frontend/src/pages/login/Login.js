@@ -1,18 +1,21 @@
 /* eslint-disable no-fallthrough */
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import "asset/css/login/login.css";
 import axios from "axios";
 
-const Login = () => {
+const Login = (props) => {
+    const navigate = useNavigate();
+
     const [getId, setId] = useState();
     const [getPassword, setPassword] = useState();
 
     const onSubmit = async (e) => {
         e.preventDefault();
 
-        const url = "http://192.168.0.86/MVC/backend/user/sel_user";
+        // const url = "http://192.168.0.86/MVC/backend/user/sel_user";
+        const url = `${process.env.REACT_APP_API_URL}/user/sel_user`;
         const loginData = {
             id: getId,
             pw: getPassword,
@@ -21,8 +24,11 @@ const Login = () => {
         await axios
             .post(url, loginData)
             .then((res) => {
-                console.log(res.data);
-                console.log("성공");
+                if (res.data.result === "success") {
+                    localStorage.setItem("loginCheck", "success");
+                    props.setLoginCheck(true);
+                    navigate("/");
+                }
             })
             .catch((error) => {
                 console.log(error);

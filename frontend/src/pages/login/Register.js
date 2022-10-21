@@ -20,8 +20,7 @@ const Modify = () => {
             return;
         }
 
-        const url = "/MVC/backend/user/ins_user";
-        // const url = "http://192.168.0.86/MVC/backend/user/ins_user";
+        const url = `${process.env.REACT_APP_API_URL}/user/ins_user`;
         const loginData = {
             id: getId,
             pw: getPassword,
@@ -31,7 +30,7 @@ const Modify = () => {
         await axios
             .post(url, loginData)
             .then((res) => {
-                console.log(res);
+                console.log(res.data);
                 console.log("성공");
             })
             .catch((error) => {
