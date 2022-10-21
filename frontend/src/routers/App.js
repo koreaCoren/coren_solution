@@ -14,6 +14,11 @@ const App = () => {
             : setLoginCheck(false);
     }, [getLoginCheck])
 
+    const loginOut = () => {
+        localStorage.setItem("loginCheck", "fail");
+        setLoginCheck(false);
+    };
+
     return (
         <>
             <Routes>
@@ -21,7 +26,7 @@ const App = () => {
                     <nav>
                         {
                             getLoginCheck === true
-                                ? <span>로그인중</span>
+                                ? <span onClick={loginOut}>로그아웃</span>
                                 : <Link to="/login">로그인</Link>
                         }
                         <Link to="/board">게시판</Link>
