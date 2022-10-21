@@ -12,14 +12,13 @@ const Register = () => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-
         const emailRegex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
         if (!emailRegex.test(getEamil)) {
             alert("이메일 형식이 아님 다시 적으셈");
             return;
         }
 
-        const url = "http://192.168.0.86/MVC/backend/user/ins_user";
+        const url = `${process.env.REACT_APP_API_URL}/user/ins_user`;
         const loginData = {
             id: getId,
             pw: getPassword,
@@ -27,7 +26,7 @@ const Register = () => {
         }
 
         await axios.post(url, loginData).then((res) => {
-            console.log(res);
+            console.log(res.data);
             console.log("성공");
         }).catch((error) => {
             console.log(error);
