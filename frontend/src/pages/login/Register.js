@@ -1,11 +1,10 @@
 /* eslint-disable no-fallthrough */
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 
 import "asset/css/login/login.css";
 import axios from 'axios';
 
-const Modify = () => {
+const Register = () => {
 
     const [getId, setId] = useState();
     const [getPassword, setPassword] = useState();
@@ -68,4 +67,4 @@ const Modify = () => {
     );
 };
 
-export default Modify;
+export default Register;
