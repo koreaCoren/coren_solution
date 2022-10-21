@@ -5,10 +5,11 @@ import { Link } from 'react-router-dom';
 import "asset/css/login/login.css";
 import axios from 'axios';
 
-const Login = () => {
+const Modify = () => {
 
     const [getId, setId] = useState();
     const [getPassword, setPassword] = useState();
+    const [getEamil, setEmail] = useState();
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -16,6 +17,7 @@ const Login = () => {
         const loginData = {
             id: getId,
             password: getPassword,
+            email: getEamil,
         }
         await axios.post(url, loginData).then((res) => {
             console.log(res);
@@ -34,6 +36,8 @@ const Login = () => {
                 setId(value);
             case "password":
                 setPassword(value);
+            case "email":
+                setEmail(value);
             default:
                 break;
         }
@@ -42,19 +46,18 @@ const Login = () => {
     return (
         <>
             <div className="loginContainer">
-                <h2>로그인</h2>
+                <h2>회원가입</h2>
 
                 <form onSubmit={onSubmit}>
                     <input type="text" onChange={onChange} name="id" placeholder='아이디' />
                     <input type="password" onChange={onChange} name="password" placeholder='비밀번호' />
+                    <input type="text" onChange={onChange} name="email" placeholder='이메일' />
 
-                    <button type='submit'>로그인</button>
-                    <Link to="/register" className='modify'>회원가입</Link>
-                    <Link to="/recover" className='recover'>아이디 / 비밀번호 찾기</Link>
+                    <button type='submit'>가입하기</button>
                 </form>
             </div>
         </>
     );
 };
 
-export default Login;
+export default Modify;
