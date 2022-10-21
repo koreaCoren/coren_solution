@@ -20,8 +20,8 @@ const Modify = () => {
             return;
         }
 
-        // const url = "/MVC/backend/user/ins_user";
-        const url = "http://192.168.0.86/MVC/backend/user/ins_user";
+        const url = "/MVC/backend/user/ins_user";
+        // const url = "http://192.168.0.86/MVC/backend/user/ins_user";
         const loginData = {
             id: getId,
             pw: getPassword,
