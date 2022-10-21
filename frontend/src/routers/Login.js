@@ -3,11 +3,11 @@ import { Routes, Route } from 'react-router-dom';
 import UserLogin from 'pages/login/Login';
 import UserRegister from 'pages/login/Register';
 
-const Login = () => {
+const Login = (props) => {
     return (
         <>
             <Routes>
-                <Route path='/' element={<UserLogin />}></Route>
+                <Route path='/' element={<UserLogin setLoginCheck={props.setLoginCheck} />}></Route>
                 <Route path='/register' element={<UserRegister />}></Route>
             </Routes>
         </>
