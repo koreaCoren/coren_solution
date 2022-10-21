@@ -7,15 +7,16 @@ class UserModel extends Model {
     public function ins_user(&$param) {
         $sql = "INSERT INTO member
                 (
-                    id, pw
+                    id, pw, email
                 )
                 VALUES
                 (
-                    :id, :pw
+                    :id, :pw, :email
                 )";
          $stmt = $this->pdo->prepare($sql);
          $stmt->bindValue(":id", $param["id"]);
-         $stmt->bindValue(":pw", $param["pw"]);         
+         $stmt->bindValue(":pw", $param["pw"]);
+         $stmt->bindValue(":email", $param["email"]);       
          $stmt->execute();
          return intval($this->pdo->lastInsertId());
     }
