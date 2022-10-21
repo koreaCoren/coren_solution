@@ -9,7 +9,8 @@ class UserController extends Controller {
     }
 
     public function sel_user(){
-        return [_RESULT => $this->model->sel_user()];
+        $json = getJson();
+        return [_RESULT => $this->model->sel_user($json)];
     }
 
     public function del_user(){
