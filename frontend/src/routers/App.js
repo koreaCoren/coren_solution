@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Routes, Route, Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import "asset/css/common.css";
 
@@ -8,15 +8,14 @@ import Main from "routers/Main";
 
 const App = () => {
     const nav = useNavigate();
-    const [getLoginCheck, setLoginCheck] = useState(false);
+    const [getLoginCheck, setLoginCheck] = useState(true);
     const localValue = localStorage.getItem("loginCheck");
-
     useEffect(() => {
         // 로그인 체크
-        localValue === "success"
-            ? setLoginCheck(true)
-            : setLoginCheck(false);
-    }, [localValue, getLoginCheck])
+        // localValue === "success"
+        //     ? setLoginCheck(true)
+        //     : setLoginCheck(false);
+    }, [localValue])
 
     //로그아웃 버튼
     // const loginOut = () => {
