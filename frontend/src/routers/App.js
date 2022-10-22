@@ -1,40 +1,36 @@
 import React, { useEffect, useState } from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, useNavigate } from "react-router-dom";
 
 import "asset/css/common.css";
 
 import Login from "routers/Login";
-import Board from "routers/Board";
+import Main from "routers/Main";
 
 const App = () => {
+    const nav = useNavigate();
     const [getLoginCheck, setLoginCheck] = useState(false);
+    const localValue = localStorage.getItem("loginCheck");
+
     useEffect(() => {
-        localStorage.getItem("loginCheck") === "success"
+        // 로그인 체크
+        localValue === "success"
             ? setLoginCheck(true)
             : setLoginCheck(false);
-    }, [getLoginCheck])
+    }, [localValue, getLoginCheck])
 
-    const loginOut = () => {
-        localStorage.setItem("loginCheck", "fail");
-        setLoginCheck(false);
-    };
+    //로그아웃 버튼
+    // const loginOut = () => {
+    //     localStorage.setItem("loginCheck", "fail");
+    //     setLoginCheck(false);
+    // };
 
     return (
         <>
-            <Routes>
-                <Route path="/" element={
-                    <nav>
-                        {
-                            getLoginCheck === true
-                                ? <span onClick={loginOut}>로그아웃</span>
-                                : <Link to="/login">로그인</Link>
-                        }
-                        <Link to="/board">게시판</Link>
-                    </nav>
-                }></Route>
-                <Route path="/login/*" element={<Login setLoginCheck={setLoginCheck} />}></Route>
-                <Route path="/board/*" element={<Board />}></Route>
-            </Routes>
+            {
+                getLoginCheck === true
+                    ? <Main getLoginCheck={getLoginCheck}></Main>
+                    : <Login setLoginCheck={setLoginCheck}></Login>
+            }
         </>
     );
 };
