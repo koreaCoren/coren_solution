@@ -3,4 +3,8 @@
 :root{
     /* 폰트 */
     --main-font: 'paybooc-Bold';
+
+    --main-color : #0008ff2b;
+    --bt-color-t1 :#503aff;
+    --bt-color-t2 :#eaeaea;
 }

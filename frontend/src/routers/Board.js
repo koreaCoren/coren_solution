@@ -24,7 +24,7 @@ const Board = () => {
         <>
             <Routes>
                 <Route path='/' element={<Read getBoardList={getBoardList} />}></Route>
-                <Route path='/detail/:id/*' element={<ReadDetail getBoardList={getBoardList} />}></Route>
+                <Route path='/board/detail/:id/*' element={<ReadDetail getBoardList={getBoardList} />}></Route>
             </Routes>
         </>
     );
