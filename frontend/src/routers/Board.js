@@ -14,16 +14,16 @@ const Board = () => {
         await axios.get(url).then((res) => {
             setBoardList(res.data);
         }).catch((error) => {
-
+            console.log(error);
         })
     }
     useEffect(() => {
         getBoard();
-    }, [])
+    }, [getBoardList])
     return (
         <>
             <Routes>
-                <Route path='/' element={<Read getBoardList={getBoardList} />}></Route>
+                <Route path='/*' element={<Read getBoardList={getBoardList} />}></Route>
                 <Route path='/board/detail/:id/*' element={<ReadDetail getBoardList={getBoardList} />}></Route>
             </Routes>
         </>

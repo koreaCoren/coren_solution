@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import "asset/css/board/read.css"
+import "asset/css/board/read.css";
 
 const Read = (props) => {
     return (

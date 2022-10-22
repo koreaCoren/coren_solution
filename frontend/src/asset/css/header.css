@@ -14,3 +14,20 @@ header ul li > i{
     padding: 0px 10px;
     font-size: 16px;
 }
+header .scrollTop{
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+}
+header .scrollTop i{
+    background-color: var(--bt-color-t1);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 10px;
+    border-radius: 50%;
+    font-size: 25px;
+    color: #fff;
+}

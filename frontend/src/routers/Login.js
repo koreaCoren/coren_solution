@@ -7,7 +7,7 @@ const Login = (props) => {
     return (
         <>
             <Routes>
-                <Route path='/' element={<UserLogin setLoginCheck={props.setLoginCheck} />}></Route>
+                <Route path='/*' element={<UserLogin setLoginCheck={props.setLoginCheck} />}></Route>
                 <Route path='/register' element={<UserRegister />}></Route>
             </Routes>
         </>
