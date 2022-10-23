@@ -22,16 +22,21 @@ class UserModel extends Model {
     }
 
     public function sel_user(&$param){
+        $userId = $param["id"];
         $sql = "SELECT * FROM member
                 WHERE id = :id AND pw = :pw";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(":id", $param["id"]);
         $stmt->bindValue(":pw", $param["pw"]);
         $stmt->execute();
+        $result = [
+            'loginCheck' => "success",
+            'userId' => $userId
+        ];
         if(empty($stmt->fetchAll(PDO::FETCH_OBJ))){
             return "fail";
         } else {
-            return "success";
+            return $result;
         }
         
         //return $stmt->fetchAll(PDO::FETCH_OBJ);
@@ -53,6 +58,14 @@ class UserModel extends Model {
         $stmt->bindValue(":id", $param["id"]);        
         $stmt->execute();
         return $stmt->rowcount();
+    }
+
+    public function find_friend(){
+        $sql = "SELECT id FROM member WHERE id LIKE %:id%";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(":id", $param["id"]);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
     //
 }

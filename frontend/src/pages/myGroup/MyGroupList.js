@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import "asset/css/board/read.css";
 
-const Read = (props) => {
+const MyGroupList = (props) => {
     return (
         <>
             <ul className='boardList'>
@@ -28,4 +28,4 @@ const Read = (props) => {
     );
 };
 
-export default Read;
+export default MyGroupList;

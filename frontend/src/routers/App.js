@@ -10,27 +10,38 @@ const App = () => {
     const nav = useNavigate();
     const [getUser, setUser] = useState();
     const [getLoginCheck, setLoginCheck] = useState(false);
-    const localValue = localStorage.getItem("loginCheck");
     useEffect(() => {
-        console.log(getUser);
         // 로그인 체크
-        localValue === "success"
-            ? setLoginCheck(true)
-            : setLoginCheck(false);
-    }, [localValue])
+        if (sessionStorage.getItem('loginCheck') === "success") {
+            setLoginCheck(true);
+            setUser(sessionStorage.getItem('userId'));
+        } else {
+            setLoginCheck(false);
+            setUser(undefined);
+        }
+    }, [sessionStorage.getItem('loginCheck')])
 
     //로그아웃 버튼
-    // const loginOut = () => {
-    //     localStorage.setItem("loginCheck", "fail");
-    //     setLoginCheck(false);
-    // };
+    const loginOut = () => {
+        sessionStorage.setItem("loginCheck", "fail");
+        sessionStorage.setItem('userId', null);
+        setUser(undefined);
+        setLoginCheck(false);
+    };
 
     return (
         <>
             {
                 getLoginCheck === true
-                    ? <Main getLoginCheck={getLoginCheck} getUser={getUser}></Main>
-                    : <Login setLoginCheck={setLoginCheck} setUser={setUser}></Login>
+                    ? <Main
+                        getLoginCheck={getLoginCheck}
+                        getUser={getUser}
+                        loginOut={loginOut}
+                    ></Main>
+                    : <Login
+                        setLoginCheck={setLoginCheck}
+                        setUser={setUser}
+                    ></Login>
             }
         </>
     );

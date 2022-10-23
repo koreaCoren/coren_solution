@@ -4,8 +4,8 @@ import axios from "axios";
 
 import "asset/css/board/read.css";
 
-import Read from "pages/board/Read";
-import ReadDetail from "pages/board/ReadDetail";
+import MyGroupList from "pages/myGroup/MyGroupList";
+import MyGroupDetail from "pages/myGroup/MyGroupDetail";
 
 const Board = () => {
     const [getBoardList, setBoardList] = useState([]);
@@ -15,7 +15,6 @@ const Board = () => {
             .get(url)
             .then((res) => {
                 setBoardList(res.data);
-                console.log(res.data);
             })
             .catch((error) => {
                 console.log(error);
@@ -29,11 +28,13 @@ const Board = () => {
             <Routes>
                 <Route
                     path="/*"
-                    element={<Read getBoardList={getBoardList} />}></Route>
+                    element={
+                        <MyGroupList getBoardList={getBoardList} />
+                    }></Route>
                 <Route
                     path="/board/detail/:id/*"
                     element={
-                        <ReadDetail getBoardList={getBoardList} />
+                        <MyGroupDetail getBoardList={getBoardList} />
                     }></Route>
             </Routes>
         </>
