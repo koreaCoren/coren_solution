@@ -1,17 +1,21 @@
-main > nav{
+main>nav {
     background-color: var(--sub-color);
 }
-main > nav > ul{
+
+main>nav>ul {
     display: flex;
 }
-main > nav > ul > li{
+
+main>nav>ul>li {
     flex: 1;
     text-align: center;
 }
-main > nav > ul > li > a{
+
+main>nav>ul>li>a {
     width: 100%;
     line-height: 40px;
 }
-main > nav > ul > li > a.on{
-    border-bottom: 3px solid  var(--bt-color-t1);
+
+main>nav>ul>li>a.on {
+    border-bottom: 3px solid var(--bt-color-t1);
 }
