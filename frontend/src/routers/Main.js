@@ -45,7 +45,7 @@ const Main = (props) => {
                     </ul>
                 </nav>
                 <Routes>
-                    <Route path='/' element={<MyGroup />}></Route>
+                    <Route path='/*' element={<MyGroup />}></Route>
                     <Route path='/findGroup' element={<FindGroup />}></Route>
                     <Route path='/myBoard' element={<div>2</div>}></Route>
                     <Route path='/friend/*' element={<Friend />}></Route>

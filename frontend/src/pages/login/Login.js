@@ -21,12 +21,13 @@ const Login = (props) => {
         }
 
         await axios.post(url, loginData).then((res) => {
-            console.log(res.data.userId);
             if (res.data.loginCheck === "success") {
                 sessionStorage.setItem('loginCheck', 'success');
                 sessionStorage.setItem("userId", res.data.userId);
                 props.setLoginCheck(true);
                 nav('/');
+            } else {
+                alert("아이디 또는 비밀번호 틀립니다.");
             }
         }).catch((error) => {
             console.log(error);
