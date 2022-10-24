@@ -61,7 +61,7 @@ class UserModel extends Model {
     }
 
     public function find_friend(&$param){
-        $search = $param["id"];
+        $search = $param["searchUser"];
         $sql = "SELECT id FROM member WHERE id LIKE '%$search%'";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
