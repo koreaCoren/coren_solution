@@ -28,10 +28,14 @@ class UserModel extends Model {
         $stmt->bindValue(":id", $param["id"]);
         $stmt->bindValue(":pw", $param["pw"]);
         $stmt->execute();
+        $result = [
+            'loginCheck' => "success",
+            'id' => $param["id"]
+        ];
         if(empty($stmt->fetchAll(PDO::FETCH_OBJ))){
             return "fail";
         } else {
-            return "success";
+            return json_encode($result);
         }
         
         //return $stmt->fetchAll(PDO::FETCH_OBJ);
