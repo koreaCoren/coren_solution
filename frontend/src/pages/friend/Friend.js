@@ -51,22 +51,16 @@ const Friend = () => {
                             getFriend.length <= 0
                                 ? <p>일치하는 친구가없습니다.</p>
                                 : <ul>
-                                    <li>
-                                        <h3>친구</h3>
-                                        <button>친구 요청</button>
-                                    </li>
-                                    <li>
-                                        <h3>친구</h3>
-                                        <button>친구 요청</button>
-                                    </li>
-                                    <li>
-                                        <h3>친구</h3>
-                                        <button>친구 요청</button>
-                                    </li>
-                                    <li>
-                                        <h3>친구</h3>
-                                        <button>친구 요청</button>
-                                    </li>
+                                    {
+                                        getFriend.map((a, i) => {
+                                            return (
+                                                <li key={i}>
+                                                    <h3>{a.neme}</h3>
+                                                    <button>친구 요청</button>
+                                                </li>
+                                            )
+                                        })
+                                    }
                                 </ul>
                         }
                     </form>
