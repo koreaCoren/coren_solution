@@ -6,11 +6,17 @@ import axios from 'axios';
 
 const Friend = () => {
     const [getfind, setFind] = useState(false);
-    const [getSearch, setSearch] = useState();
+    const [getSearch, setSearch] = useState(null);
     const [getFriend, setFriend] = useState([]);
+    const [getResponesUser, setResponesUser] = useState(null);
 
     const friendSearch = async (e) => {
         e.preventDefault();
+
+        if (getSearch === null || getSearch.length < 2) {
+            alert("두글자 이상 입력해주세요");
+            return;
+        }
 
         const url = `${process.env.REACT_APP_API_URL}/user/find_friend`;
         const searchUser = {
@@ -18,11 +24,32 @@ const Friend = () => {
         }
 
         await axios.post(url, searchUser).then((res) => {
-            setFriend(res.data);
+            if (res.data.length === 0) {
+                alert("일치하는 친구가 없습니다.");
+            } else {
+                setFriend(res.data);
+            }
         }).catch((error) => {
             console.log(error);
         })
     }
+
+    const firendRequest = async (e) => {
+        e.preventDefault();
+
+        const url = ``;
+        const friend = {
+            requestUser: sessionStorage.getItem("userId"),
+            responseUser: getResponesUser,
+        }
+
+        await axios.post(url, friend).then((res) => {
+            console.log(res.data);
+        }).catch((error) => {
+            console.log(error);
+        })
+    }
+
     useEffect(() => { }, [getFriend])
 
     const onChange = (e) => {
@@ -52,16 +79,19 @@ const Friend = () => {
                                 <i className="fa-solid fa-magnifying-glass"></i>
                             </button>
                         </div>
+                    </form>
+
+                    <form className='searchList' onSubmit={firendRequest}>
                         {
                             getFriend.length <= 0
-                                ? <p>일치하는 친구가없습니다.</p>
+                                ? <p>일치하는 친구가 없습니다.</p>
                                 : <ul>
                                     {
                                         getFriend.map((a, i) => {
                                             return (
                                                 <li key={i}>
                                                     <h3>{a.id}</h3>
-                                                    <button>친구 요청</button>
+                                                    <button onClick={() => { setResponesUser(a.id) }}>친구 요청</button>
                                                 </li>
                                             )
                                         })
