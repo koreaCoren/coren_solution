@@ -37,11 +37,12 @@ const Friend = () => {
     const firendRequest = async (e) => {
         e.preventDefault();
 
-        const url = ``;
+        const url = `${process.env.REACT_APP_API_URL}/user/req_friend`
         const friend = {
             requestUser: sessionStorage.getItem("userId"),
             responseUser: getResponesUser,
-        }
+        }  
+        console.log(friend.requestUser + ':' + friend.responseUser);
 
         await axios.post(url, friend).then((res) => {
             console.log(res.data);

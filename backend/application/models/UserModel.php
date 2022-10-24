@@ -3,7 +3,7 @@ namespace application\models;
 use PDO;
 
 class UserModel extends Model {
-    //테스트용
+    // 회원가입
     public function ins_user(&$param) {
         $sql = "INSERT INTO member
                 (
@@ -21,6 +21,7 @@ class UserModel extends Model {
          return intval($this->pdo->lastInsertId());
     }
 
+    // 로그인 체크
     public function sel_user(&$param){
         $userId = $param["id"];
         $sql = "SELECT * FROM member
@@ -67,5 +68,20 @@ class UserModel extends Model {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
-    //
+    
+    public function req_friend(&$param){
+        $sql = "INSERT INTO friends
+                (
+                    reqFri, resFri
+                )
+                VALUES
+                (
+                    :req, :res
+                )";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(":req", $param["requestUser"]);
+        $stmt->bindValue(":res", $param["responseUser"]);
+        $stmt->execute();
+        return $stmt->rowcount();
+    }
 }
