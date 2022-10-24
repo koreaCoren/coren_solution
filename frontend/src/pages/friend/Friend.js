@@ -7,8 +7,28 @@ import axios from 'axios';
 const Friend = () => {
     const [getfind, setFind] = useState(false);
     const [getSearch, setSearch] = useState(null);
-    const [getFriend, setFriend] = useState([]);
+    const [getFindFriend, setFindFriend] = useState([]);
     const [getResponesUser, setResponesUser] = useState(null);
+    const [getFriend, setFriend] = useState([]);
+
+    const getFiendList = async () => {
+        const url = ``;
+
+        const user = {
+            user: sessionStorage.getItem("userId"),
+        };
+
+        await axios.post(url, user).then((res) => {
+            console.log(res.data);
+            setFriend(res.data);
+        }).catch((error) => {
+            console.log(error);
+        });
+    }
+
+    useEffect(() => {
+        getFiendList();
+    }, [])
 
     const friendSearch = async (e) => {
         e.preventDefault();
@@ -16,22 +36,22 @@ const Friend = () => {
         if (getSearch === null || getSearch.length < 2) {
             alert("두글자 이상 입력해주세요");
             return;
-        }
+        };
 
         const url = `${process.env.REACT_APP_API_URL}/user/find_friend`;
         const searchUser = {
             searchUser: getSearch,
-        }
+        };
 
         await axios.post(url, searchUser).then((res) => {
             if (res.data.length === 0) {
                 alert("일치하는 친구가 없습니다.");
             } else {
-                setFriend(res.data);
+                setFindFriend(res.data);
             }
         }).catch((error) => {
             console.log(error);
-        })
+        });
     }
 
     const firendRequest = async (e) => {
@@ -41,17 +61,16 @@ const Friend = () => {
         const friend = {
             requestUser: sessionStorage.getItem("userId"),
             responseUser: getResponesUser,
-        }  
-        console.log(friend.requestUser + ':' + friend.responseUser);
+        };
 
         await axios.post(url, friend).then((res) => {
             console.log(res.data);
         }).catch((error) => {
             console.log(error);
-        })
+        });
     }
 
-    useEffect(() => { }, [getFriend])
+    useEffect(() => { }, [getFindFriend])
 
     const onChange = (e) => {
         const value = e.target.value;
@@ -84,11 +103,11 @@ const Friend = () => {
 
                     <form className='searchList' onSubmit={firendRequest}>
                         {
-                            getFriend.length <= 0
+                            getFindFriend.length <= 0
                                 ? <p>일치하는 친구가 없습니다.</p>
                                 : <ul>
                                     {
-                                        getFriend.map((a, i) => {
+                                        getFindFriend.map((a, i) => {
                                             return (
                                                 <li key={i}>
                                                     <h3>{a.id}</h3>
@@ -101,6 +120,29 @@ const Friend = () => {
                         }
                     </form>
                 </div>
+            </div>
+
+            <div className="friendList">
+                {
+                    getFriend.length <= 0
+                        ? <p>친구가 없습니다</p>
+                        : <ul>
+                            {
+                                getFriend.map((a, i) => {
+                                    return (
+                                        <li key={i}>
+                                            <h3>{a.friendName}</h3>
+                                            {
+                                                a.state === false
+                                                    ? <div>요청중</div>
+                                                    : null
+                                            }
+                                        </li>
+                                    )
+                                })
+                            }
+                        </ul>
+                }
             </div>
         </div>
     );
