@@ -10,9 +10,10 @@ import ReadDetail from 'pages/board/ReadDetail';
 const Board = () => {
     const [getBoardList, setBoardList] = useState([]);
     const getBoard = async () => {
-        const url = "https://0d56cdb4-a231-4fc7-9510-bd3644fbdcd2.mock.pstmn.io/boardList";
+        const url = `${process.env.REACT_APP_API_URL}/Board/sel_board`;
         await axios.get(url).then((res) => {
-            setBoardList(res.data);
+            // setBoardList(res.data);
+            console.log(res.data);
         }).catch((error) => {
             console.log(error);
         })
