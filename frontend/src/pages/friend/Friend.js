@@ -11,9 +11,16 @@ const Friend = () => {
 
     const friendSearch = async (e) => {
         e.preventDefault();
+        
+        const url = `${process.env.REACT_APP_API_URL}/user/find_friend`;
+        const userData = {
+            id: getSearch,
+        }
+        console.log(userData);
 
-        const url = "";
-        await axios.post(url, getSearch).then((res) => {
+        await axios.post(url, userData).then((res) => {
+            console.log(res.data);
+
             setFriend(res.data);
         }).catch((error) => {
             console.log(error)
