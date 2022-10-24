@@ -1,9 +1,12 @@
 /* eslint-disable no-fallthrough */
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import "asset/css/login/login.css";
-import axios from "axios";
+import axios from 'axios';
+
+const Register = () => {
+    const nav = useNavigate();
 
 const Modify = () => {
     const [getId, setId] = useState();
@@ -81,7 +84,12 @@ const Modify = () => {
                         placeholder="이메일"
                     />
 
-                    <button type="submit">가입하기</button>
+                    <button className='buttonBlue' type='submit'>가입하기</button>
+                    <button
+                        type='button'
+                        className='buttonGary'
+                        onClick={() => { nav(-1) }}
+                    >뒤로가기</button>
                 </form>
             </div>
         </>
