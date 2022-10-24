@@ -56,6 +56,7 @@
     line-height: 40px;
     border-radius: 5px;
     font-family: var(--main-font);
+    cursor: pointer;
 }
 
 .loginContainer > form > .recover{
