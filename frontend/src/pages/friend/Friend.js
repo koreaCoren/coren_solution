@@ -20,6 +20,7 @@ const Friend = () => {
 
         await axios.post(url, userData).then((res) => {
             console.log(res.data);
+
             setFriend(res.data);
         }).catch((error) => {
             console.log(error)
