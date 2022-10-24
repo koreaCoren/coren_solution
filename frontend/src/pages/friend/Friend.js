@@ -11,21 +11,19 @@ const Friend = () => {
 
     const friendSearch = async (e) => {
         e.preventDefault();
-        
+
         const url = `${process.env.REACT_APP_API_URL}/user/find_friend`;
-        const userData = {
-            id: getSearch,
+        const searchUser = {
+            searchUser: getSearch,
         }
-        console.log(userData);
 
-        await axios.post(url, userData).then((res) => {
-            console.log(res.data);
-
+        await axios.post(url, searchUser).then((res) => {
             setFriend(res.data);
         }).catch((error) => {
-            console.log(error)
+            console.log(error);
         })
     }
+    useEffect(() => { }, [getFriend])
 
     const onChange = (e) => {
         const value = e.target.value;
@@ -62,7 +60,7 @@ const Friend = () => {
                                         getFriend.map((a, i) => {
                                             return (
                                                 <li key={i}>
-                                                    <h3>{a.neme}</h3>
+                                                    <h3>{a.id}</h3>
                                                     <button>친구 요청</button>
                                                 </li>
                                             )
