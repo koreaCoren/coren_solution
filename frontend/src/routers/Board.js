@@ -12,15 +12,15 @@ const Board = () => {
     const getBoard = async () => {
         const url = `${process.env.REACT_APP_API_URL}/Board/sel_board`;
         await axios.get(url).then((res) => {
-            // setBoardList(res.data);
-            console.log(res.data);
+            setBoardList(res.data);
+            console.log(res.data)
         }).catch((error) => {
             console.log(error);
         })
     }
     useEffect(() => {
         getBoard();
-    }, [getBoardList])
+    }, [])
     return (
         <>
             <Routes>

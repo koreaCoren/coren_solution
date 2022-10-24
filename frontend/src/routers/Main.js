@@ -28,7 +28,7 @@ const Main = (props) => {
     }, [nowUrl])
     return (
         <>
-            <Header getLoginCheck={props.getLoginCheck}></Header>
+            <Header getLoginCheck={props.getLoginCheck} getUser={props.getUser}></Header>
             <main>
                 <nav>
                     <ul>

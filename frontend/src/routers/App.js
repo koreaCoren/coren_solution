@@ -8,9 +8,11 @@ import Main from "routers/Main";
 
 const App = () => {
     const nav = useNavigate();
+    const [getUser, setUser] = useState();
     const [getLoginCheck, setLoginCheck] = useState(false);
     const localValue = localStorage.getItem("loginCheck");
     useEffect(() => {
+        console.log(getUser);
         // 로그인 체크
         localValue === "success"
             ? setLoginCheck(true)
@@ -27,8 +29,8 @@ const App = () => {
         <>
             {
                 getLoginCheck === true
-                    ? <Main getLoginCheck={getLoginCheck}></Main>
-                    : <Login setLoginCheck={setLoginCheck}></Login>
+                    ? <Main getLoginCheck={getLoginCheck} getUser={getUser}></Main>
+                    : <Login setLoginCheck={setLoginCheck} setUser={setUser}></Login>
             }
         </>
     );
