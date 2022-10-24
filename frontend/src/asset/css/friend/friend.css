@@ -84,7 +84,7 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 100%;
+    height: calc(100% - 15px);
     background-color: #fff;
     margin-top: 15px;
     border-radius: 10px;
@@ -93,8 +93,7 @@
 .find>.findContainer>form>ul {
     display: flex;
     width: 100%;
-    height: 100%;
-    height: calc(100% - 15px - 37px);
+    height: calc(100% - 15px);
     flex-direction: column;
     background-color: #fff;
     margin-top: 15px;
