@@ -23,10 +23,16 @@ class UserController extends Controller {
         return [_RESULT => $this->model->upd_user($json)];
     }
 
-    //친구 찾기
+    // 친구 찾기
     public function find_friend(){
         $json = getJson();
         return $this->model->find_friend($json);
+    }
+
+    // 친구 요청
+    public function req_friend(){
+        $json = getJson();
+        return [_RESULT => $this->model->req_friend($json)];
     }
     
 }
