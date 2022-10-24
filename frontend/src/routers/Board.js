@@ -23,7 +23,7 @@ const Board = () => {
     };
     useEffect(() => {
         getBoard();
-    }, [getBoardList]);
+    }, []);
     return (
         <>
             <Routes>

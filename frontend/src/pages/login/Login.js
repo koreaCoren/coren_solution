@@ -24,8 +24,10 @@ const Login = (props) => {
         await axios
             .post(url, loginData)
             .then((res) => {
+                console.log(res.data.result);
                 if (res.data.result === "success") {
                     localStorage.setItem("loginCheck", "success");
+                    props.setUser(res.data.result);
                     props.setLoginCheck(true);
                     nav("/");
                 }
