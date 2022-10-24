@@ -1,21 +1,19 @@
 /* eslint-disable no-fallthrough */
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import "asset/css/login/login.css";
-import axios from 'axios';
+import axios from "axios";
 
 const Register = () => {
     const nav = useNavigate();
 
-const Modify = () => {
     const [getId, setId] = useState();
     const [getPassword, setPassword] = useState();
     const [getEamil, setEmail] = useState();
 
     const onSubmit = async (e) => {
         e.preventDefault();
-
         const emailRegex =
             /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
         if (!emailRegex.test(getEamil)) {
@@ -48,6 +46,7 @@ const Modify = () => {
         switch (name) {
             case "id":
                 setId(value);
+                break;
             case "pw":
                 setPassword(value);
                 break;
@@ -84,16 +83,21 @@ const Modify = () => {
                         placeholder="이메일"
                     />
 
-                    <button className='buttonBlue' type='submit'>가입하기</button>
+                    <button className="buttonBlue" type="submit">
+                        가입하기
+                    </button>
                     <button
-                        type='button'
-                        className='buttonGary'
-                        onClick={() => { nav(-1) }}
-                    >뒤로가기</button>
+                        type="button"
+                        className="buttonGary"
+                        onClick={() => {
+                            nav(-1);
+                        }}>
+                        뒤로가기
+                    </button>
                 </form>
             </div>
         </>
     );
 };
 
-export default Modify;
+export default Register;
