@@ -60,10 +60,10 @@ class UserModel extends Model {
         return $stmt->rowcount();
     }
 
-    public function find_friend(){
-        $sql = "SELECT id FROM member WHERE id LIKE %:id%";
+    public function find_friend(&$param){
+        $search = $param["id"];
+        $sql = "SELECT id FROM member WHERE id LIKE '%$search%'";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->bindValue(":id", $param["id"]);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
