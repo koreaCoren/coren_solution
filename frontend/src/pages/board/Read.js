@@ -15,7 +15,7 @@ const Read = (props) => {
                                     <h2>{a.title}</h2>
                                     <h3>
                                         <div className="days">2022/10/22</div>
-                                        <div className="name">pkd***</div>
+                                        <div className="name">{a.id}</div>
                                     </h3>
                                 </Link>
                             </li>

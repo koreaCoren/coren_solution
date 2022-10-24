@@ -31,6 +31,12 @@ const Header = (props) => {
                 <li><i className="fa-solid fa-bars"></i></li>
             </ul >
 
+            <div className="menuContainer">
+                {
+                    props.getUser
+                }
+            </div>
+
             <div onClick={scrollTop} className="scrollTop">
                 <i className="fa-solid fa-sort-up"></i>
             </div>
