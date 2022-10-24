@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-const ReadDateil = (props) => {
+const MyGroupDetail = (props) => {
     const { id } = useParams();
     return (
         <>
@@ -12,4 +12,4 @@ const ReadDateil = (props) => {
     );
 };
 
-export default ReadDateil;
+export default MyGroupDetail;

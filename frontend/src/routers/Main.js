@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import Header from 'components/Header';
 import { Link, Route, Routes, useLocation } from 'react-router-dom';
-import Board from './Board';
+import MyGroup from './MyGroup';
 
 import "asset/css/main.css"
+import FindGroup from 'pages/findGroup/FindGroup';
+import Friend from 'pages/friend/Friend';
 
 const Main = (props) => {
     const nowUrl = useLocation();
@@ -28,7 +30,11 @@ const Main = (props) => {
     }, [nowUrl])
     return (
         <>
-            <Header getLoginCheck={props.getLoginCheck} getUser={props.getUser}></Header>
+            <Header
+                getLoginCheck={props.getLoginCheck}
+                getUser={props.getUser}
+                loginOut={props.loginOut}
+            ></Header>
             <main>
                 <nav>
                     <ul>
@@ -39,10 +45,10 @@ const Main = (props) => {
                     </ul>
                 </nav>
                 <Routes>
-                    <Route path='/*' element={<Board />}></Route>
-                    <Route path='/findGroup' element={<div>1</div>}></Route>
+                    <Route path='/' element={<MyGroup />}></Route>
+                    <Route path='/findGroup' element={<FindGroup />}></Route>
                     <Route path='/myBoard' element={<div>2</div>}></Route>
-                    <Route path='/friend' element={<div>3</div>}></Route>
+                    <Route path='/friend/*' element={<Friend />}></Route>
                 </Routes>
             </main>
         </>
