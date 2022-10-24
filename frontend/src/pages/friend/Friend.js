@@ -13,7 +13,7 @@ const Friend = () => {
         e.preventDefault();
 
         const url = "";
-        await axios.get(url, getSearch).then((res) => {
+        await axios.post(url, getSearch).then((res) => {
             setFriend(res.data);
         }).catch((error) => {
             console.log(error)
