@@ -35,6 +35,7 @@ const Friend = () => {
     const friendSearch = async (e) => {
         e.preventDefault();
         let userArr = [];
+        let resFri = [];
 
         if (getSearch === null || getSearch.length < 2) {
             alert("두글자 이상 입력해주세요");
@@ -52,18 +53,17 @@ const Friend = () => {
                 if (res.data.length === 0) {
                     alert("일치하는 친구가 없습니다.");
                 } else {
-                    userArr.push(...res.data);
-                    console.log(userArr);
+                    for (let i = 0; i < res.data.length; i++) {
+                        userArr.push(res.data[i].id);
+                    }
+                    for (let i = 0; i < getFriend.length; i++) {
+                        resFri.push(getFriend[i].resFri);
+                    }
+
                     if (getFriend.length > 0) {
-                        // for (let i = 0; i < userArr.length; i++) {
-                        //     for (let j = 0; j < getFriend.length; j++) {
-                        //         if (userArr[i].id === getFriend[j].resFri) {
-                        //             userArr.splice(i, 1);
-                        //         }
-                        //     }
-                        //     i--;
-                        // }
-                        // setFindFriend(res.data);
+                        console.log(userArr.filter(resFri[0]));
+
+                        setFindFriend(res.data);
                     } else {
                         setFindFriend(res.data);
                     }
