@@ -47,18 +47,17 @@ const Friend = () => {
             if (res.data.length === 0) {
                 alert("일치하는 친구가 없습니다.");
             } else {
-                userArr.push(...res.data);
-                console.log(userArr);
                 if (getFriend.length > 0) {
-                    // for (let i = 0; i < userArr.length; i++) {
-                    //     for (let j = 0; j < getFriend.length; j++) {
-                    //         if (userArr[i].id === getFriend[j].resFri) {
-                    //             userArr.splice(i, 1);
-                    //         }
-                    //     }
-                    //     i--;
-                    // }
-                    // setFindFriend(res.data);
+                    userArr.push(...res.data);
+                    for (let i = 0; i < getFriend.length; i++) {
+                        userArr.forEach((el, index) => {
+                            if (el.id === getFriend[i].resFri) {
+                                userArr.splice(index, 1);
+                            }
+                        })
+                    }
+
+                    setFindFriend([...userArr]);
                 } else {
                     setFindFriend(res.data);
                 }
@@ -147,7 +146,7 @@ const Friend = () => {
                                             <h3>{a.resFri}</h3>
                                             {
                                                 a.onFriend === 0
-                                                    ? <div>요청중</div>
+                                                    ? <div>요청취소</div>
                                                     : null
                                             }
                                         </li>
