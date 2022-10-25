@@ -122,25 +122,25 @@
     font-family: var(--main-font);
 }
 
-.friend>.friendList p {
+.friend form>.friendList p {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 65vh;
 }
 
-.friend>.friendList {
+.friend form>.friendList {
     height: 100%;
 }
 
-.friend>.friendList>ul {
+.friend form>.friendList>ul {
     display: flex;
     flex-direction: column;
 }
 
-.friend>.friendList>ul>li {}
+.friend form>.friendList>ul>li {}
 
-.friend>.friendList>ul>li>div {
+.friend form>.friendList>ul>li>div {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -148,11 +148,12 @@
     border-bottom: 1px solid #ddd;
 }
 
-.friend>.friendList>ul>li h3 {
+.friend form>.friendList>ul>li h3 {
     line-height: 40px;
 }
 
-.friend>.friendList>ul>li>div>div {
+.friend form>.friendList>ul>li>div>div,
+.friend form>.friendList>ul>li>div>button {
     background-color: #eee;
     font-weight: bold;
     padding: 5px 10px;
@@ -160,7 +161,7 @@
     font-family: var(--main-font);
 }
 
-.friend>.friendList>ul>li>ul {
+.friend form>.friendList>ul>li>ul {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -170,20 +171,20 @@
     transition: max-height .2s;
 }
 
-.friend>.friendList>ul>li.on>ul {
+.friend form>.friendList>ul>li.on>ul {
     max-height: 89px;
 }
 
-.friend>.friendList>ul>li>ul>li {
+.friend form>.friendList>ul>li>ul>li {
     flex: 1;
     padding: 10px 0px;
 }
 
-.friend>.friendList>ul>li.on>ul>li {
+.friend form>.friendList>ul>li.on>ul>li {
     border-bottom: 1px solid #ddd
 }
 
-.friend>.friendList>ul>li>ul>li>a {
+.friend form>.friendList>ul>li>ul>li>a {
     width: 100%;
     display: flex;
     align-items: center;
@@ -194,10 +195,10 @@
 }
 
 
-.friend>.friendList>ul>li>ul>li:first-child>a {
+.friend form>.friendList>ul>li>ul>li:first-child>a {
     border-right: 1px solid #ddd;
 }
 
-.friend>.friendList>ul>li>ul>li>a>i {
+.friend form>.friendList>ul>li>ul>li>a>i {
     font-size: 30px;
 }
