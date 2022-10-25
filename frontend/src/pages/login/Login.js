@@ -29,9 +29,11 @@ const Login = (props) => {
                     sessionStorage.setItem("loginCheck", "success");
                     sessionStorage.setItem("userId", res.data.userId);
                     sessionStorage.setItem("loginToken", res.data.token);
+                    console.log(res.data.token);
                     props.setLoginCheck(true);
                     nav("/");
                 } else {
+                    console.log(res.data);
                     alert("아이디 또는 비밀번호 틀립니다.");
                 }
             })

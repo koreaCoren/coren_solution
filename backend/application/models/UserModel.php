@@ -30,17 +30,62 @@ class UserModel extends Model {
         $stmt->bindValue(":id", $param["id"]);
         $stmt->bindValue(":pw", $param["pw"]);
         $stmt->execute();
-        $result = [
-            'loginCheck' => "success",
-            'userId' => $userId
-        ];
         if(empty($stmt->fetchAll(PDO::FETCH_OBJ))){
             return "fail";
         } else {
+            function GenerateString($length){
+                $characters  = "0123456789";
+                $characters .= "abcdefghijklmnopqrstuvwxyz";
+                $characters .= "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                $characters .= "_";
+                $string_generated = "";
+                $nmr_loops = $length;
+                    while ($nmr_loops--){
+                    $string_generated .= $characters[mt_rand(0, strlen($characters) - 1)];
+                    }               
+                return $string_generated;}
+            $token = GenerateString(100);
+            $sql = "INSERT INTO token
+                    (id , token)
+                    VALUE
+                    ('$userId', '$token')";
+            $stmt2 = $this->pdo->prepare($sql);
+            $stmt2->execute();
+            $result = [
+                'loginCheck' => "success",
+                'userId' => $userId,
+                'token' => $token
+            ];
+            // $param = [
+            //     'id' => $userId,
+            //     'token' => $token
+            // ];
+            // create_token($param);
             return $result;
         }
         
         //return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+    
+    // public function create_token(&$param){
+    //     $sql = "INSERT INTO token
+    //             (id , token)
+    //             VALUE
+    //             (:id, :token)";
+    //     $stmt = $this->pdo->prepare($sql);
+    //     $stmt->bindValue(":id", $param["id"]);
+    //     $stmt->bindValue(":token", $param["token"]);           
+    //     $stmt->execute();
+    //     return "true";
+    // }
+
+    // 로그아웃(토큰삭제)
+    public function break_token(&$param){
+        $sql = "DELETE FROM token WHERE id = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue("id", $param["userId"]);
+        $stmt->execute();
+        return intval($this->pdo->lastInsertId());
     }
 
     public function upd_user(&$param){
