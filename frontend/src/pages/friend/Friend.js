@@ -10,6 +10,8 @@ const Friend = () => {
     const [getFindFriend, setFindFriend] = useState([]);
     const [getResponesUser, setResponesUser] = useState(null);
     const [getFriend, setFriend] = useState([]);
+    const [userMenu, setUserMenu] = useState(0);
+    const [isUserMenu, setIsUserMenu] = useState(false);
 
     // 친구 리스트
     const getFiendList = async () => {
@@ -148,11 +150,34 @@ const Friend = () => {
                             {
                                 getFriend.map((a, i) => {
                                     return (
-                                        <li key={i}>
-                                            <h3>{a.resFri}</h3>
+                                        <li key={i}
+                                            onClick={() => {
+                                                setUserMenu(i);
+                                                i === userMenu
+                                                    ? setIsUserMenu(!isUserMenu)
+                                                    : setIsUserMenu(true);
+                                            }}
+                                            className={
+                                                i === userMenu
+                                                    ? isUserMenu === true
+                                                        ? "on"
+                                                        : ""
+                                                    : ""
+                                            } >
+                                            <div>
+                                                <h3>{a.resFri}</h3>
+                                                {
+                                                    a.onFriend === 0
+                                                        ? <div>요청취소</div>
+                                                        : <div>친구</div>
+                                                }
+                                            </div>
                                             {
-                                                a.onFriend === 0
-                                                    ? <div>요청취소</div>
+                                                a.onFriend === 1
+                                                    ? <ul>
+                                                        <li><Link to={`/chat/${a.resFri}`}><i className="fa-solid fa-comment"></i>1 : 1 채팅</Link></li>
+                                                        <li><Link to={`info/${a.resFri}`}><i className="fa-regular fa-file-lines"></i>정보 보기</Link></li>
+                                                    </ul>
                                                     : null
                                             }
                                         </li>
