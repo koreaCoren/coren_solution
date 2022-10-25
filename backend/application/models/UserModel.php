@@ -45,22 +45,47 @@ class UserModel extends Model {
                     }               
                 return $string_generated;}
             $token = GenerateString(100);
-            // $sql = "INSERT INTO token
-            //         (id , token)
-            //         VALUE
-            //         (:id , $token)";
-            // $stmt = $this->pdo->prepare($sql);
-            // $stmt->bindValue(":id", $param["id"]);
-            // $stmt->execute();
+            $sql = "INSERT INTO token
+                    (id , token)
+                    VALUE
+                    ('$userId', '$token')";
+            $stmt2 = $this->pdo->prepare($sql);
+            $stmt2->execute();
             $result = [
                 'loginCheck' => "success",
                 'userId' => $userId,
-                // 'token' => $token
+                'token' => $token
             ];
+            // $param = [
+            //     'id' => $userId,
+            //     'token' => $token
+            // ];
+            // create_token($param);
             return $result;
         }
         
         //return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+    
+    // public function create_token(&$param){
+    //     $sql = "INSERT INTO token
+    //             (id , token)
+    //             VALUE
+    //             (:id, :token)";
+    //     $stmt = $this->pdo->prepare($sql);
+    //     $stmt->bindValue(":id", $param["id"]);
+    //     $stmt->bindValue(":token", $param["token"]);           
+    //     $stmt->execute();
+    //     return "true";
+    // }
+
+    // 로그아웃(토큰삭제)
+    public function break_token(&$param){
+        $sql = "DELETE FROM token WHERE id = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue("id", $param["userId"]);
+        $stmt->execute();
+        return intval($this->pdo->lastInsertId());
     }
 
     public function upd_user(&$param){
