@@ -61,6 +61,7 @@ const Friend = () => {
                 } else {
                     setFindFriend(res.data);
                 }
+                alert("검색완료");
             }
         }).catch((error) => {
             console.log(error);
