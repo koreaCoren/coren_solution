@@ -34,5 +34,11 @@ class UserController extends Controller {
         $json = getJson();
         return [_RESULT => $this->model->req_friend($json)];
     }
+
+    // 친구 요청 중 화면 출력
+    public function reqing_friend(){
+        $json = getJson();
+        return $this->model->reqing_friend($json);
+    }
     
 }
