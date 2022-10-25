@@ -12,6 +12,13 @@ class UserController extends Controller {
         $json = getJson();
         return $this->model->sel_user($json);
     }
+
+    // 로그아웃(토큰 삭제)
+    public function break_token(){
+        $json = getJson();
+        return $this->model->break_token($json);
+    }
+
     // 계정 삭제?
     public function del_user(){
         $json = getJson();
