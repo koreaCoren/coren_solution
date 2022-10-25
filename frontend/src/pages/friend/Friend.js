@@ -37,7 +37,6 @@ const Friend = () => {
     const friendSearch = async (e) => {
         e.preventDefault();
         let userArr = [];
-        let resFri = [];
 
         if (getSearch === null || getSearch.length < 2) {
             alert("두글자 이상 입력해주세요");
