@@ -6,6 +6,7 @@ import MyGroup from './MyGroup';
 import "asset/css/main.css"
 import FindGroup from 'pages/findGroup/FindGroup';
 import Friend from 'pages/friend/Friend';
+import Chat from 'pages/chat/Chat';
 
 const Main = (props) => {
     const nowUrl = useLocation();
@@ -49,6 +50,8 @@ const Main = (props) => {
                     <Route path='/findGroup' element={<FindGroup />}></Route>
                     <Route path='/myBoard' element={<div>2</div>}></Route>
                     <Route path='/friend/*' element={<Friend />}></Route>
+
+                    <Route path='/chat/:id' element={<Chat />}></Route>
                 </Routes>
             </main>
         </>
