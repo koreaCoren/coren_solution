@@ -12,14 +12,13 @@ const Friend = () => {
     const [getFriend, setFriend] = useState([]);
 
     const getFiendList = async () => {
-        const url = ``;
+        const url = `${process.env.REACT_APP_API_URL}/user/reqing_friend`;
 
         const user = {
             user: sessionStorage.getItem("userId"),
         };
 
         await axios.post(url, user).then((res) => {
-            console.log(res.data);
             setFriend(res.data);
         }).catch((error) => {
             console.log(error);
@@ -32,6 +31,7 @@ const Friend = () => {
 
     const friendSearch = async (e) => {
         e.preventDefault();
+        let userArr = [];
 
         if (getSearch === null || getSearch.length < 2) {
             alert("두글자 이상 입력해주세요");
@@ -47,7 +47,21 @@ const Friend = () => {
             if (res.data.length === 0) {
                 alert("일치하는 친구가 없습니다.");
             } else {
-                setFindFriend(res.data);
+                userArr.push(...res.data);
+                console.log(userArr);
+                if (getFriend.length > 0) {
+                    // for (let i = 0; i < userArr.length; i++) {
+                    //     for (let j = 0; j < getFriend.length; j++) {
+                    //         if (userArr[i].id === getFriend[j].resFri) {
+                    //             userArr.splice(i, 1);
+                    //         }
+                    //     }
+                    //     i--;
+                    // }
+                    // setFindFriend(res.data);
+                } else {
+                    setFindFriend(res.data);
+                }
             }
         }).catch((error) => {
             console.log(error);
@@ -64,7 +78,6 @@ const Friend = () => {
         };
 
         await axios.post(url, friend).then((res) => {
-            console.log(res.data);
         }).catch((error) => {
             console.log(error);
         });
@@ -131,9 +144,9 @@ const Friend = () => {
                                 getFriend.map((a, i) => {
                                     return (
                                         <li key={i}>
-                                            <h3>{a.friendName}</h3>
+                                            <h3>{a.resFri}</h3>
                                             {
-                                                a.state === false
+                                                a.onFriend === 0
                                                     ? <div>요청중</div>
                                                     : null
                                             }
