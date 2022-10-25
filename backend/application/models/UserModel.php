@@ -70,18 +70,26 @@ class UserModel extends Model {
     }
     
     public function req_friend(&$param){
-        $sql = "INSERT INTO friends
+        $sql = "REPLACE INTO friends
                 (
-                    reqFri, resFri
+                    reqFri, resFri, onFriend
                 )
                 VALUES
                 (
-                    :req, :res
+                    :req, :res, 0
                 )";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(":req", $param["requestUser"]);
         $stmt->bindValue(":res", $param["responseUser"]);
         $stmt->execute();
         return $stmt->rowcount();
+    }
+
+    public function reqing_friend(&$param){
+        $sql = "SELECT * FROM friends WHERE reqFri = :user";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue("user", $param["user"]);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 }
