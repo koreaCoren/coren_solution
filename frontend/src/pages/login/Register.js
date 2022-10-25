@@ -12,6 +12,7 @@ const Register = () => {
     const [getPassword, setPassword] = useState();
     const [getEamil, setEmail] = useState();
 
+    //회원가입
     const onSubmit = async (e) => {
         e.preventDefault();
         const emailRegex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
