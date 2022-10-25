@@ -12,6 +12,7 @@ const Register = () => {
     const [getPassword, setPassword] = useState();
     const [getEamil, setEmail] = useState();
 
+    //회원가입
     const onSubmit = async (e) => {
         e.preventDefault();
         const emailRegex =

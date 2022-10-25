@@ -11,6 +11,7 @@ const Friend = () => {
     const [getResponesUser, setResponesUser] = useState(null);
     const [getFriend, setFriend] = useState([]);
 
+    // 친구 리스트
     const getFiendList = async () => {
         const url = `${process.env.REACT_APP_API_URL}/user/reqing_friend`;
 
@@ -32,6 +33,7 @@ const Friend = () => {
         getFiendList();
     }, []);
 
+    //친구 검색
     const friendSearch = async (e) => {
         e.preventDefault();
         let userArr = [];
@@ -75,6 +77,7 @@ const Friend = () => {
             });
     };
 
+    //친구 요청
     const firendRequest = async (e) => {
         e.preventDefault();
 
@@ -90,6 +93,8 @@ const Friend = () => {
             .catch((error) => {
                 console.log(error);
             });
+
+        window.location.reload();
     };
 
     useEffect(() => {}, [getFindFriend]);

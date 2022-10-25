@@ -8,9 +8,10 @@ import axios from "axios";
 const Login = (props) => {
     const nav = useNavigate();
 
-    const [getId, setId] = useState();
-    const [getPassword, setPassword] = useState();
+    const [getId, setId] = useState("");
+    const [getPassword, setPassword] = useState("");
 
+    //로그인
     const onSubmit = async (e) => {
         e.preventDefault();
 
@@ -27,6 +28,7 @@ const Login = (props) => {
                 if (res.data.loginCheck === "success") {
                     sessionStorage.setItem("loginCheck", "success");
                     sessionStorage.setItem("userId", res.data.userId);
+                    sessionStorage.setItem("loginToken", res.data.token);
                     props.setLoginCheck(true);
                     nav("/");
                 } else {
@@ -45,8 +47,10 @@ const Login = (props) => {
         switch (name) {
             case "id":
                 setId(value);
+                break;
             case "pw":
                 setPassword(value);
+                break;
             default:
                 break;
         }
@@ -63,12 +67,14 @@ const Login = (props) => {
                         onChange={onChange}
                         name="id"
                         placeholder="아이디"
+                        value={getId}
                     />
                     <input
                         type="password"
                         onChange={onChange}
                         name="pw"
                         placeholder="비밀번호"
+                        value={getPassword}
                     />
 
                     <button className="buttonBlue" type="submit">

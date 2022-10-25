@@ -23,8 +23,9 @@ const App = () => {
 
     //로그아웃 버튼
     const loginOut = () => {
-        sessionStorage.setItem("loginCheck", "fail");
-        sessionStorage.setItem('userId', null);
+        sessionStorage.removeItem("loginCheck");
+        sessionStorage.removeItem('userId');
+        sessionStorage.removeItem('loginToken');
         setUser(undefined);
         setLoginCheck(false);
     };
