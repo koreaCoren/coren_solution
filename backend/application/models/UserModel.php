@@ -30,13 +30,33 @@ class UserModel extends Model {
         $stmt->bindValue(":id", $param["id"]);
         $stmt->bindValue(":pw", $param["pw"]);
         $stmt->execute();
-        $result = [
-            'loginCheck' => "success",
-            'userId' => $userId
-        ];
         if(empty($stmt->fetchAll(PDO::FETCH_OBJ))){
             return "fail";
         } else {
+            function GenerateString($length){
+                $characters  = "0123456789";
+                $characters .= "abcdefghijklmnopqrstuvwxyz";
+                $characters .= "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                $characters .= "_";
+                $string_generated = "";
+                $nmr_loops = $length;
+                    while ($nmr_loops--){
+                    $string_generated .= $characters[mt_rand(0, strlen($characters) - 1)];
+                    }               
+                return $string_generated;}
+            $token = GenerateString(100);
+            // $sql = "INSERT INTO token
+            //         (id , token)
+            //         VALUE
+            //         (:id , $token)";
+            // $stmt = $this->pdo->prepare($sql);
+            // $stmt->bindValue(":id", $param["id"]);
+            // $stmt->execute();
+            $result = [
+                'loginCheck' => "success",
+                'userId' => $userId,
+                // 'token' => $token
+            ];
             return $result;
         }
         
