@@ -122,25 +122,33 @@
     font-family: var(--main-font);
 }
 
-.friend form>.friendList p {
+.friend .friendList>h2 {
+    width: 100%;
+    background-color: #f5f5f5;
+    text-align: center;
+    line-height: 30px;
+}
+
+.friend .friendList p {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 65vh;
+    line-height: 50px;
+    border-bottom: 1px solid #ddd
 }
 
-.friend form>.friendList {
+.friend .friendList {
     height: 100%;
 }
 
-.friend form>.friendList>ul {
+.friend .friendList>ul {
     display: flex;
     flex-direction: column;
 }
 
-.friend form>.friendList>ul>li {}
+.friend .friendList>ul>li {}
 
-.friend form>.friendList>ul>li>div {
+.friend .friendList>ul>li>div {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -148,12 +156,12 @@
     border-bottom: 1px solid #ddd;
 }
 
-.friend form>.friendList>ul>li h3 {
+.friend .friendList>ul>li h3 {
     line-height: 40px;
 }
 
-.friend form>.friendList>ul>li>div>div,
-.friend form>.friendList>ul>li>div>button {
+.friend .friendList>ul>li>div>div,
+.friend .friendList>ul>li>div>button {
     background-color: #eee;
     font-weight: bold;
     padding: 5px 10px;
@@ -161,11 +169,11 @@
     font-family: var(--main-font);
 }
 
-.friend form>.friendList>ul>li>div>button {
+.friend .friendList>ul>li>div>button {
     cursor: pointer;
 }
 
-.friend form>.friendList>ul>li>ul {
+.friend .friendList>ul>li>ul {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -175,21 +183,21 @@
     transition: max-height .2s;
 }
 
-.friend form>.friendList>ul>li.on>ul {
+.friend .friendList>ul>li.on>ul {
     max-height: 89px;
 }
 
-.friend form>.friendList>ul>li>ul>li {
+.friend .friendList>ul>li>ul>li {
     flex: 1;
     padding: 10px 0px;
 }
 
-.friend form>.friendList>ul>li.on>ul>li {
+.friend .friendList>ul>li.on>ul>li {
     border-bottom: 1px solid #ddd
 }
 
-.friend form>.friendList>ul>li>ul>li>a,
-.friend form>.friendList>ul>li>ul>li>span {
+.friend .friendList>ul>li>ul>li>a,
+.friend .friendList>ul>li>ul>li>span {
     width: 100%;
     display: flex;
     align-items: center;
@@ -201,12 +209,12 @@
 }
 
 
-.friend form>.friendList>ul>li>ul>li:not(:last-child)>a,
-.friend form>.friendList>ul>li>ul>li:not(:last-child)>span {
+.friend .friendList>ul>li>ul>li:not(:last-child)>a,
+.friend .friendList>ul>li>ul>li:not(:last-child)>span {
     border-right: 1px solid #ddd;
 }
 
-.friend form>.friendList>ul>li>ul>li>a>i,
-.friend form>.friendList>ul>li>ul>li>span>i {
+.friend .friendList>ul>li>ul>li>a>i,
+.friend .friendList>ul>li>ul>li>span>i {
     font-size: 30px;
 }
