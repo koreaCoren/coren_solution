@@ -5,17 +5,18 @@ use PDO;
 class UserModel extends Model {
     // 회원가입
     public function ins_user(&$param) {
+        $pw = $param["pw"];
+        $hashPw = password_hash($pw, PASSWORD_DEFAULT);
         $sql = "INSERT INTO member
                 (
                     id, pw, email
                 )
                 VALUES
                 (
-                    :id, :pw, :email
+                    :id, '$hashPw', :email
                 )";
          $stmt = $this->pdo->prepare($sql);
          $stmt->bindValue(":id", $param["id"]);
-         $stmt->bindValue(":pw", $param["pw"]);
          $stmt->bindValue(":email", $param["email"]);       
          $stmt->execute();
          return intval($this->pdo->lastInsertId());
@@ -25,13 +26,15 @@ class UserModel extends Model {
     public function sel_user(&$param){
         $userId = $param["id"];
         $sql = "SELECT * FROM member
-                WHERE id = :id AND pw = :pw";
+                WHERE id = :id";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(":id", $param["id"]);
-        $stmt->bindValue(":pw", $param["pw"]);
         $stmt->execute();
-        if(empty($stmt->fetchAll(PDO::FETCH_OBJ))){
-            return "fail";
+        $fail = ["fail"];
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+        $pwData = $data['pw'];
+        if(!password_verify($param["pw"], $pwData)){
+            return $fail;
         } else {
             function GenerateString($length){
                 $characters  = "0123456789";
