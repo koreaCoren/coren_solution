@@ -106,6 +106,7 @@ class UserModel extends Model {
         return $stmt->rowcount();
     }
 
+    // 친구 찾기
     public function find_friend(&$param){
         $search = $param["searchUser"];
         $sql = "SELECT id FROM member WHERE id LIKE '%$search%'";
@@ -114,6 +115,7 @@ class UserModel extends Model {
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
     
+    // 친구 요청
     public function req_friend(&$param){
         $sql = "REPLACE INTO friends
                 (
@@ -130,11 +132,35 @@ class UserModel extends Model {
         return $stmt->rowcount();
     }
 
+    //친구 요청 중 화면 출력
     public function reqing_friend(&$param){
         $sql = "SELECT * FROM friends WHERE reqFri = :user";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue("user", $param["user"]);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+    //친구 요청 취소
+    public function deny_friend(&$param){
+        $sql = "DELETE FROM friends 
+                WHERE reqFri = :reqUser 
+                AND resFri = :resUser";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindvalue("reqUser", $param["requestUser"]);
+        $stmt->bindvalue("resUser", $param["responseUser"]);
+        $stmt->execute();
+        return "success";
+    }
+
+    //친구 삭제
+    public function delete_friend(&$param){
+        $sql = "DELETE FROM friends 
+                WHERE reqFri = :reqUser 
+                AND resFri = :resUser";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindvalue("reqUser", $param["requestUser"]);
+        $stmt->bindvalue("resUser", $param["responseUser"]);
+        $stmt->execute();
+        return "success";
     }
 }

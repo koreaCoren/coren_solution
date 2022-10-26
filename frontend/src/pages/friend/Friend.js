@@ -18,7 +18,7 @@ const Friend = () => {
     //메뉴 온오프
     const [userMenu, setUserMenu] = useState(0);
     const [isUserMenu, setIsUserMenu] = useState(false);
-    //친구 요청취소할 아이디
+    //친구 요청취소
     const [getCencelFriend, setCencelFriend] = useState(null);
 
     // 친구 리스트
@@ -42,7 +42,7 @@ const Friend = () => {
     //친구리스트 불러오기
     useEffect(() => {
         getFiendList();
-    }, []);
+    }, [getFriend]);
 
     //친구 검색
     const friendSearch = async (e) => {
@@ -111,10 +111,26 @@ const Friend = () => {
     const firendRequestCancellation = async (e) => {
         e.preventDefault();
 
-        const url = `${process.env.REACT_APP_API_URL}/user/`;
+        const url = `${process.env.REACT_APP_API_URL}/user/deny_friend`;
         const friend = {
             requestUser: sessionStorage.getItem("userId"),
             responseUser: getCencelFriend,
+        };
+
+        await axios
+            .post(url, friend)
+            .then((res) => {})
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
+    //친구 삭제
+    const deleteFriend = async (deleteFri) => {
+        const url = `${process.env.REACT_APP_API_URL}/user/delete_friend`;
+        const friend = {
+            requestUser: sessionStorage.getItem("userId"),
+            responseUser: deleteFri,
         };
 
         await axios
@@ -245,6 +261,15 @@ const Friend = () => {
                                                         <i className="fa-regular fa-file-lines"></i>
                                                         정보 보기
                                                     </Link>
+                                                </li>
+                                                <li
+                                                    onClick={() => {
+                                                        deleteFriend(a.resFri);
+                                                    }}>
+                                                    <span>
+                                                        <i className="fa-solid fa-user-minus"></i>
+                                                        친구 삭제
+                                                    </span>
                                                 </li>
                                             </ul>
                                         ) : null}

@@ -32,8 +32,8 @@ const Register = () => {
         await axios
             .post(url, loginData)
             .then((res) => {
-                console.log(res.data);
-                console.log("성공");
+                alert("회원가입 완료되었습니다.");
+                nav("/");
             })
             .catch((error) => {
                 console.log(error);

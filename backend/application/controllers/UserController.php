@@ -48,4 +48,15 @@ class UserController extends Controller {
         return $this->model->reqing_friend($json);
     }
     
+    // 친추 취소
+    public function deny_friend(){
+        $json = getjson();
+        return $this->model->deny_friend($json);
+    }
+
+    // 친구 삭제
+    public function delete_friend(){
+        $json = getjson();
+        return $this->model->delete_friend($json);
+    }
 }
