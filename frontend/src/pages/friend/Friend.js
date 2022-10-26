@@ -117,7 +117,7 @@ const Friend = () => {
 
     //친구 삭제
     const deleteFriend = async (deleteFri) => {
-        const url = `${process.env.REACT_APP_API_URL}/user`
+        const url = `${process.env.REACT_APP_API_URL}/user/delete_friend`
         const friend = {
             requestUser: sessionStorage.getItem("userId"),
             responseUser: deleteFri,

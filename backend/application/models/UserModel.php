@@ -140,8 +140,20 @@ class UserModel extends Model {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
-
+    //친구 요청 취소
     public function deny_friend(&$param){
+        $sql = "DELETE FROM friends 
+                WHERE reqFri = :reqUser 
+                AND resFri = :resUser";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindvalue("reqUser", $param["requestUser"]);
+        $stmt->bindvalue("resUser", $param["responseUser"]);
+        $stmt->execute();
+        return "success";
+    }
+
+    //친구 삭제
+    public function delete_friend(&$param){
         $sql = "DELETE FROM friends 
                 WHERE reqFri = :reqUser 
                 AND resFri = :resUser";
