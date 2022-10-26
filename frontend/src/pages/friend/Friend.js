@@ -103,13 +103,14 @@ const Friend = () => {
     const firendRequestCancellation = async (e) => {
         e.preventDefault();
 
-        const url = `${process.env.REACT_APP_API_URL}/user/`
+        const url = `${process.env.REACT_APP_API_URL}/user/deny_friend`
         const friend = {
             requestUser: sessionStorage.getItem("userId"),
             responseUser: getCencelFriend,
         };
 
         await axios.post(url, friend).then((res) => {
+            window.location.reload();
         }).catch((error) => {
             console.log(error);
         });
