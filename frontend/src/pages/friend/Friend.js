@@ -18,7 +18,7 @@ const Friend = () => {
     //메뉴 온오프
     const [userMenu, setUserMenu] = useState(0);
     const [isUserMenu, setIsUserMenu] = useState(false);
-    //친구 요청취소할 아이디
+    //친구 요청취소
     const [getCencelFriend, setCencelFriend] = useState(null);
 
     // 친구 리스트
@@ -39,7 +39,7 @@ const Friend = () => {
     //친구리스트 불러오기
     useEffect(() => {
         getFiendList();
-    }, [])
+    }, [getFriend])
 
     //친구 검색
     const friendSearch = async (e) => {
@@ -110,7 +110,20 @@ const Friend = () => {
         };
 
         await axios.post(url, friend).then((res) => {
-            window.location.reload();
+        }).catch((error) => {
+            console.log(error);
+        });
+    }
+
+    //친구 삭제
+    const deleteFriend = async (deleteFri) => {
+        const url = `${process.env.REACT_APP_API_URL}/user`
+        const friend = {
+            requestUser: sessionStorage.getItem("userId"),
+            responseUser: deleteFri,
+        };
+
+        await axios.post(url, friend).then((res) => {
         }).catch((error) => {
             console.log(error);
         });
@@ -204,6 +217,8 @@ const Friend = () => {
                                                         ? <ul>
                                                             <li><Link to={`/chat/${a.resFri}`}><i className="fa-solid fa-comment"></i>1 : 1 채팅</Link></li>
                                                             <li><Link to={`info/${a.resFri}`}><i className="fa-regular fa-file-lines"></i>정보 보기</Link></li>
+                                                            <li onClick={() => { deleteFriend(a.resFri) }}
+                                                            ><span><i className="fa-solid fa-user-minus"></i>친구 삭제</span></li>
                                                         </ul>
                                                         : null
                                                 }
@@ -214,8 +229,8 @@ const Friend = () => {
                             </ul>
                     }
                 </div>
-            </form>
-        </div>
+            </form >
+        </div >
     );
 };
 
