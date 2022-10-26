@@ -137,9 +137,10 @@ class UserModel extends Model {
 
     //친구 요청 중 화면 출력
     public function reqing_friend(&$param){
-        $sql = "SELECT * FROM friends WHERE reqFri = :user";
+        $user = $param["user"];
+        $sql = "SELECT * FROM friends WHERE reqFri = '$user' OR resFri = '$user'";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->bindValue("user", $param["user"]);
+        // $stmt->bindValue("user", $param["user"]);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
