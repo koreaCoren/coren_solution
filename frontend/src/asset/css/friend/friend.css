@@ -160,8 +160,13 @@
     line-height: 40px;
 }
 
-.friend .friendList>ul>li>div>div,
-.friend .friendList>ul>li>div>button {
+.friend .friendList>ul>li>div>div {
+    display: flex;
+    gap: 5px;
+}
+
+.friend .friendList>ul>li>div>span,
+.friend .friendList>ul>li>div>div>button {
     background-color: #eee;
     font-weight: bold;
     padding: 5px 10px;
@@ -169,7 +174,7 @@
     font-family: var(--main-font);
 }
 
-.friend .friendList>ul>li>div>button {
+.friend .friendList>ul>li>div>div>button {
     cursor: pointer;
 }
 
