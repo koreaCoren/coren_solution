@@ -3,14 +3,13 @@ import { Link } from 'react-router-dom';
 
 import "asset/css/friend/friend.css"
 import axios from 'axios';
-import ResFriList from './ResFriList';
-import ReqFriList from './ReqFriList';
+import FriendList from 'components/FriendList';
 
 const Friend = () => {
     //친구찾기 버튼
     const [getfind, setFind] = useState(false);
     //친구 검색 인풋
-    const [getSearch, setSearch] = useState(null);
+    const [getSearch, setSearch] = useState("");
     //찾은 친구
     const [getFindFriend, setFindFriend] = useState([]);
     // 친구요청 받을 친구아이디
@@ -20,8 +19,10 @@ const Friend = () => {
     const [isUserMenu, setIsUserMenu] = useState(false);
     //친구 요청취소
     const [getCencelFriend, setCencelFriend] = useState(null);
-    //친구수락
-    const [getFirendReponse, setFirendReponse] = useState(null);
+    //친구수락,거절
+    const [getFirendReponse, setFirendReponse] = useState(false);
+    //친구수락 거절 여부
+    const [getIsFriend, setIsFriend] = useState(undefined);
     //친구 요청
     const [getReqFri, setReqFri] = useState([]);
     //친구 응답
@@ -108,7 +109,6 @@ const Friend = () => {
                 } else {
                     setFindFriend(res.data);
                 }
-                alert("검색완료");
             }
         }).catch((error) => {
             console.log(error);
@@ -119,7 +119,7 @@ const Friend = () => {
     const firendRequest = async (e) => {
         e.preventDefault();
 
-        const url = `${process.env.REACT_APP_API_URL}/user/req_friend`
+        const url = `${process.env.REACT_APP_API_URL}/user/req_friend`;
         const friend = {
             requestUser: sessionStorage.getItem("userId"),
             responseUser: getResponesUser,
@@ -151,7 +151,7 @@ const Friend = () => {
 
     //친구 삭제
     const deleteFriend = async (deleteFri) => {
-        const url = `${process.env.REACT_APP_API_URL}/user/delete_friend`
+        const url = `${process.env.REACT_APP_API_URL}/user/delete_friend`;
         const friend = {
             requestUser: sessionStorage.getItem("userId"),
             responseUser: deleteFri,
@@ -167,13 +167,15 @@ const Friend = () => {
     const firendReponse = async (e) => {
         e.preventDefault();
 
-        const url = `${process.env.REACT_APP_API_URL}/user/`
+        const url = `${process.env.REACT_APP_API_URL}/user/accept_friend`;
         const friend = {
             requestUser: sessionStorage.getItem("userId"),
             responseUser: getFirendReponse,
+            isFriend: getIsFriend,
         };
 
         await axios.post(url, friend).then((res) => {
+            setIsFriend(false);
         }).catch((error) => {
             console.log(error);
         });
@@ -198,13 +200,13 @@ const Friend = () => {
                 <div className={getfind === true ? "findContainer on" : "findContainer"}>
                     <h2>친구 찾기</h2>
 
-                    <button type='button' className="close" onClick={() => { setFind(!getfind) }}>
+                    <button type='button' className="close" onClick={() => { setFind(!getfind); setSearch(""); setFindFriend([]); }}>
                         <i className="fa-solid fa-xmark"></i>
                     </button>
 
                     <form onSubmit={friendSearch}>
                         <div className="inputBox">
-                            <input type="text" onChange={onChange} />
+                            <input type="text" onChange={onChange} value={getSearch} />
                             <button type='submit'>
                                 <i className="fa-solid fa-magnifying-glass"></i>
                             </button>
@@ -233,12 +235,12 @@ const Friend = () => {
             </div>
             {/* 친구 수락 */}
             <form onSubmit={firendReponse}>
-                <ResFriList getResFri={getResFri} setFirendReponse={setFirendReponse}></ResFriList>
+                <FriendList getFriList={getResFri} setFriend={setFirendReponse} button={"수락"} noButton={"거절"} setIsFriend={setIsFriend}></FriendList>
             </form>
 
             {/* 친구요청 */}
             <form onSubmit={firendRequestCancellation}>
-                <ReqFriList getReqFri={getReqFri} setCencelFriend={setCencelFriend}></ReqFriList>
+                <FriendList getFriList={getReqFri} setFriend={setCencelFriend} button={"요청취소"} noButton={""}></FriendList>
             </form >
 
             {/* 친구목록 */}
@@ -267,7 +269,7 @@ const Friend = () => {
                                             } >
                                             <div>
                                                 <h3>{a}</h3>
-                                                <div>친구</div>
+                                                <span>친구</span>
                                             </div>
                                             <ul>
                                                 <li><Link to={`/chat/${a.resFri}`}><i className="fa-solid fa-comment"></i>1 : 1 채팅</Link></li>
