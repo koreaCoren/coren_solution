@@ -167,7 +167,7 @@ const Friend = () => {
     const firendReponse = async (e) => {
         e.preventDefault();
 
-        const url = `${process.env.REACT_APP_API_URL}/user/`
+        const url = `${process.env.REACT_APP_API_URL}/user/accept_friend`
         const friend = {
             requestUser: sessionStorage.getItem("userId"),
             responseUser: getFirendReponse,

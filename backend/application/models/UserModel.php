@@ -153,18 +153,32 @@ class UserModel extends Model {
         $stmt->bindvalue("reqUser", $param["requestUser"]);
         $stmt->bindvalue("resUser", $param["responseUser"]);
         $stmt->execute();
-        return "success";
+        return intval($this->pdo->lastInsertId());
     }
 
     //친구 삭제
     public function delete_friend(&$param){
+        $reqUser = $param["requestUser"];
+        $resUser = $param["responseUser"];
         $sql = "DELETE FROM friends 
-                WHERE reqFri = :reqUser 
-                AND resFri = :resUser";
+                WHERE reqFri = '$reqUser' AND resFri = '$resUser'
+                OR reqFri = '$resUser' AND resFri = '$reqUser'";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->bindvalue("reqUser", $param["requestUser"]);
-        $stmt->bindvalue("resUser", $param["responseUser"]);
+        // $stmt->bindvalue("reqUser", $param["requestUser"]);
+        // $stmt->bindvalue("resUser", $param["responseUser"]);
         $stmt->execute();
-        return "success";
+        return intval($this->pdo->lastInsertId());
+    }
+
+    //친구 수락
+    public function accept_friend(&$param){
+        $sql = "UPDATE friends
+                SET onfriend = '1'
+                WHERE resFri = :user AND reqFri = :reqUser";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindvalue("user", $param["requestUser"]);
+        $stmt->bindvalue("reqUser", $param["responseUser"]);
+        $stmt->execute();
+        return intval($this->pdo->lastInsertId());
     }
 }
