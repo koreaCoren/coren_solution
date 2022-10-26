@@ -5,17 +5,18 @@ use PDO;
 class UserModel extends Model {
     // 회원가입
     public function ins_user(&$param) {
+        $pw = $param["pw"];
+        $hashPw = password_hash($pw, PASSWORD_DEFAULT);
         $sql = "INSERT INTO member
                 (
                     id, pw, email
                 )
                 VALUES
                 (
-                    :id, :pw, :email
+                    :id, '$hashPw', :email
                 )";
          $stmt = $this->pdo->prepare($sql);
          $stmt->bindValue(":id", $param["id"]);
-         $stmt->bindValue(":pw", $param["pw"]);
          $stmt->bindValue(":email", $param["email"]);       
          $stmt->execute();
          return intval($this->pdo->lastInsertId());
@@ -25,13 +26,15 @@ class UserModel extends Model {
     public function sel_user(&$param){
         $userId = $param["id"];
         $sql = "SELECT * FROM member
-                WHERE id = :id AND pw = :pw";
+                WHERE id = :id";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(":id", $param["id"]);
-        $stmt->bindValue(":pw", $param["pw"]);
         $stmt->execute();
-        if(empty($stmt->fetchAll(PDO::FETCH_OBJ))){
-            return "fail";
+        $fail = ["fail"];
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+        $pwData = $data['pw'];
+        if(!password_verify($param["pw"], $pwData)){
+            return $fail;
         } else {
             function GenerateString($length){
                 $characters  = "0123456789";
@@ -134,9 +137,10 @@ class UserModel extends Model {
 
     //친구 요청 중 화면 출력
     public function reqing_friend(&$param){
-        $sql = "SELECT * FROM friends WHERE reqFri = :user";
+        $user = $param["user"];
+        $sql = "SELECT * FROM friends WHERE reqFri = '$user' OR resFri = '$user'";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->bindValue("user", $param["user"]);
+        // $stmt->bindValue("user", $param["user"]);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
@@ -149,18 +153,32 @@ class UserModel extends Model {
         $stmt->bindvalue("reqUser", $param["requestUser"]);
         $stmt->bindvalue("resUser", $param["responseUser"]);
         $stmt->execute();
-        return "success";
+        return intval($this->pdo->lastInsertId());
     }
 
     //친구 삭제
     public function delete_friend(&$param){
+        $reqUser = $param["requestUser"];
+        $resUser = $param["responseUser"];
         $sql = "DELETE FROM friends 
-                WHERE reqFri = :reqUser 
-                AND resFri = :resUser";
+                WHERE reqFri = '$reqUser' AND resFri = '$resUser'
+                OR reqFri = '$resUser' AND resFri = '$reqUser'";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->bindvalue("reqUser", $param["requestUser"]);
-        $stmt->bindvalue("resUser", $param["responseUser"]);
+        // $stmt->bindvalue("reqUser", $param["requestUser"]);
+        // $stmt->bindvalue("resUser", $param["responseUser"]);
         $stmt->execute();
-        return "success";
+        return intval($this->pdo->lastInsertId());
+    }
+
+    //친구 수락
+    public function accept_friend(&$param){
+        $sql = "UPDATE friends
+                SET onfriend = '1'
+                WHERE resFri = :user AND reqFri = :reqUser";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindvalue("user", $param["requestUser"]);
+        $stmt->bindvalue("reqUser", $param["responseUser"]);
+        $stmt->execute();
+        return intval($this->pdo->lastInsertId());
     }
 }

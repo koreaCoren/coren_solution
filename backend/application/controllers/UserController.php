@@ -59,4 +59,10 @@ class UserController extends Controller {
         $json = getjson();
         return $this->model->delete_friend($json);
     }
+
+    // 친구 수락
+    public function accept_friend(){
+        $json = getjson();
+        return $this->model->accept_friend($json);
+    }
 }
