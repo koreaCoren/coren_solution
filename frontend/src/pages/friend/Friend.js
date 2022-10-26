@@ -21,16 +21,48 @@ const Friend = () => {
     //친구 요청취소
     const [getCencelFriend, setCencelFriend] = useState(null);
 
+    //친구 요청
+    const [getReqFri, setReqFri] = useState([]);
+    //친구 응답
+    const [getResFri, setResFri] = useState([]);
+    //친구 리스트
+
     // 친구 리스트
     const getFiendList = async () => {
         const url = `${process.env.REACT_APP_API_URL}/user/reqing_friend`;
+        let userState = [
+            { res: [] },
+            { req: [] },
+            { fri: [] },
+        ];
 
         const user = {
             user: sessionStorage.getItem("userId"),
         };
 
         await axios.post(url, user).then((res) => {
-            setFriend(res.data);
+            res.data.forEach((el) => {
+                console.log(res.data);
+                if (el.onFriend === 0) {
+                    //친구응답
+                    if (el.resFri === sessionStorage.getItem("userId")) {
+                        userState[0].res.push(el.reqFri);
+                    }
+                    //친구요청
+                    if (el.reqFri === sessionStorage.getItem("userId")) {
+                        userState[1].req.push(el.resFri);
+                    }
+                } else if (el.onFriend === 1) {
+                    //친구들
+                    if (el.reqFri === sessionStorage.getItem("userId") ||
+                        el.resFri === sessionStorage.getItem("userId")) {
+                        userState[2].fri.push(el.resFri);
+                    }
+                }
+            })
+            setResFri([...userState[0].res]);
+            setReqFri([...userState[1].req]);
+            setFriend([...userState[2].fri]);
         }).catch((error) => {
             console.log(error);
         });
@@ -182,7 +214,53 @@ const Friend = () => {
                 </div>
             </div>
             <form onSubmit={firendRequestCancellation}>
+
                 <div className="friendList">
+                    요청 들어옴
+                    {
+                        getResFri.length <= 0
+                            ? <p>요청한 친구가 없습니다</p>
+                            : <ul>
+                                {
+                                    getResFri.map((a, i) => {
+                                        return (
+                                            <li key={i}>
+                                                <div>
+                                                    <h3>{a}</h3>
+                                                    <button>수락</button>
+                                                </div>
+                                            </li>
+                                        )
+                                    })
+                                }
+                            </ul>
+                    }
+                </div>
+
+                <div className="friendList">
+                    요청
+                    {
+                        getReqFri.length <= 0
+                            ? <p>요청한 친구가 없습니다</p>
+                            : <ul>
+                                {
+                                    getReqFri.map((a, i) => {
+                                        return (
+                                            <li key={i}>
+                                                <div>
+                                                    <h3>{a}</h3>
+                                                    <button onClick={() => { setCencelFriend(a) }}>요청취소</button>
+                                                </div>
+                                            </li>
+                                        )
+                                    })
+                                }
+                            </ul>
+                    }
+                </div>
+
+                <div className="friendList">
+                    친구
                     {
                         getFriend.length <= 0
                             ? <p>친구가 없습니다</p>
@@ -205,23 +283,15 @@ const Friend = () => {
                                                         : ""
                                                 } >
                                                 <div>
-                                                    <h3>{a.resFri}</h3>
-                                                    {
-                                                        a.onFriend === 0
-                                                            ? <button onClick={() => { setCencelFriend(a.resFri) }}>요청취소</button>
-                                                            : <div>친구</div>
-                                                    }
+                                                    <h3>{a}</h3>
+                                                    <div>친구</div>
                                                 </div>
-                                                {
-                                                    a.onFriend === 1
-                                                        ? <ul>
-                                                            <li><Link to={`/chat/${a.resFri}`}><i className="fa-solid fa-comment"></i>1 : 1 채팅</Link></li>
-                                                            <li><Link to={`info/${a.resFri}`}><i className="fa-regular fa-file-lines"></i>정보 보기</Link></li>
-                                                            <li onClick={() => { deleteFriend(a.resFri) }}
-                                                            ><span><i className="fa-solid fa-user-minus"></i>친구 삭제</span></li>
-                                                        </ul>
-                                                        : null
-                                                }
+                                                <ul>
+                                                    <li><Link to={`/chat/${a.resFri}`}><i className="fa-solid fa-comment"></i>1 : 1 채팅</Link></li>
+                                                    <li><Link to={`info/${a.resFri}`}><i className="fa-regular fa-file-lines"></i>정보 보기</Link></li>
+                                                    <li onClick={() => { deleteFriend(a) }}
+                                                    ><span><i className="fa-solid fa-user-minus"></i>친구 삭제</span></li>
+                                                </ul>
                                             </li>
                                         )
                                     })
