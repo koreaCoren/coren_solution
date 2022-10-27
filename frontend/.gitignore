@@ -5,6 +5,7 @@
 /node_modules
 /.pnp
 .pnp.js
+.env
 
 # testing
 /coverage
@@ -15,7 +16,6 @@
 # misc
 .composer.json
 .composer.lock
-.env
 .DS_Store
 .env.local
 .env.development.local
