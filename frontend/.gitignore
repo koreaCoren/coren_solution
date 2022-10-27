@@ -28,4 +28,4 @@ yarn-error.log*
 
 .env
 
-/backend/application/libs
+Config.php
