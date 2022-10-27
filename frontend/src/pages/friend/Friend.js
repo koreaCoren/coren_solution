@@ -3,27 +3,37 @@ import { Link } from "react-router-dom";
 
 import "asset/css/friend/friend.css";
 import axios from "axios";
+import FriendList from "components/FriendList";
 
 const Friend = () => {
     //친구찾기 버튼
     const [getfind, setFind] = useState(false);
     //친구 검색 인풋
-    const [getSearch, setSearch] = useState(null);
+    const [getSearch, setSearch] = useState("");
     //찾은 친구
     const [getFindFriend, setFindFriend] = useState([]);
     // 친구요청 받을 친구아이디
     const [getResponesUser, setResponesUser] = useState(null);
-    // 친구 리스트
-    const [getFriend, setFriend] = useState([]);
     //메뉴 온오프
     const [userMenu, setUserMenu] = useState(0);
     const [isUserMenu, setIsUserMenu] = useState(false);
     //친구 요청취소
     const [getCencelFriend, setCencelFriend] = useState(null);
+    //친구수락,거절
+    const [getFirendReponse, setFirendReponse] = useState(false);
+    //친구수락 거절 여부
+    const [getIsFriend, setIsFriend] = useState(undefined);
+    //친구 요청
+    const [getReqFri, setReqFri] = useState([]);
+    //친구 응답
+    const [getResFri, setResFri] = useState([]);
+    //친구 리스트
+    const [getFriend, setFriend] = useState([]);
 
     // 친구 리스트
     const getFiendList = async () => {
         const url = `${process.env.REACT_APP_API_URL}/user/reqing_friend`;
+        let userState = [{ res: [] }, { req: [] }, { fri: [] }];
 
         const user = {
             user: sessionStorage.getItem("userId"),
@@ -32,7 +42,30 @@ const Friend = () => {
         await axios
             .post(url, user)
             .then((res) => {
-                setFriend(res.data);
+                res.data.forEach((el) => {
+                    if (el.onFriend === 0) {
+                        //친구응답
+                        if (el.resFri === sessionStorage.getItem("userId")) {
+                            userState[0].res.push(el.reqFri);
+                        }
+                        //친구요청
+                        if (el.reqFri === sessionStorage.getItem("userId")) {
+                            userState[1].req.push(el.resFri);
+                        }
+                    } else if (el.onFriend === 1) {
+                        //친구들
+                        if (el.reqFri === sessionStorage.getItem("userId")) {
+                            userState[2].fri.push(el.resFri);
+                        } else if (
+                            el.resFri === sessionStorage.getItem("userId")
+                        ) {
+                            userState[2].fri.push(el.reqFri);
+                        }
+                    }
+                });
+                setResFri([...userState[0].res]);
+                setReqFri([...userState[1].req]);
+                setFriend([...userState[2].fri]);
             })
             .catch((error) => {
                 console.log(error);
@@ -80,7 +113,6 @@ const Friend = () => {
                         setFindFriend(res.data);
                     }
                 }
-                alert("검색완료");
             })
             .catch((error) => {
                 console.log(error);
@@ -141,6 +173,27 @@ const Friend = () => {
             });
     };
 
+    //친구 수락
+    const firendReponse = async (e) => {
+        e.preventDefault();
+
+        const url = `${process.env.REACT_APP_API_URL}/user/accept_friend`;
+        const friend = {
+            requestUser: sessionStorage.getItem("userId"),
+            responseUser: getFirendReponse,
+            isFriend: getIsFriend,
+        };
+
+        await axios
+            .post(url, friend)
+            .then((res) => {
+                setIsFriend(false);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
     //친구 검색 리스트 받아오기
     useEffect(() => {}, [getFindFriend]);
 
@@ -172,13 +225,19 @@ const Friend = () => {
                         className="close"
                         onClick={() => {
                             setFind(!getfind);
+                            setSearch("");
+                            setFindFriend([]);
                         }}>
                         <i className="fa-solid fa-xmark"></i>
                     </button>
 
                     <form onSubmit={friendSearch}>
                         <div className="inputBox">
-                            <input type="text" onChange={onChange} />
+                            <input
+                                type="text"
+                                onChange={onChange}
+                                value={getSearch}
+                            />
                             <button type="submit">
                                 <i className="fa-solid fa-magnifying-glass"></i>
                             </button>
@@ -208,78 +267,82 @@ const Friend = () => {
                     </form>
                 </div>
             </div>
-            <form onSubmit={firendRequestCancellation}>
-                <div className="friendList">
-                    {getFriend.length <= 0 ? (
-                        <p>친구가 없습니다</p>
-                    ) : (
-                        <ul>
-                            {getFriend.map((a, i) => {
-                                return (
-                                    <li
-                                        key={i}
-                                        onClick={() => {
-                                            setUserMenu(i);
-                                            i === userMenu
-                                                ? setIsUserMenu(!isUserMenu)
-                                                : setIsUserMenu(true);
-                                        }}
-                                        className={
-                                            i === userMenu
-                                                ? isUserMenu === true
-                                                    ? "on"
-                                                    : ""
-                                                : ""
-                                        }>
-                                        <div>
-                                            <h3>{a.resFri}</h3>
-                                            {a.onFriend === 0 ? (
-                                                <button
-                                                    onClick={() => {
-                                                        setCencelFriend(
-                                                            a.resFri
-                                                        );
-                                                    }}>
-                                                    요청취소
-                                                </button>
-                                            ) : (
-                                                <div>친구</div>
-                                            )}
-                                        </div>
-                                        {a.onFriend === 1 ? (
-                                            <ul>
-                                                <li>
-                                                    <Link
-                                                        to={`/chat/${a.resFri}`}>
-                                                        <i className="fa-solid fa-comment"></i>
-                                                        1 : 1 채팅
-                                                    </Link>
-                                                </li>
-                                                <li>
-                                                    <Link
-                                                        to={`info/${a.resFri}`}>
-                                                        <i className="fa-regular fa-file-lines"></i>
-                                                        정보 보기
-                                                    </Link>
-                                                </li>
-                                                <li
-                                                    onClick={() => {
-                                                        deleteFriend(a.resFri);
-                                                    }}>
-                                                    <span>
-                                                        <i className="fa-solid fa-user-minus"></i>
-                                                        친구 삭제
-                                                    </span>
-                                                </li>
-                                            </ul>
-                                        ) : null}
-                                    </li>
-                                );
-                            })}
-                        </ul>
-                    )}
-                </div>
+            {/* 친구 수락 */}
+            <form onSubmit={firendReponse}>
+                <FriendList
+                    getFriList={getResFri}
+                    setFriend={setFirendReponse}
+                    button={"수락"}
+                    noButton={"거절"}
+                    setIsFriend={setIsFriend}></FriendList>
             </form>
+
+            {/* 친구요청 */}
+            <form onSubmit={firendRequestCancellation}>
+                <FriendList
+                    getFriList={getReqFri}
+                    setFriend={setCencelFriend}
+                    button={"요청취소"}
+                    noButton={""}></FriendList>
+            </form>
+
+            {/* 친구목록 */}
+            <div className="friendList">
+                <h2>친구</h2>
+                {getFriend.length <= 0 ? (
+                    <p>친구가 없습니다</p>
+                ) : (
+                    <ul>
+                        {getFriend.map((a, i) => {
+                            return (
+                                <li
+                                    key={i}
+                                    onClick={() => {
+                                        setUserMenu(i);
+                                        i === userMenu
+                                            ? setIsUserMenu(!isUserMenu)
+                                            : setIsUserMenu(true);
+                                    }}
+                                    className={
+                                        i === userMenu
+                                            ? isUserMenu === true
+                                                ? "on"
+                                                : ""
+                                            : ""
+                                    }>
+                                    <div>
+                                        <h3>{a}</h3>
+                                        <span>친구</span>
+                                    </div>
+                                    <ul>
+                                        <li>
+                                            <Link to={`/chat/${a.resFri}`}>
+                                                <i className="fa-solid fa-comment"></i>
+                                                1 : 1 채팅
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link to={`info/${a.resFri}`}>
+                                                <i className="fa-regular fa-file-lines"></i>
+                                                정보 보기
+                                            </Link>
+                                        </li>
+                                        <li
+                                            onClick={() => {
+                                                deleteFriend(a);
+                                            }}>
+                                            <span>
+                                                <i className="fa-solid fa-user-minus"></i>
+                                                친구 삭제
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </li>
+                            );
+                        })}
+                    </ul>
+                )}
+            </div>
         </div>
     );
 };
