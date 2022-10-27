@@ -131,7 +131,7 @@ const Friend = () => {
 
         await axios
             .post(url, friend)
-            .then((res) => {})
+            .then((res) => { })
             .catch((error) => {
                 console.log(error);
             });
@@ -151,7 +151,7 @@ const Friend = () => {
 
         await axios
             .post(url, friend)
-            .then((res) => {})
+            .then((res) => { })
             .catch((error) => {
                 console.log(error);
             });
@@ -167,7 +167,7 @@ const Friend = () => {
 
         await axios
             .post(url, friend)
-            .then((res) => {})
+            .then((res) => { })
             .catch((error) => {
                 console.log(error);
             });
@@ -195,7 +195,7 @@ const Friend = () => {
     };
 
     //친구 검색 리스트 받아오기
-    useEffect(() => {}, [getFindFriend]);
+    useEffect(() => { }, [getFindFriend]);
 
     const onChange = (e) => {
         const value = e.target.value;
@@ -205,11 +205,7 @@ const Friend = () => {
     return (
         <div className="friend">
             <div className="find">
-                <button
-                    type="button"
-                    onClick={() => {
-                        setFind(!getfind);
-                    }}>
+                <button type="button" onClick={() => { setFind(!getfind); }}>
                     <i className="fa-solid fa-plus"></i>
                     친구 추가하기
                 </button>
@@ -253,10 +249,7 @@ const Friend = () => {
                                     return (
                                         <li key={i}>
                                             <h3>{a.id}</h3>
-                                            <button
-                                                onClick={() => {
-                                                    setResponesUser(a.id);
-                                                }}>
+                                            <button onClick={() => { setResponesUser(a.id); }}>
                                                 친구 요청
                                             </button>
                                         </li>
@@ -269,22 +262,14 @@ const Friend = () => {
             </div>
             {/* 친구 수락 */}
             <form onSubmit={firendReponse}>
-                <FriendList
-                    getFriList={getResFri}
-                    setFriend={setFirendReponse}
-                    button={"수락"}
-                    noButton={"거절"}
-                    setIsFriend={setIsFriend}></FriendList>
+                <FriendList getFriList={getResFri} setFriend={setFirendReponse} button={"수락"} noButton={"거절"} setIsFriend={setIsFriend} title={"친구 요청옴"}></FriendList>
+
             </form>
 
             {/* 친구요청 */}
             <form onSubmit={firendRequestCancellation}>
-                <FriendList
-                    getFriList={getReqFri}
-                    setFriend={setCencelFriend}
-                    button={"요청취소"}
-                    noButton={""}></FriendList>
-            </form>
+                <FriendList getFriList={getReqFri} setFriend={setCencelFriend} button={"요청취소"} noButton={""} title={"친구요청보냄"}></FriendList>
+            </form >
 
             {/* 친구목록 */}
             <div className="friendList">

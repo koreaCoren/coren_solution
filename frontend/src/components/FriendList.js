@@ -3,7 +3,7 @@ import React from 'react';
 const FriendList = (props) => {
     return (
         <div className="friendList">
-            <h2>친구요청보냄</h2>
+            <h2>{props.title}</h2>
             {
                 props.getFriList.length <= 0
                     ? <p>요청한 친구가 없습니다</p>
