@@ -1,7 +1,6 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/bin
 /vendor
 /node_modules
 /.pnp
@@ -28,5 +27,3 @@ yarn-debug.log*
 yarn-error.log*
 
 env/
-
-backend/application/libs
