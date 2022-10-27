@@ -63,9 +63,7 @@ const Login = (props) => {
                 <h2>회원수첩</h2>
 
                 <form onSubmit={onSubmit}>
-                    <input
-                        type="text"
-                        onChange={onChange}
+                    <input type="text" onChange={onChange}
                         name="id"
                         placeholder="아이디"
                         value={getId}
