@@ -1,9 +1,9 @@
 /* eslint-disable no-fallthrough */
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import "asset/css/login/login.css";
-import axios from 'axios';
+import axios from "axios";
 
 const Register = () => {
     const nav = useNavigate();
@@ -15,7 +15,8 @@ const Register = () => {
     //회원가입
     const onSubmit = async (e) => {
         e.preventDefault();
-        const emailRegex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+        const emailRegex =
+            /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
         if (!emailRegex.test(getEamil)) {
             alert("이메일 형식이 아님 다시 적으셈");
             return;
@@ -26,16 +27,19 @@ const Register = () => {
             id: getId,
             pw: getPassword,
             email: getEamil,
-        }
+        };
 
-        await axios.post(url, loginData).then((res) => {
-            alert("회원가입 완료되었습니다.");
-            nav('/');
-        }).catch((error) => {
-            console.log(error);
-            console.log("되겠냐?");
-        })
-    }
+        await axios
+            .post(url, loginData)
+            .then((res) => {
+                alert("회원가입 완료되었습니다.");
+                nav("/");
+            })
+            .catch((error) => {
+                console.log(error);
+                console.log("되겠냐?");
+            });
+    };
 
     const onChange = (e) => {
         const value = e.target.value;
@@ -53,7 +57,7 @@ const Register = () => {
             default:
                 break;
         }
-    }
+    };
 
     return (
         <>
@@ -61,16 +65,36 @@ const Register = () => {
                 <h2>회원가입</h2>
 
                 <form onSubmit={onSubmit}>
-                    <input type="text" onChange={onChange} name="id" placeholder='아이디' />
-                    <input type="password" onChange={onChange} name="pw" placeholder='비밀번호' />
-                    <input type="text" onChange={onChange} name="email" placeholder='이메일' />
+                    <input
+                        type="text"
+                        onChange={onChange}
+                        name="id"
+                        placeholder="아이디"
+                    />
+                    <input
+                        type="password"
+                        onChange={onChange}
+                        name="pw"
+                        placeholder="비밀번호"
+                    />
+                    <input
+                        type="text"
+                        onChange={onChange}
+                        name="email"
+                        placeholder="이메일"
+                    />
 
-                    <button className='buttonBlue' type='submit'>가입하기</button>
+                    <button className="buttonBlue" type="submit">
+                        가입하기
+                    </button>
                     <button
-                        type='button'
-                        className='buttonGary'
-                        onClick={() => { nav(-1) }}
-                    >뒤로가기</button>
+                        type="button"
+                        className="buttonGary"
+                        onClick={() => {
+                            nav(-1);
+                        }}>
+                        뒤로가기
+                    </button>
                 </form>
             </div>
         </>
