@@ -131,7 +131,7 @@ const Friend = () => {
 
         await axios
             .post(url, friend)
-            .then((res) => {})
+            .then((res) => { })
             .catch((error) => {
                 console.log(error);
             });
@@ -151,7 +151,7 @@ const Friend = () => {
 
         await axios
             .post(url, friend)
-            .then((res) => {})
+            .then((res) => { })
             .catch((error) => {
                 console.log(error);
             });
@@ -167,7 +167,7 @@ const Friend = () => {
 
         await axios
             .post(url, friend)
-            .then((res) => {})
+            .then((res) => { })
             .catch((error) => {
                 console.log(error);
             });
@@ -195,7 +195,7 @@ const Friend = () => {
     };
 
     //친구 검색 리스트 받아오기
-    useEffect(() => {}, [getFindFriend]);
+    useEffect(() => { }, [getFindFriend]);
 
     const onChange = (e) => {
         const value = e.target.value;
