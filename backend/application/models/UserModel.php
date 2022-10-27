@@ -121,13 +121,13 @@ class UserModel extends Model {
     // 친구 요청
     public function req_friend(&$param){
         $sql = "REPLACE INTO friends
-                (
-                    reqFri, resFri, onFriend
-                )
-                VALUES
-                (
-                    :req, :res, 0
-                )";
+            (
+                reqFri, resFri, onFriend
+            )
+            VALUES
+            (
+                :req, :res, 0
+            )";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(":req", $param["requestUser"]);
         $stmt->bindValue(":res", $param["responseUser"]);
@@ -144,6 +144,7 @@ class UserModel extends Model {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
+    
     //친구 요청 취소
     public function deny_friend(&$param){
         $sql = "DELETE FROM friends 
@@ -170,11 +171,17 @@ class UserModel extends Model {
         return intval($this->pdo->lastInsertId());
     }
 
-    //친구 수락
+    //친구 수락 or 거절
     public function accept_friend(&$param){
-        $sql = "UPDATE friends
+        if($param["isFriend"] === true ){
+            $sql = "UPDATE friends
                 SET onfriend = '1'
                 WHERE resFri = :user AND reqFri = :reqUser";
+        } else {
+            $sql = "DELETE FROM friends 
+                    WHERE reqFri = :reqUser 
+                    AND resFri = :user";
+        }
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindvalue("user", $param["requestUser"]);
         $stmt->bindvalue("reqUser", $param["responseUser"]);
