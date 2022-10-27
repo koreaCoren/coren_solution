@@ -6,7 +6,8 @@
 /.pnp
 .pnp.js
 .env
-test.php
+/bin
+
 # testing
 /coverage
 
