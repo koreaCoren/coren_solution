@@ -1,0 +1,30 @@
+ul.boardList {
+    display: flex;
+    flex-direction: column;
+}
+
+ul.boardList li {}
+
+ul.boardList li a {
+    width: 100%;
+    padding: 15px;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+ul.boardList li a h2 {}
+
+ul.boardList li a h3 {
+    text-align: right;
+}
+
+ul.boardList li a h3 .days {
+    font-size: 10px;
+}
+
+ul.boardList li a h3 .name {
+    font-size: 10px;
+    color: #888;
+}
