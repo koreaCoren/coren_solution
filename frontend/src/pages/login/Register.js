@@ -29,12 +29,10 @@ const Register = () => {
             email: getEamil,
         };
 
-        await axios
-            .post(url, loginData)
-            .then((res) => {
-                alert("회원가입 완료되었습니다.");
-                nav("/");
-            })
+        await axios.post(url, loginData).then((res) => {
+            alert("회원가입 완료되었습니다.");
+            nav("/");
+        })
             .catch((error) => {
                 console.log(error);
                 console.log("되겠냐?");
@@ -65,36 +63,12 @@ const Register = () => {
                 <h2>회원가입</h2>
 
                 <form onSubmit={onSubmit}>
-                    <input
-                        type="text"
-                        onChange={onChange}
-                        name="id"
-                        placeholder="아이디"
-                    />
-                    <input
-                        type="password"
-                        onChange={onChange}
-                        name="pw"
-                        placeholder="비밀번호"
-                    />
-                    <input
-                        type="text"
-                        onChange={onChange}
-                        name="email"
-                        placeholder="이메일"
-                    />
+                    <input type="text" onChange={onChange} name="id" placeholder="아이디" />
+                    <input type="password" onChange={onChange} name="pw" placeholder="비밀번호" />
+                    <input type="text" onChange={onChange} name="email" placeholder="이메일" />
 
-                    <button className="buttonBlue" type="submit">
-                        가입하기
-                    </button>
-                    <button
-                        type="button"
-                        className="buttonGary"
-                        onClick={() => {
-                            nav(-1);
-                        }}>
-                        뒤로가기
-                    </button>
+                    <button className="buttonBlue" type="submit">가입하기</button>
+                    <button type="button" className="buttonGary" onClick={() => { nav(-1); }}>뒤로가기</button>
                 </form>
             </div>
         </>
