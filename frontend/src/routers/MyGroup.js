@@ -11,11 +11,9 @@ const Board = () => {
     const [getBoardList, setBoardList] = useState([]);
     const getBoard = async () => {
         const url = `${process.env.REACT_APP_API_URL}/Board/sel_board`;
-        await axios
-            .get(url)
-            .then((res) => {
-                setBoardList(res.data);
-            })
+        await axios.get(url).then((res) => {
+            setBoardList(res.data);
+        })
             .catch((error) => {
                 console.log(error);
             });
@@ -26,16 +24,8 @@ const Board = () => {
     return (
         <>
             <Routes>
-                <Route
-                    path="/*"
-                    element={
-                        <MyGroupList getBoardList={getBoardList} />
-                    }></Route>
-                <Route
-                    path="/board/detail/:id/*"
-                    element={
-                        <MyGroupDetail getBoardList={getBoardList} />
-                    }></Route>
+                <Route path="/*" element={<MyGroupList getBoardList={getBoardList} />}></Route>
+                <Route path="/board/detail/:id/*" element={<MyGroupDetail getBoardList={getBoardList} />}></Route>
             </Routes>
         </>
     );

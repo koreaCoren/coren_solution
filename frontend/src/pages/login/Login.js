@@ -22,20 +22,18 @@ const Login = (props) => {
             pw: getPassword,
         };
 
-        await axios
-            .post(url, loginData)
-            .then((res) => {
-                if (res.data.loginCheck === "success") {
-                    sessionStorage.setItem("loginCheck", "success");
-                    sessionStorage.setItem("userId", res.data.userId);
-                    sessionStorage.setItem("loginToken", res.data.token);
-                    props.setLoginCheck(true);
-                    nav("/");
-                } else {
-                    console.log(res.data);
-                    alert("아이디 또는 비밀번호 틀립니다.");
-                }
-            })
+        await axios.post(url, loginData).then((res) => {
+            if (res.data.loginCheck === "success") {
+                sessionStorage.setItem("loginCheck", "success");
+                sessionStorage.setItem("userId", res.data.userId);
+                sessionStorage.setItem("loginToken", res.data.token);
+                props.setLoginCheck(true);
+                nav("/");
+            } else {
+                console.log(res.data);
+                alert("아이디 또는 비밀번호 틀립니다.");
+            }
+        })
             .catch((error) => {
                 console.log(error);
                 console.log("응 안됨 돌아가");
@@ -63,30 +61,12 @@ const Login = (props) => {
                 <h2>회원수첩</h2>
 
                 <form onSubmit={onSubmit}>
-                    <input
-                        type="text"
-                        onChange={onChange}
-                        name="id"
-                        placeholder="아이디"
-                        value={getId}
-                    />
-                    <input
-                        type="password"
-                        onChange={onChange}
-                        name="pw"
-                        placeholder="비밀번호"
-                        value={getPassword}
-                    />
+                    <input type="text" onChange={onChange} name="id" placeholder="아이디" value={getId} />
+                    <input type="password" onChange={onChange} name="pw" placeholder="비밀번호" value={getPassword} />
 
-                    <button className="buttonBlue" type="submit">
-                        로그인
-                    </button>
-                    <Link to="/register" className="buttonGary">
-                        회원가입
-                    </Link>
-                    <Link to="/recover" className="recover">
-                        아이디 / 비밀번호 찾기
-                    </Link>
+                    <button className="buttonBlue" type="submit">로그인</button>
+                    <Link to="/register" className="buttonGary">회원가입</Link>
+                    <Link to="/recover" className="recover">아이디 / 비밀번호 찾기</Link>
                 </form>
             </div>
         </>

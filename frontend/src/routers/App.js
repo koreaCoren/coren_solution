@@ -31,7 +31,7 @@ const App = () => {
         const Data = {
             userId: userId
         }
-        
+
         await axios.post(url, Data).then((res) => {
             console.log(res.data);
         }).catch((error) => {
@@ -49,15 +49,8 @@ const App = () => {
         <>
             {
                 getLoginCheck === true
-                    ? <Main
-                        getLoginCheck={getLoginCheck}
-                        getUser={getUser}
-                        loginOut={loginOut}
-                    ></Main>
-                    : <Login
-                        setLoginCheck={setLoginCheck}
-                        setUser={setUser}
-                    ></Login>
+                    ? <Main getLoginCheck={getLoginCheck} getUser={getUser} loginOut={loginOut}></Main>
+                    : <Login setLoginCheck={setLoginCheck} setUser={setUser}></Login>
             }
         </>
     );
