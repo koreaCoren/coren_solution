@@ -32,11 +32,10 @@ const Register = () => {
         await axios.post(url, loginData).then((res) => {
             alert("회원가입 완료되었습니다.");
             nav("/");
-        })
-            .catch((error) => {
-                console.log(error);
-                console.log("되겠냐?");
-            });
+        }).catch((error) => {
+            console.log(error);
+            console.log("되겠냐?");
+        });
     };
 
     const onChange = (e) => {
