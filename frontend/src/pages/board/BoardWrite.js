@@ -19,18 +19,21 @@ const BoardWrite = () => {
     const onSubmit = async (e) => {
         e.preventDefault();
 
+        let days = new Date();
 
         const url = `${process.env.REACT_APP_API_URL}/board/ins_board`;
         const boardData = {
             id: sessionStorage.getItem("userId"),
             title: getTitle,
             content: getContent,
+            date: `${days.getFullYear()}/${days.getMonth() + 1}/${days.getDate() + 1}`
         };
         console.log(boardData);
 
         await axios.post(url, boardData).then((res) => {
-            console.log("OK");
-            console.log(res.data);
+            setTitle("");
+            setContent("");
+            nav("/board");
         }).catch((error) => {
             console.log(error);
         });

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import "asset/css/board/read.css";
@@ -9,6 +9,7 @@ import BoardWrite from "pages/board/BoardWrite";
 import BoardDetail from "pages/board/BoardDetail";
 
 const Board = () => {
+    const nav = useNavigate();
     const [getBoardList, setBoardList] = useState([]);
     const getBoard = async () => {
         const url = `${process.env.REACT_APP_API_URL}/Board/sel_board`;
@@ -21,7 +22,7 @@ const Board = () => {
 
     useEffect(() => {
         getBoard();
-    }, []);
+    }, [nav]);
 
     return (
         <>
