@@ -5,6 +5,7 @@ import axios from "axios";
 import "asset/css/board/read.css";
 
 import BoardList from "pages/board/Board";
+import BoardWrite from "pages/board/BoardWrite";
 import BoardDetail from "pages/board/BoardDetail";
 
 const Board = () => {
@@ -26,6 +27,7 @@ const Board = () => {
         <>
             <Routes>
                 <Route path="/*" element={<BoardList getBoardList={getBoardList} />}></Route>
+                <Route path="/write/*" element={<BoardWrite getBoardList={getBoardList} />}></Route>
                 <Route path="/detail/:id/*" element={<BoardDetail getBoardList={getBoardList} />}></Route>
             </Routes>
         </>

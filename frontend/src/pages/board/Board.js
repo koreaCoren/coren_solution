@@ -7,6 +7,7 @@ const BoardList = (props) => {
     return (
         <>
             <ul className='boardList'>
+                <li><Link to={`/board/write`}><h2>글쓰기</h2></Link></li>
                 {
                     props.getBoardList.map((a, i) => {
                         return (
