@@ -17,6 +17,7 @@
 .friend ul li>img {
     width: 86px;
     height: 86px;
+    border-radius: 5px;
 }
 
 .friend ul li .content {
