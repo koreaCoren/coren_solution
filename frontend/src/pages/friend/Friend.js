@@ -18,7 +18,7 @@ const Friend = () => {
                         </div>
                         <div>
                             <a href="tel:010-0000-0000">
-                                <i class="fa-solid fa-phone"></i>
+                                <i className="fa-solid fa-phone"></i>
                             </a>
                         </div>
                     </div>
@@ -34,7 +34,7 @@ const Friend = () => {
                         </div>
                         <div>
                             <a href="tel:010-0000-0000">
-                                <i class="fa-solid fa-phone"></i>
+                                <i className="fa-solid fa-phone"></i>
                             </a>
                         </div>
                     </div>
