@@ -10,4 +10,21 @@ class BoardModel extends Model {
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
+    public function ins_board(&$param){
+        $sql = "INSERT INTO board
+                (
+                    id, title, ctnt
+                )
+                VALUES
+                (
+                    :id, :title, :ctnt
+                )";
+         $stmt = $this->pdo->prepare($sql);
+         $stmt->bindValue(":id", $param["id"]);
+         $stmt->bindValue(":title", $param["title"]);       
+         $stmt->bindValue(":ctnt", $param["ctnt"]);       
+         $stmt->execute();
+         return intval($this->pdo->lastInsertId());
+    }
+
 }
