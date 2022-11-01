@@ -33,11 +33,10 @@ const Login = (props) => {
                 console.log(res.data);
                 alert("아이디 또는 비밀번호 틀립니다.");
             }
-        })
-            .catch((error) => {
-                console.log(error);
-                console.log("응 안됨 돌아가");
-            });
+        }).catch((error) => {
+            console.log(error);
+            console.log("응 안됨 돌아가");
+        });
     };
 
     const onChange = (e) => {

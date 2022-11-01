@@ -27,7 +27,7 @@ const Board = () => {
         <>
             <Routes>
                 <Route path="/*" element={<BoardList getBoardList={getBoardList} />}></Route>
-                <Route path="/write/*" element={<BoardWrite getBoardList={getBoardList} />}></Route>
+                <Route path="/write/*" element={<BoardWrite />}></Route>
                 <Route path="/detail/:id/*" element={<BoardDetail getBoardList={getBoardList} />}></Route>
             </Routes>
         </>
