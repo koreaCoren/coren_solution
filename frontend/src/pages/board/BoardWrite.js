@@ -19,14 +19,18 @@ const BoardWrite = () => {
     const onSubmit = async (e) => {
         e.preventDefault();
 
-        const url = `${process.env.REACT_APP_API_URL}/user/ins_user`;
+
+        const url = `${process.env.REACT_APP_API_URL}/board/ins_board`;
         const boardData = {
             id: sessionStorage.getItem("userId"),
             title: getTitle,
             content: getContent,
         };
+        console.log(boardData);
 
         await axios.post(url, boardData).then((res) => {
+            console.log("OK");
+            console.log(res.data);
         }).catch((error) => {
             console.log(error);
         });
