@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Header from 'components/Header';
 import { Link, Route, Routes, useLocation } from 'react-router-dom';
-import MyGroup from './MyGroup';
+import Board from './Board';
 
 import "asset/css/main.css"
-import FindGroup from 'pages/findGroup/FindGroup';
 import Friend from 'pages/friend/Friend';
-import Chat from 'pages/chat/Chat';
 
 const Main = (props) => {
     const nowUrl = useLocation();
@@ -16,13 +14,13 @@ const Main = (props) => {
             case "/":
                 setNav(0)
                 break;
-            case "/findGroup":
+            case "/board":
                 setNav(1)
                 break;
-            case "/myBoard":
+            case "/advertisement":
                 setNav(2)
                 break;
-            case "/friend":
+            case "/myInfo":
                 setNav(3)
                 break;
             default:
@@ -39,19 +37,17 @@ const Main = (props) => {
             <main>
                 <nav>
                     <ul>
-                        <li><Link to="/" className={getNav === 0 ? "on" : ""}>내 그룹</Link></li>
-                        <li><Link to="/findGroup" className={getNav === 1 ? "on" : ""}>그룹 찾기</Link></li>
-                        <li><Link to="/myBoard" className={getNav === 2 ? "on" : ""}>내 게시글</Link></li>
-                        <li><Link to="/friend" className={getNav === 3 ? "on" : ""}>친구</Link></li>
+                        <li><Link to="/" className={getNav === 0 ? "on" : ""}>홈</Link></li>
+                        <li><Link to="/board" className={getNav === 1 ? "on" : ""}>게시판</Link></li>
+                        <li><Link to="/advertisement" className={getNav === 2 ? "on" : ""}>전광판</Link></li>
+                        <li><Link to="/myInfo" className={getNav === 3 ? "on" : ""}>MY</Link></li>
                     </ul>
                 </nav>
                 <Routes>
-                    <Route path='/*' element={<MyGroup />}></Route>
-                    <Route path='/findGroup' element={<FindGroup />}></Route>
-                    <Route path='/myBoard' element={<div>2</div>}></Route>
-                    <Route path='/friend/*' element={<Friend />}></Route>
-
-                    <Route path='/chat/:id' element={<Chat />}></Route>
+                    <Route path='/*' element={<Friend />}></Route>
+                    <Route path='/board/*' element={<Board />}></Route>
+                    <Route path='/advertisement' element={<div>1</div>}></Route>
+                    <Route path='/myInfo/*' element={<div>2</div>}></Route>
                 </Routes>
             </main>
         </>
