@@ -16,6 +16,7 @@ const Header = (props) => {
         scrollTop();
 
         //로그인상태에서 회원가입 접근 차단
+        //테스트
         if (props.getLoginCheck === true) {
             if (nowUrl.pathname === "/register") {
                 alert("로그인상태에서는 접근 할 수 없습니다.");
