@@ -19,12 +19,12 @@ class BoardModel extends Model {
                 (
                     :id, :title, :ctnt
                 )";
-         $stmt = $this->pdo->prepare($sql);
-         $stmt->bindValue(":id", $param["id"]);
-         $stmt->bindValue(":title", $param["title"]);       
-         $stmt->bindValue(":ctnt", $param["ctnt"]);       
-         $stmt->execute();
-         return intval($this->pdo->lastInsertId());
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(":id", $param["id"]);
+        $stmt->bindValue(":title", $param["title"]);
+        $stmt->bindValue(":ctnt", $param["content"]);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
 }
