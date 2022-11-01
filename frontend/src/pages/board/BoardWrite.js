@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import "asset/css/board/write.css";
@@ -18,6 +18,7 @@ const BoardWrite = () => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
+
 
         const url = `${process.env.REACT_APP_API_URL}/board/ins_board`;
         const boardData = {
@@ -50,7 +51,6 @@ const BoardWrite = () => {
             default:
                 break;
         }
-        console.log(getTitle);
     }
 
     return (
@@ -61,7 +61,7 @@ const BoardWrite = () => {
                 <textarea onChange={onChange} name="content" placeholder="내용" value={getContent}></textarea>
                 <div className="buttons">
                     <button type="button" onClick={back}>뒤로가기</button>
-                    <button>작성하기</button>
+                    <button type="submit">작성하기</button>
                 </div>
             </form>
         </div>
