@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 
-const MyGroupDetail = (props) => {
+const BoardDetail = (props) => {
     const { id } = useParams();
     return (
         <>
@@ -12,4 +12,4 @@ const MyGroupDetail = (props) => {
     );
 };
 
-export default MyGroupDetail;
+export default BoardDetail;

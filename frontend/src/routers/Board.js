@@ -4,8 +4,8 @@ import axios from "axios";
 
 import "asset/css/board/read.css";
 
-import MyGroupList from "pages/myGroup/MyGroupList";
-import MyGroupDetail from "pages/myGroup/MyGroupDetail";
+import BoardList from "pages/board/Board";
+import BoardDetail from "pages/board/BoardDetail";
 
 const Board = () => {
     const [getBoardList, setBoardList] = useState([]);
@@ -13,19 +13,20 @@ const Board = () => {
         const url = `${process.env.REACT_APP_API_URL}/Board/sel_board`;
         await axios.get(url).then((res) => {
             setBoardList(res.data);
-        })
-            .catch((error) => {
-                console.log(error);
-            });
+        }).catch((error) => {
+            console.log(error);
+        });
     };
+
     useEffect(() => {
         getBoard();
     }, []);
+
     return (
         <>
             <Routes>
-                <Route path="/*" element={<MyGroupList getBoardList={getBoardList} />}></Route>
-                <Route path="/board/detail/:id/*" element={<MyGroupDetail getBoardList={getBoardList} />}></Route>
+                <Route path="/*" element={<BoardList getBoardList={getBoardList} />}></Route>
+                <Route path="/detail/:id/*" element={<BoardDetail getBoardList={getBoardList} />}></Route>
             </Routes>
         </>
     );
