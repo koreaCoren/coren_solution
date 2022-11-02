@@ -2,9 +2,25 @@ import React from "react";
 import { Link, useParams } from "react-router-dom";
 
 import "asset/css/board/readDetail.css";
+import axios from "axios";
 
 const BoardDetail = (props) => {
     const { id } = useParams();
+
+    const boardDelete = async () => {
+        const ok = window.confirm("정말로 삭제 하시겠습니까?");
+        const url = `${process.env.REACT_APP_API_URL}/??`;
+        const user = {
+            token: sessionStorage.getItem("loginToken"),
+            userId: sessionStorage.getItem("userId"),
+        }
+        await axios.post(url, user).then((res) => {
+
+        }).catch((error) => {
+
+        })
+    }
+
     return (
         <div className="read">
             <div className="title">
