@@ -10,7 +10,7 @@ import axios from "axios";
 const App = () => {
     const [getUser, setUser] = useState();
     const [getLoginCheck, setLoginCheck] = useState(false);
-
+    
     // useEffect(() => {
     //     // 로그인 체크
     //     if (sessionStorage.getItem('loginCheck') === "success") {
