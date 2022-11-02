@@ -51,7 +51,9 @@ class UserModel extends Model {
             $sql = "INSERT INTO token
                     (id , token)
                     VALUE
-                    ('$userId', '$token')";
+                    ('$userId', '$token')
+                    ON DUPLICATE KEY
+                    UPDATE id='$userId', token='$token'";
             $stmt2 = $this->pdo->prepare($sql);
             $stmt2->execute();
             $result = [
@@ -187,5 +189,15 @@ class UserModel extends Model {
         $stmt->bindvalue("reqUser", $param["responseUser"]);
         $stmt->execute();
         return intval($this->pdo->lastInsertId());
+    }
+
+    //토큰 체크
+    public function checkToken(&$param){
+        $sql = "SELECT * FROM token WHERE id = :id AND token = :token";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue("id", $param["userId"]);
+        $stmt->bindValue("token", $param["token"]);
+        $row = $stmt->execute();
+        return $row === 1 ? 'ok': 'false';
     }
 }
