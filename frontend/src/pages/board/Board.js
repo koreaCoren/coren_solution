@@ -9,10 +9,10 @@ const BoardList = (props) => {
             <ul className='boardList'>
                 <li><Link to={`/board/write`}><h2>글쓰기</h2></Link></li>
                 {
-                    props.getBoardList.map((a, i) => {
+                    props.getBoardList.slice(0).reverse().map((a, i) => {
                         return (
                             <li key={i}>
-                                <Link to={`/board/detail/${i}`}>
+                                <Link to={`/board/detail/${props.getBoardList.length - (i + 1)}`}>
                                     <h2>{a.title}</h2>
                                     <h3>
                                         <div className="days">{a.cre_date}</div>
