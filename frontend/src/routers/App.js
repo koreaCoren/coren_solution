@@ -13,13 +13,15 @@ const App = () => {
     const [getLoginCheck, setLoginCheck] = useState(false);
 
     const tokenCheck = async () => {
-        const url = `${process.REACT_APP_API_URL}/??`;
+        const url = `${process.REACT_APP_API_URL}/user/checkToken`;
         const tokenData = {
             token: sessionStorage.getItem("loginToken"),
             userId: sessionStorage.getItem("userId"),
         }
 
         await axios.post(url, tokenData).then((res) => {
+            console.log("ok");
+            console.log(res.data);
             if (res.data === "ok") {
                 setLoginCheck(true);
                 setUser(sessionStorage.getItem('userId'));
@@ -29,6 +31,7 @@ const App = () => {
             }
         }).catch((error) => {
             console.log(error);
+            console.log("ok");
         })
     }
 
