@@ -14,12 +14,18 @@ const App = () => {
 
     const tokenCheck = async () => {
         const url = `${process.REACT_APP_API_URL}/??`;
+        const tokenData = {
+            token: sessionStorage.getItem("loginToken"),
+            userId: sessionStorage.getItem("userId"),
+        }
 
-        await axios.post(url, sessionStorage.getItem("loginToken")).then((res) => {
+        await axios.post(url, tokenData).then((res) => {
             if (res.data === "ok") {
                 setLoginCheck(true);
+                setUser(sessionStorage.getItem('userId'));
             } else {
                 setLoginCheck(false);
+                setUser(undefined);
             }
         }).catch((error) => {
             console.log(error);
@@ -29,6 +35,7 @@ const App = () => {
     useEffect(() => {
         tokenCheck();
     }, [nav])
+
     // useEffect(() => {
     //     // 로그인 체크
     //     if (sessionStorage.getItem('loginCheck') === "success") {
