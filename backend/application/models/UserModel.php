@@ -76,7 +76,17 @@ class UserModel extends Model {
         $stmt->bindValue("id", $param["userId"]);
         $stmt->bindValue("token", $param["token"]);
         $row = $stmt->execute();
-        return $row === 1 ? 'ok': 'false';
+        if($row === 1){
+            $result = [
+                'result' => 'ok',
+            ];
+        }else {
+            $result = [
+                'result' => 'false',
+            ];
+        }
+        
+        return $result;
     }
 
 
