@@ -10,17 +10,17 @@ import axios from "axios";
 const App = () => {
     const [getUser, setUser] = useState();
     const [getLoginCheck, setLoginCheck] = useState(false);
-    
-    // useEffect(() => {
-    //     // 로그인 체크
-    //     if (sessionStorage.getItem('loginCheck') === "success") {
-    //         setLoginCheck(true);
-    //         setUser(sessionStorage.getItem('userId'));
-    //     } else {
-    //         setLoginCheck(false);
-    //         setUser(undefined);
-    //     }
-    // }, [sessionStorage.getItem('loginCheck')])
+
+    useEffect(() => {
+        // 로그인 체크
+        if (sessionStorage.getItem('loginCheck') === "success") {
+            setLoginCheck(true);
+            setUser(sessionStorage.getItem('userId'));
+        } else {
+            setLoginCheck(false);
+            setUser(undefined);
+        }
+    }, [sessionStorage.getItem('loginCheck')])
 
     //로그아웃 버튼
     const loginOut = async (e) => {
