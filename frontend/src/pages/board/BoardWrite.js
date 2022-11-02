@@ -20,14 +20,13 @@ const BoardWrite = () => {
         e.preventDefault();
 
         let days = new Date();
-        console.log(`${days.getFullYear()}/${days.getMonth() + 1}/${days.getDate()}`);
 
         const url = `${process.env.REACT_APP_API_URL}/board/ins_board`;
         const boardData = {
             id: sessionStorage.getItem("userId"),
             title: getTitle,
             content: getContent,
-            date: `${days.getFullYear()}/${days.getMonth() + 1}/${days.getDate() + 1}`
+            date: `${days.getFullYear()}/${days.getMonth() + 1}/${days.getDate()}`
         };
 
         await axios.post(url, boardData).then((res) => {

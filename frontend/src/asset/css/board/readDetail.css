@@ -1,0 +1,61 @@
+.read {
+    padding: 10px;
+}
+
+.read>.title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding: 5px;
+}
+
+.read>.title>div>h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.read>.title>div>h2 {
+    font-size: 12px;
+    line-height: 1.2;
+}
+
+.read>.title>div>h3 {
+    font-size: 12px;
+    line-height: 1.2;
+}
+
+.read>.title>.button {
+    position: relative;
+}
+
+.read>.title>.button button {}
+
+.read>.title>.button button i {
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.read>.title>.button>ul {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #eee;
+    background-color: #fff;
+}
+
+.read>.title>.button>ul li:last-child {
+    border-top: 1px solid #eee;
+}
+
+.read>.title>.button>ul li a,
+.read>.title>.button>ul li button {
+    white-space: nowrap;
+    padding: 10px 20px;
+}
+
+.read>p {
+    padding: 10px 5px;
+}
