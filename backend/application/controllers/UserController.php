@@ -67,8 +67,8 @@ class UserController extends Controller {
     }
 
     //토큰 체크
-    public function checkToken(){
+    public function check_token(){
         $json = getJson();
-        return $this->model->checkToken($json);
+        return $this->model->check_token($json);
     }
 }
