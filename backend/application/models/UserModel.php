@@ -193,12 +193,14 @@ class UserModel extends Model {
 
     //토큰 체크
     public function checkToken(&$param){
-        $sql = "SELECT * FROM token WHERE id = :id AND token = :token";
+        $sql = "SELECT * FROM token WHERE id = :id";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue("id", $param["userId"]);
-        $stmt->bindValue("token", $param["token"]);
+        // $stmt->bindValue("token", $param["token"]);
         $row = $stmt->execute();
-        if($row === 1){
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+        $tkData = $data['token'];
+        if($param["token"] == $tkData){
             $result = [
                 'result' => 'ok',
             ];
