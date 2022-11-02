@@ -21,17 +21,12 @@ const Main = (props) => {
         }
         console.log(tokenData);
         await axios.post(url, tokenData).then((res) => {
-            console.log(res.data.result);
-            if (res.data.result === "ok") {
-                props.setUser(sessionStorage.getItem('userId'));
-                props.setLoginCheck(true);
-            } else {
+            if (res.data.result !== "ok") {
                 sessionStorage.removeItem("loginCheck");
                 sessionStorage.removeItem('userId');
                 sessionStorage.removeItem('loginToken');
-                props.setLoginCheck(false);
-                props.setUser(undefined);
                 alert("토큰 만료됬어 돌아가렴");
+                window.location.reload();
             }
         }).catch((error) => {
             console.log(error);
