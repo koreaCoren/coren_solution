@@ -11,16 +11,41 @@ const App = () => {
     const nav = useNavigate();
     const [getUser, setUser] = useState();
     const [getLoginCheck, setLoginCheck] = useState(false);
-    useEffect(() => {
-        // 로그인 체크
-        if (sessionStorage.getItem('loginCheck') === "success") {
-            setLoginCheck(true);
-            setUser(sessionStorage.getItem('userId'));
-        } else {
-            setLoginCheck(false);
-            setUser(undefined);
+
+    const tokenCheck = async () => {
+        const url = `${process.REACT_APP_API_URL}/user/check_token`;
+        const tokenData = {
+            token: sessionStorage.getItem("loginToken"),
+            userId: sessionStorage.getItem("userId"),
         }
-    }, [sessionStorage.getItem('loginCheck')])
+
+        await axios.post(url, tokenData).then((res) => {
+            if (res.data === "ok") {
+                setLoginCheck(true);
+                setUser(sessionStorage.getItem('userId'));
+            } else {
+                setLoginCheck(false);
+                setUser(undefined);
+            }
+        }).catch((error) => {
+            console.log(error);
+        })
+    }
+
+    useEffect(() => {
+        tokenCheck();
+    }, [nav])
+
+    // useEffect(() => {
+    //     // 로그인 체크
+    //     if (sessionStorage.getItem('loginCheck') === "success") {
+    //         setLoginCheck(true);
+    //         setUser(sessionStorage.getItem('userId'));
+    //     } else {
+    //         setLoginCheck(false);
+    //         setUser(undefined);
+    //     }
+    // }, [sessionStorage.getItem('loginCheck')])
 
     //로그아웃 버튼
     const loginOut = async (e) => {

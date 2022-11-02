@@ -15,7 +15,6 @@
 # misc
 .composer.json
 .composer.lock
-.env
 .DS_Store
 .env.local
 .env.development.local

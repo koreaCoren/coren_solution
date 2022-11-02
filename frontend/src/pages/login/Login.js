@@ -15,7 +15,6 @@ const Login = (props) => {
     const onSubmit = async (e) => {
         e.preventDefault();
 
-        // const url = "http://192.168.0.86/MVC/backend/user/sel_user";
         const url = `${process.env.REACT_APP_API_URL}/user/sel_user`;
         const loginData = {
             id: getId,

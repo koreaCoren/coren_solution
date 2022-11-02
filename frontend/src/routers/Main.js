@@ -40,14 +40,14 @@ const Main = (props) => {
                         <li><Link to="/" className={getNav === 0 ? "on" : ""}>홈</Link></li>
                         <li><Link to="/board" className={getNav === 1 ? "on" : ""}>게시판</Link></li>
                         <li><Link to="/advertisement" className={getNav === 2 ? "on" : ""}>전광판</Link></li>
-                        <li><Link to="/myInfo" className={getNav === 3 ? "on" : ""}>MY</Link></li>
+                        {/* <li><Link to="/myInfo" className={getNav === 3 ? "on" : ""}>MY</Link></li> */}
                     </ul>
                 </nav>
                 <Routes>
                     <Route path='/*' element={<Friend />}></Route>
                     <Route path='/board/*' element={<Board />}></Route>
                     <Route path='/advertisement' element={<div>1</div>}></Route>
-                    <Route path='/myInfo/*' element={<div>2</div>}></Route>
+                    {/* <Route path='/myInfo/*' element={<div>2</div>}></Route> */}
                 </Routes>
             </main>
         </>
