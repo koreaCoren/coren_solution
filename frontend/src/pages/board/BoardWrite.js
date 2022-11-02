@@ -28,6 +28,7 @@ const BoardWrite = () => {
             content: getContent,
             date: `${days.getFullYear()}/${days.getMonth() + 1}/${days.getDate()}`
         };
+        console.log(boardData);
 
         await axios.post(url, boardData).then((res) => {
             setTitle("");
