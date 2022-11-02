@@ -8,36 +8,9 @@ import Main from "routers/Main";
 import axios from "axios";
 
 const App = () => {
-    const nav = useNavigate();
     const [getUser, setUser] = useState();
     const [getLoginCheck, setLoginCheck] = useState(false);
-
-    const tokenCheck = async () => {
-        const url = `${process.env.REACT_APP_API_URL}/user/check_token`;
-        const tokenData = {
-            token: sessionStorage.getItem("loginToken"),
-            userId: sessionStorage.getItem("userId"),
-        }
-        console.log("send");
-
-        await axios.post(url, tokenData).then((res) => {
-            console.log("OK");
-            if (res.data === "ok") {
-                setLoginCheck(true);
-                setUser(sessionStorage.getItem('userId'));
-            } else {
-                setLoginCheck(false);
-                setUser(undefined);
-            }
-        }).catch((error) => {
-            console.log(error);
-        })
-    }
-
-    useEffect(() => {
-        tokenCheck();
-    }, [nav])
-
+    
     // useEffect(() => {
     //     // 로그인 체크
     //     if (sessionStorage.getItem('loginCheck') === "success") {
@@ -76,7 +49,13 @@ const App = () => {
         <>
             {
                 getLoginCheck === true
-                    ? <Main getLoginCheck={getLoginCheck} getUser={getUser} loginOut={loginOut}></Main>
+                    ? <Main
+                        getLoginCheck={getLoginCheck}
+                        getUser={getUser}
+                        loginOut={loginOut}
+                        setUser={setUser}
+                        setLoginCheck={setLoginCheck}
+                    ></Main>
                     : <Login setLoginCheck={setLoginCheck} setUser={setUser}></Login>
             }
         </>
