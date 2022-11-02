@@ -28,4 +28,22 @@ class BoardModel extends Model {
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
+    public function del_board(&$param){
+        $sql = "DELETE FROM board WHERE i_board = :i_board";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(":i_board", $param["i_board"]);        
+        $stmt->execute();
+        return $stmt->rowcount();
+    }
+
+    public function upd_board(&$param){
+        $sql = "UPDATE board SET title = :title, ctnt = :ctnt WHERE i_board = :i_board";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(":i_board", $param["i_board"]);    
+        $stmt->bindValue(":title", $param["title"]);    
+        $stmt->bindValue(":ctnt", $param["ctnt"]);                
+        $stmt->execute();
+        return $stmt->rowcount();
+    }
+
 }
