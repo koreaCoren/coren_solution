@@ -1,14 +1,46 @@
 import React, { useEffect, useState } from 'react';
 import Header from 'components/Header';
-import { Link, Route, Routes, useLocation } from 'react-router-dom';
-import Board from './Board';
+import { Link, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
-import "asset/css/main.css"
+import Board from './Board';
 import Friend from 'pages/friend/Friend';
 
+import "asset/css/main.css"
+
 const Main = (props) => {
+    const nav = useNavigate();
     const nowUrl = useLocation();
     const [getNav, setNav] = useState(0);
+
+    const tokenCheck = async () => {
+        const url = `${process.env.REACT_APP_API_URL}/user/checkToken`;
+        const tokenData = {
+            token: sessionStorage.getItem("loginToken"),
+            userId: sessionStorage.getItem("userId"),
+        }
+
+        await axios.post(url, tokenData).then((res) => {
+            if (res.data.result === "ok") {
+                props.setUser(sessionStorage.getItem('userId'));
+                props.setLoginCheck(true);
+            } else {
+                sessionStorage.removeItem("loginCheck");
+                sessionStorage.removeItem('userId');
+                sessionStorage.removeItem('loginToken');
+                props.setLoginCheck(false);
+                props.setUser(undefined);
+                alert("토큰 만료됬어 돌아가렴");
+            }
+        }).catch((error) => {
+            console.log(error);
+        })
+    }
+
+    useEffect(() => {
+        tokenCheck();
+    }, [nav])
+
     useEffect(() => {
         switch (nowUrl.pathname) {
             case "/":

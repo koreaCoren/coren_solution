@@ -196,4 +196,14 @@ class UserModel extends Model {
         $stmt->execute();
         return intval($this->pdo->lastInsertId());
     }
+
+    //토큰 체크
+    public function check_token(&$param){
+        $sql = "SELECT * FROM token WHERE id = :id AND token = :token";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue("id", $param["userId"]);
+        $stmt->bindValue("token", $param["token"]);
+        $row = $stmt->execute();
+        return $row === 1 ? 'ok': 'false';
+    }
 }
