@@ -26,7 +26,7 @@ const BoardWrite = () => {
             id: sessionStorage.getItem("userId"),
             title: getTitle,
             content: getContent,
-            date: `${days.getFullYear()}/${days.getMonth() + 1}/${days.getDate() + 1}`
+            date: `${days.getFullYear()}/${days.getMonth() + 1}/${days.getDate()}`
         };
         console.log(boardData);
 

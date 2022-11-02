@@ -11,16 +11,34 @@ const App = () => {
     const nav = useNavigate();
     const [getUser, setUser] = useState();
     const [getLoginCheck, setLoginCheck] = useState(false);
+
+    const tokenCheck = async () => {
+        const url = `${process.REACT_APP_API_URL}/??`;
+
+        await axios.post(url, sessionStorage.getItem("loginToken")).then((res) => {
+            if (res.data === "ok") {
+                setLoginCheck(true);
+            } else {
+                setLoginCheck(false);
+            }
+        }).catch((error) => {
+            console.log(error);
+        })
+    }
+
     useEffect(() => {
-        // 로그인 체크
-        if (sessionStorage.getItem('loginCheck') === "success") {
-            setLoginCheck(true);
-            setUser(sessionStorage.getItem('userId'));
-        } else {
-            setLoginCheck(false);
-            setUser(undefined);
-        }
-    }, [sessionStorage.getItem('loginCheck')])
+        tokenCheck();
+    }, [nav])
+    // useEffect(() => {
+    //     // 로그인 체크
+    //     if (sessionStorage.getItem('loginCheck') === "success") {
+    //         setLoginCheck(true);
+    //         setUser(sessionStorage.getItem('userId'));
+    //     } else {
+    //         setLoginCheck(false);
+    //         setUser(undefined);
+    //     }
+    // }, [sessionStorage.getItem('loginCheck')])
 
     //로그아웃 버튼
     const loginOut = async (e) => {
