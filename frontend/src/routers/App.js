@@ -13,7 +13,7 @@ const App = () => {
     const [getLoginCheck, setLoginCheck] = useState(false);
 
     const tokenCheck = async () => {
-        const url = `${process.REACT_APP_API_URL}/??`;
+        const url = `${process.REACT_APP_API_URL}/user/check_token`;
         const tokenData = {
             token: sessionStorage.getItem("loginToken"),
             userId: sessionStorage.getItem("userId"),
