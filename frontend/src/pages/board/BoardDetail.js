@@ -1,23 +1,24 @@
 import React from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 import "asset/css/board/readDetail.css";
 import axios from "axios";
 
 const BoardDetail = (props) => {
+    const nav = useNavigate();
     const { id } = useParams();
 
     const boardDelete = async () => {
         const ok = window.confirm("정말로 삭제 하시겠습니까?");
-        const url = `${process.env.REACT_APP_API_URL}/??`;
+        const url = `${process.env.REACT_APP_API_URL}/board/del_board`;
         const user = {
-            token: sessionStorage.getItem("loginToken"),
             userId: sessionStorage.getItem("userId"),
+            boardNum: props.getBoardList[id]?.i_board
         }
         await axios.post(url, user).then((res) => {
-
+            nav(-1);
         }).catch((error) => {
-
+            console.log(error);
         })
     }
 
@@ -30,20 +31,20 @@ const BoardDetail = (props) => {
                     <h3>작성일 {props.getBoardList[id]?.cre_date}</h3>
                 </div>
                 <div className="button">
-                    <button type="button"><i class="fa-solid fa-bars"></i></button>
+                    <button type="button"><i className="fa-solid fa-bars"></i></button>
                     <ul>
                         <li><Link>수정</Link></li>
-                        <li><button>삭제</button></li>
+                        <li><button onClick={boardDelete}>삭제</button></li>
                     </ul>
                 </div>
             </div>
-            <p>
+            <div className="content">
                 {
                     props.getBoardList[id]?.ctnt.split("\n").map((a, i) => {
-                        return (<div key={i}>{a}<br /></div>)
+                        return (<p key={i}>{a}<br /></p>)
                     })
                 }
-            </p>
+            </div>
         </div>
     );
 };
