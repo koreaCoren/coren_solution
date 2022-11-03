@@ -10,16 +10,18 @@ const BoardDetail = (props) => {
 
     const boardDelete = async () => {
         const ok = window.confirm("정말로 삭제 하시겠습니까?");
-        const url = `${process.env.REACT_APP_API_URL}/board/del_board`;
-        const user = {
-            userId: sessionStorage.getItem("userId"),
-            boardNum: props.getBoardList[id]?.i_board
+        if (ok) {
+            const url = `${process.env.REACT_APP_API_URL}/board/del_board`;
+            const user = {
+                userId: sessionStorage.getItem("userId"),
+                boardNum: props.getBoardList[id]?.i_board
+            }
+            await axios.post(url, user).then((res) => {
+                nav(-1);
+            }).catch((error) => {
+                console.log(error);
+            })
         }
-        await axios.post(url, user).then((res) => {
-            nav(-1);
-        }).catch((error) => {
-            console.log(error);
-        })
     }
 
     return (
@@ -33,7 +35,7 @@ const BoardDetail = (props) => {
                 <div className="button">
                     <button type="button"><i className="fa-solid fa-bars"></i></button>
                     <ul>
-                        <li><Link>수정</Link></li>
+                        <li><Link to={`/board/edit/${id}`}>수정</Link></li>
                         <li><button onClick={boardDelete}>삭제</button></li>
                     </ul>
                 </div>
