@@ -42,8 +42,15 @@
     right: 0;
     display: flex;
     flex-direction: column;
-    border: 1px solid #eee;
     background-color: #fff;
+    max-height: 0px;
+    overflow: hidden;
+    transition: max-height .2s;
+}
+
+.read>.title>.button>ul.on {
+    border: 1px solid #eee;
+    max-height: 70px;
 }
 
 .read>.title>.button>ul li:last-child {

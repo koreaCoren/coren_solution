@@ -7,6 +7,7 @@ import Board from './Board';
 import Friend from 'pages/friend/Friend';
 
 import "asset/css/main.css"
+import Advertisement from 'pages/advertisement/Advertisement';
 
 const Main = (props) => {
     const nav = useNavigate();
@@ -74,7 +75,7 @@ const Main = (props) => {
                 <Routes>
                     <Route path='/*' element={<Friend />}></Route>
                     <Route path='/board/*' element={<Board />}></Route>
-                    <Route path='/advertisement' element={<div>1</div>}></Route>
+                    <Route path='/advertisement' element={<Advertisement />}></Route>
                     {/* <Route path='/myInfo/*' element={<div>2</div>}></Route> */}
                 </Routes>
             </main>
