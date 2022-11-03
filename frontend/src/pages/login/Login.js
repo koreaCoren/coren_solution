@@ -62,7 +62,7 @@ const Login = (props) => {
                     <input type="text" onChange={onChange} name="id" placeholder="아이디" value={getId} />
                     <input type="password" onChange={onChange} name="pw" placeholder="비밀번호" value={getPassword} />
 
-                    <button className="buttonBlue" type="submit">로그인</button>
+                    <button className="buttonBlue" type="submit">로그인?</button>
                     <Link to="/register" className="buttonGary">회원가입</Link>
                     <Link to="/recover" className="recover">아이디 / 비밀번호 찾기</Link>
                 </form>
