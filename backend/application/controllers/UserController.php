@@ -12,6 +12,11 @@ class UserController extends Controller {
         $json = getJson();
         return $this->model->sel_user($json);
     }
+    // 토큰 체크
+    public function checkToken(){
+        $json = getJson();
+        return $this->model->checkToken($json);
+    }
 
     // 로그아웃(토큰 삭제)
     public function break_token(){
@@ -65,10 +70,5 @@ class UserController extends Controller {
         $json = getjson();
         return $this->model->accept_friend($json);
     }
-
-    //토큰 체크
-    public function checkToken(){
-        $json = getJson();
-        return $this->model->checkToken($json);
-    }
+    
 }

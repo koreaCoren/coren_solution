@@ -31,7 +31,7 @@ class UserModel extends Model {
         $stmt->bindValue(":id", $param["id"]);
         $stmt->execute();
         $fail = ["fail"];
-        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);        
         $pwData = $data['pw'];
         if(!password_verify($param["pw"], $pwData)){
             return $fail;
@@ -48,6 +48,9 @@ class UserModel extends Model {
                     }               
                 return $string_generated;}
             $token = GenerateString(100);
+
+            //신규유저 로그인시 수정이 되지 않으므로 체크
+
             $sql = "INSERT INTO token
                     (id , token)
                     VALUE
@@ -61,28 +64,34 @@ class UserModel extends Model {
                 'userId' => $userId,
                 'token' => $token
             ];
-            // $param = [
-            //     'id' => $userId,
-            //     'token' => $token
-            // ];
-            // create_token($param);
             return $result;
         }
         
-        //return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
-    
-    // public function create_token(&$param){
-    //     $sql = "INSERT INTO token
-    //             (id , token)
-    //             VALUE
-    //             (:id, :token)";
-    //     $stmt = $this->pdo->prepare($sql);
-    //     $stmt->bindValue(":id", $param["id"]);
-    //     $stmt->bindValue(":token", $param["token"]);           
-    //     $stmt->execute();
-    //     return "true";
-    // }
+
+    //토큰 체크
+    public function checkToken(&$param){
+        $sql = "SELECT * FROM token WHERE id = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue("id", $param["userId"]);
+        // $stmt->bindValue("token", $param["token"]);
+        $stmt->execute();
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+        $tkData = $data['token'];
+
+        if($param["token"] == $tkData){
+            $result = [
+                'result' => 'ok',
+            ];
+        }else {
+            $result = [
+                'result' => 'false',
+            ];
+        }
+        
+        return $result;
+    }
+
 
     // 로그아웃(토큰삭제)
     public function break_token(&$param){
@@ -190,26 +199,5 @@ class UserModel extends Model {
         $stmt->execute();
         return intval($this->pdo->lastInsertId());
     }
-
-    //토큰 체크
-    public function checkToken(&$param){
-        $sql = "SELECT * FROM token WHERE id = :id";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->bindValue("id", $param["userId"]);
-        // $stmt->bindValue("token", $param["token"]);
-        $row = $stmt->execute();
-        $data = $stmt->fetch(PDO::FETCH_ASSOC);
-        $tkData = $data['token'];
-        if($param["token"] == $tkData){
-            $result = [
-                'result' => 'ok',
-            ];
-        }else {
-            $result = [
-                'result' => 'false',
-            ];
-        }
-        
-        return $result;
-    }
+   
 }
