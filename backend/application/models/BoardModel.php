@@ -26,12 +26,13 @@ class BoardModel extends Model {
         $stmt->bindValue(":cre_date", $param["date"]);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_OBJ);
-    }
+    }  
 
     public function del_board(&$param){
-        $sql = "DELETE FROM board WHERE i_board = :i_board";
+        $sql = "DELETE FROM board WHERE i_board = :i_board and id = :id";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->bindValue(":i_board", $param["i_board"]);        
+        $stmt->bindValue(":i_board", $param["boardNum"]);        
+        $stmt->bindValue(":id", $param["userId"]);        
         $stmt->execute();
         return $stmt->rowcount();
     }

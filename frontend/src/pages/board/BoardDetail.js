@@ -9,7 +9,7 @@ const BoardDetail = (props) => {
 
     const boardDelete = async () => {
         const ok = window.confirm("정말로 삭제 하시겠습니까?");
-        const url = `${process.env.REACT_APP_API_URL}/??`;
+        const url = `${process.env.REACT_APP_API_URL}/board/del_board`;
         const user = {
             token: sessionStorage.getItem("loginToken"),
             userId: sessionStorage.getItem("userId"),
@@ -33,7 +33,7 @@ const BoardDetail = (props) => {
                     <button type="button"><i class="fa-solid fa-bars"></i></button>
                     <ul>
                         <li><Link>수정</Link></li>
-                        <li><button>삭제</button></li>
+                        <li><button onClick={BoardDetail}>삭제</button></li>
                     </ul>
                 </div>
             </div>

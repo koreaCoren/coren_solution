@@ -70,10 +70,5 @@ class UserController extends Controller {
         $json = getjson();
         return $this->model->accept_friend($json);
     }
-
-    //토큰 체크
-    public function checkToken(){
-        $json = getJson();
-        return $this->model->checkToken($json);
-    }
+    
 }
