@@ -17,6 +17,12 @@ class BoardController extends Controller {
         $json = getJson();
         return [_RESULT => $this->model->del_board($json)];
     }
+    //게시글 확인
+    public function check_board(){
+        $json = getJson();
+        return [_RESULT => $this->model->check_board($json)];
+    }
+
     //게시글 수정
     public function upd_board(){
         $json = getJson();
