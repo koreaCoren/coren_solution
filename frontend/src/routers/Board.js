@@ -7,6 +7,7 @@ import "asset/css/board/read.css";
 import BoardList from "pages/board/Board";
 import BoardWrite from "pages/board/BoardWrite";
 import BoardDetail from "pages/board/BoardDetail";
+import BoardEdit from "pages/board/BoardEdit";
 
 const Board = () => {
     const nav = useNavigate();
@@ -30,6 +31,7 @@ const Board = () => {
                 <Route path="/*" element={<BoardList getBoardList={getBoardList} />}></Route>
                 <Route path="/write/*" element={<BoardWrite />}></Route>
                 <Route path="/detail/:id/*" element={<BoardDetail getBoardList={getBoardList} />}></Route>
+                <Route path="/edit/:id/*" element={<BoardEdit getBoardList={getBoardList} />}></Route>
             </Routes>
         </>
     );

@@ -1,6 +1,6 @@
 /* eslint-disable no-fallthrough */
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 import "asset/css/login/login.css";
 import axios from "axios";
