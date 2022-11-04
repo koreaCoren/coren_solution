@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import "asset/css/header.css"
 
@@ -29,7 +29,7 @@ const Header = (props) => {
         <header>
             <ul className="flexBox">
                 <li onClick={() => { nav(-1) }}><i className="fa-solid fa-chevron-left"></i></li>
-                <li><Link to="/">회원수첩</Link></li>
+                <li>회원수첩</li>
                 <li onClick={() => { setMenuOnOff(!getMenuOnOff) }}><i className="fa-solid fa-bars"></i></li>
             </ul >
 
