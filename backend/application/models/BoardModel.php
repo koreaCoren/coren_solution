@@ -29,7 +29,7 @@ class BoardModel extends Model {
     }  
 
     public function del_board(&$param){
-        $sql = "DELETE FROM board WHERE i_board = :i_board and id = :id";
+        $sql = "DELETE FROM board WHERE i_board = :i_board and id = BINARY :id";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(":i_board", $param["boardNum"]);        
         $stmt->bindValue(":id", $param["userId"]);        
@@ -37,7 +37,7 @@ class BoardModel extends Model {
         return $stmt->rowcount();
     }
     public function check_board(&$param){
-        $sql = "SELECT * FROM board WHERE i_board = :i_board and id = :id";
+        $sql = "SELECT * FROM board WHERE i_board = :i_board and id = BINARY :id";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(":i_board", $param["boardNum"]);        
         $stmt->bindValue(":id", $param["userId"]);    
@@ -47,7 +47,7 @@ class BoardModel extends Model {
 
 
     public function upd_board(&$param){
-        $sql = "UPDATE board SET title = :title, ctnt = :ctnt WHERE i_board = :i_board and id = :id";
+        $sql = "UPDATE board SET title = :title, ctnt = :ctnt WHERE i_board = :i_board and id = BINARY :id";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(":i_board", $param["boardNum"]); 
         $stmt->bindValue(":id", $param["userId"]);    

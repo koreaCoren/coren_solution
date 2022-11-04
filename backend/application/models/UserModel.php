@@ -26,7 +26,7 @@ class UserModel extends Model {
     public function sel_user(&$param){
         $userId = $param["id"];
         $sql = "SELECT * FROM member
-                WHERE id = :id";
+                WHERE id = BINARY :id";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(":id", $param["id"]);
         $stmt->execute();
@@ -71,7 +71,7 @@ class UserModel extends Model {
 
     //토큰 체크
     public function checkToken(&$param){
-        $sql = "SELECT * FROM token WHERE id = :id";
+        $sql = "SELECT * FROM token WHERE id = BINARY :id";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue("id", $param["userId"]);
         // $stmt->bindValue("token", $param["token"]);
@@ -95,7 +95,7 @@ class UserModel extends Model {
 
     // 로그아웃(토큰삭제)
     public function break_token(&$param){
-        $sql = "DELETE FROM token WHERE id = :id";
+        $sql = "DELETE FROM token WHERE id = BINARY :id";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue("id", $param["userId"]);
         $stmt->execute();
@@ -103,7 +103,7 @@ class UserModel extends Model {
     }
 
     public function upd_user(&$param){
-        $sql = "UPDATE member SET id = :cid
+        $sql = "UPDATE member SET id = BINARY :cid
                 WHERE id = :id";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(":cid", $param["cid"]);
@@ -113,7 +113,7 @@ class UserModel extends Model {
     }
 
     public function del_user(&$param){
-        $sql = "DELETE FROM member WHERE id = :id";
+        $sql = "DELETE FROM member WHERE id = BINARY :id";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(":id", $param["id"]);        
         $stmt->execute();
@@ -123,7 +123,7 @@ class UserModel extends Model {
     // 친구 찾기
     public function find_friend(&$param){
         $search = $param["searchUser"];
-        $sql = "SELECT id FROM member WHERE id LIKE '%$search%'";
+        $sql = "SELECT id FROM member WHERE id LIKE BINARY '%$search%'";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_OBJ);

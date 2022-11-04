@@ -20,7 +20,6 @@ const Main = (props) => {
             token: sessionStorage.getItem("loginToken"),
             userId: sessionStorage.getItem("userId"),
         }
-        console.log(tokenData);
         await axios.post(url, tokenData).then((res) => {
             if (res.data.result !== "ok") {
                 sessionStorage.removeItem("loginCheck");
