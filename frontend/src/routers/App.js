@@ -8,6 +8,7 @@ import Main from "routers/Main";
 import axios from "axios";
 
 const App = () => {
+    const nav = useNavigate();
     const [getUser, setUser] = useState();
     const [getLoginCheck, setLoginCheck] = useState(false);
 
@@ -44,6 +45,14 @@ const App = () => {
         setUser(undefined);
         setLoginCheck(false);
     };
+
+    useEffect(() => {
+        document.addEventListener("message", (e) => {
+            if (e.data === "뒤로가기") {
+                nav(-1);
+            }
+        })
+    }, []);
 
     return (
         <>
