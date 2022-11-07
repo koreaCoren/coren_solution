@@ -5,6 +5,20 @@ class UserController extends Controller {
     // 회원가입
     public function ins_user() {
         $json = getJson();
+        $checkId = $json['id'];
+        $checkEmail = $json['email'];
+        $result = [
+            'id' => true,
+            'email' => true,
+        ];
+
+        if($this->model->check_id($checkId) === 1){
+            $result['id'] = false;
+            return $result;
+        }else if($this->model->check_email($checkEmail) === 1){
+            $result['email'] = false;
+            return $result;
+        };
         return [_RESULT => $this->model->ins_user($json)];
     }
     // 로그인 체크

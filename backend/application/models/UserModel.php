@@ -3,6 +3,29 @@ namespace application\models;
 use PDO;
 
 class UserModel extends Model {
+    // 중복 체크
+    public function check_id($checkId){
+        $sql = "SELECT * FROM member
+                WHERE id = BINARY :checkId";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(":checkId", $checkId);
+        $stmt->execute();
+        $row = $stmt->rowCount();
+        
+        return $row;
+    }
+
+    public function check_email($checkEmail){
+        $sql = "SELECT * FROM member
+                WHERE email = BINARY :checkEmail";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(":checkEmail", $checkEmail);
+        $stmt->execute();
+        $row = $stmt->rowCount();
+        
+        return $row;
+    }
+
     // 회원가입
     public function ins_user(&$param) {
         $pw = $param["pw"];
@@ -38,19 +61,8 @@ class UserModel extends Model {
         $pwData = $data['pw'];
         if(!password_verify($param["pw"], $pwData)){
             return $fail;
-        } else {
-            function GenerateString($length){
-                $characters  = "0123456789";
-                $characters .= "abcdefghijklmnopqrstuvwxyz";
-                $characters .= "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-                $characters .= "_";
-                $string_generated = "";
-                $nmr_loops = $length;
-                    while ($nmr_loops--){
-                    $string_generated .= $characters[mt_rand(0, strlen($characters) - 1)];
-                    }               
-                return $string_generated;}
-            $token = GenerateString(100);
+        } else {           
+            $token = getToken(100);
 
             //신규유저 로그인시 수정이 되지 않으므로 체크
 
