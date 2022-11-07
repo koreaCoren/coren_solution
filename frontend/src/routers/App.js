@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import "asset/css/common.css";
+// import splashScreen from "asset/image/splashScreen.jpg";
 
 import Login from "routers/Login";
 import Main from "routers/Main";

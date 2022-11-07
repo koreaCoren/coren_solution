@@ -26,7 +26,7 @@ const Main = (props) => {
                 sessionStorage.removeItem('userId');
                 sessionStorage.removeItem('loginToken');
                 alert("토큰 만료됬어 돌아가렴");
-                window.location.reload();
+                nav("/");
             }
         }).catch((error) => {
             console.log(error);
