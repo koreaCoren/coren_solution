@@ -14,11 +14,14 @@ class UserModel extends Model {
                 VALUES
                 (
                     :id, '$hashPw', :email
-                )";
+                )
+                ON DUPLICATE KEY
+                    UPDATE che = 1
+                ";
          $stmt = $this->pdo->prepare($sql);
          $stmt->bindValue(":id", $param["id"]);
          $stmt->bindValue(":email", $param["email"]);       
-         $stmt->execute();
+         $row = $stmt->execute();
          return intval($this->pdo->lastInsertId());
     }
 

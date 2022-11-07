@@ -30,6 +30,7 @@ const Register = () => {
         };
 
         await axios.post(url, loginData).then((res) => {
+            console.log(res.data);
             alert("회원가입 완료되었습니다.");
             nav("/");
         }).catch((error) => {
