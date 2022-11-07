@@ -17,8 +17,6 @@ const BoardList = (props) => {
                                     <h3>
                                         <div className="days">{a.cre_date}</div>
                                         <div className="name">{a.id}</div>
-                                        <div className="i_board">{a.id}</div>
-
                                     </h3>
                                 </Link>
                             </li>

@@ -3,6 +3,29 @@ namespace application\models;
 use PDO;
 
 class UserModel extends Model {
+    // 중복 체크
+    public function check_id($checkId){
+        $sql = "SELECT * FROM member
+                WHERE id = BINARY :checkId";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(":checkId", $checkId);
+        $stmt->execute();
+        $row = $stmt->rowCount();
+        
+        return $row;
+    }
+
+    public function check_email($checkEmail){
+        $sql = "SELECT * FROM member
+                WHERE email = BINARY :checkEmail";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(":checkEmail", $checkEmail);
+        $stmt->execute();
+        $row = $stmt->rowCount();
+        
+        return $row;
+    }
+
     // 회원가입
     public function ins_user(&$param) {
         $pw = $param["pw"];
@@ -14,11 +37,14 @@ class UserModel extends Model {
                 VALUES
                 (
                     :id, '$hashPw', :email
-                )";
+                )
+                ON DUPLICATE KEY
+                    UPDATE che = 1
+                ";
          $stmt = $this->pdo->prepare($sql);
          $stmt->bindValue(":id", $param["id"]);
          $stmt->bindValue(":email", $param["email"]);       
-         $stmt->execute();
+         $row = $stmt->execute();
          return intval($this->pdo->lastInsertId());
     }
 
@@ -26,7 +52,7 @@ class UserModel extends Model {
     public function sel_user(&$param){
         $userId = $param["id"];
         $sql = "SELECT * FROM member
-                WHERE id = :id";
+                WHERE id = BINARY :id";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(":id", $param["id"]);
         $stmt->execute();
@@ -35,19 +61,8 @@ class UserModel extends Model {
         $pwData = $data['pw'];
         if(!password_verify($param["pw"], $pwData)){
             return $fail;
-        } else {
-            function GenerateString($length){
-                $characters  = "0123456789";
-                $characters .= "abcdefghijklmnopqrstuvwxyz";
-                $characters .= "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-                $characters .= "_";
-                $string_generated = "";
-                $nmr_loops = $length;
-                    while ($nmr_loops--){
-                    $string_generated .= $characters[mt_rand(0, strlen($characters) - 1)];
-                    }               
-                return $string_generated;}
-            $token = GenerateString(100);
+        } else {           
+            $token = getToken(100);
 
             //신규유저 로그인시 수정이 되지 않으므로 체크
 
@@ -71,7 +86,7 @@ class UserModel extends Model {
 
     //토큰 체크
     public function checkToken(&$param){
-        $sql = "SELECT * FROM token WHERE id = :id";
+        $sql = "SELECT * FROM token WHERE id = BINARY :id";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue("id", $param["userId"]);
         // $stmt->bindValue("token", $param["token"]);
@@ -95,7 +110,7 @@ class UserModel extends Model {
 
     // 로그아웃(토큰삭제)
     public function break_token(&$param){
-        $sql = "DELETE FROM token WHERE id = :id";
+        $sql = "DELETE FROM token WHERE id = BINARY :id";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue("id", $param["userId"]);
         $stmt->execute();
@@ -103,7 +118,7 @@ class UserModel extends Model {
     }
 
     public function upd_user(&$param){
-        $sql = "UPDATE member SET id = :cid
+        $sql = "UPDATE member SET id = BINARY :cid
                 WHERE id = :id";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(":cid", $param["cid"]);
@@ -113,7 +128,7 @@ class UserModel extends Model {
     }
 
     public function del_user(&$param){
-        $sql = "DELETE FROM member WHERE id = :id";
+        $sql = "DELETE FROM member WHERE id = BINARY :id";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(":id", $param["id"]);        
         $stmt->execute();
@@ -123,7 +138,7 @@ class UserModel extends Model {
     // 친구 찾기
     public function find_friend(&$param){
         $search = $param["searchUser"];
-        $sql = "SELECT id FROM member WHERE id LIKE '%$search%'";
+        $sql = "SELECT id FROM member WHERE id LIKE BINARY '%$search%'";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_OBJ);
