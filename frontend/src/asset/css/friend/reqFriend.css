@@ -1,0 +1,225 @@
+.reqFriend {
+    padding: 0px 10px;
+}
+
+.find>button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 5px;
+    border-bottom: 1px solid #ccc;
+    cursor: pointer;
+    width: 100%;
+}
+
+.find>button>i {
+    font-size: 18px;
+    border: 2px solid #777;
+    color: #777;
+    border-radius: 50%;
+    padding: 3px;
+}
+
+.find>.findContainer {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000000aa;
+    align-items: center;
+    flex-direction: column;
+    padding: 15px;
+}
+
+.find>.findContainer.on {
+    display: flex;
+}
+
+.find>.findContainer>h2 {
+    color: #fff;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.find>.findContainer .close i {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    color: #fff;
+    font-size: 20px;
+}
+
+.find>.findContainer form {
+    width: 100%;
+}
+
+.find>.findContainer form.searchList {
+    height: 100%;
+}
+
+.find>.findContainer form>.inputBox {
+    position: relative;
+}
+
+.find>.findContainer form>.inputBox>input {
+    width: 100%;
+    line-height: 25px;
+    padding: 5px 15px;
+    border: 1px solid #aaa;
+    border-radius: 50px;
+}
+
+.find>.findContainer form>.inputBox i {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    padding: 5px;
+}
+
+.find>.findContainer>form>p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: calc(100% - 15px);
+    background-color: #fff;
+    margin-top: 15px;
+    border-radius: 10px;
+}
+
+.find>.findContainer>form>ul {
+    display: flex;
+    width: 100%;
+    height: calc(100% - 15px);
+    flex-direction: column;
+    background-color: #fff;
+    margin-top: 15px;
+    border-radius: 10px;
+    overflow-y: scroll;
+}
+
+.find>.findContainer>form>ul li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0px 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.find>.findContainer>form>ul li h3 {
+    line-height: 40px;
+}
+
+.find>.findContainer>form>ul li button {
+    background-color: #eee;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-family: var(--main-font);
+}
+
+.reqFriend .friendList>h2 {
+    width: 100%;
+    background-color: #f5f5f5;
+    text-align: center;
+    line-height: 30px;
+}
+
+.reqFriend .friendList p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 50px;
+    border-bottom: 1px solid #ddd
+}
+
+.reqFriend .friendList {
+    height: 100%;
+}
+
+.reqFriend .friendList>ul {
+    display: flex;
+    flex-direction: column;
+}
+
+.reqFriend .friendList>ul>li {}
+
+.reqFriend .friendList>ul>li>div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.reqFriend .friendList>ul>li h3 {
+    line-height: 40px;
+}
+
+.reqFriend .friendList>ul>li>div>div {
+    display: flex;
+    gap: 5px;
+}
+
+.reqFriend .friendList>ul>li>div>span,
+.reqFriend .friendList>ul>li>div>div>button {
+    background-color: #eee;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-family: var(--main-font);
+}
+
+.reqFriend .friendList>ul>li>div>div>button {
+    cursor: pointer;
+}
+
+.reqFriend .friendList>ul>li>ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f5f5f5;
+    max-height: 0px;
+    overflow: hidden;
+    transition: max-height .2s;
+}
+
+.reqFriend .friendList>ul>li.on>ul {
+    max-height: 89px;
+}
+
+.reqFriend .friendList>ul>li>ul>li {
+    flex: 1;
+    padding: 10px 0px;
+}
+
+.reqFriend .friendList>ul>li.on>ul>li {
+    border-bottom: 1px solid #ddd
+}
+
+.reqFriend .friendList>ul>li>ul>li>a,
+.reqFriend .friendList>ul>li>ul>li>span {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px 0px;
+    cursor: pointer;
+}
+
+
+.reqFriend .friendList>ul>li>ul>li:not(:last-child)>a,
+.reqFriend .friendList>ul>li>ul>li:not(:last-child)>span {
+    border-right: 1px solid #ddd;
+}
+
+.reqFriend .friendList>ul>li>ul>li>a>i,
+.reqFriend .friendList>ul>li>ul>li>span>i {
+    font-size: 30px;
+}

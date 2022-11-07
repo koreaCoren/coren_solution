@@ -5,9 +5,11 @@ import axios from 'axios';
 
 import Board from './Board';
 import Friend from 'pages/friend/Friend';
+import Advertisement from 'pages/advertisement/Advertisement';
+import ReqFriend from 'pages/friend/ReqFriend';
 
 import "asset/css/main.css"
-import Advertisement from 'pages/advertisement/Advertisement';
+import MyPage from 'pages/mypage/MyPage';
 
 const Main = (props) => {
     const nav = useNavigate();
@@ -49,8 +51,11 @@ const Main = (props) => {
             case "/advertisement":
                 setNav(2)
                 break;
-            case "/myInfo":
+            case "/reqFriend":
                 setNav(3)
+                break;
+            case "/mypage":
+                setNav(4)
                 break;
             default:
                 break;
@@ -69,14 +74,16 @@ const Main = (props) => {
                         <li><Link to="/" className={getNav === 0 ? "on" : ""}>홈</Link></li>
                         <li><Link to="/board" className={getNav === 1 ? "on" : ""}>게시판</Link></li>
                         <li><Link to="/advertisement" className={getNav === 2 ? "on" : ""}>전광판</Link></li>
-                        {/* <li><Link to="/myInfo" className={getNav === 3 ? "on" : ""}>MY</Link></li> */}
+                        <li><Link to="/reqFriend" className={getNav === 3 ? "on" : ""}>친구</Link></li>
+                        <li><Link to="/mypage" className={getNav === 4 ? "on" : ""}>MY</Link></li>
                     </ul>
                 </nav>
                 <Routes>
                     <Route path='/*' element={<Friend />}></Route>
                     <Route path='/board/*' element={<Board />}></Route>
                     <Route path='/advertisement' element={<Advertisement />}></Route>
-                    {/* <Route path='/myInfo/*' element={<div>2</div>}></Route> */}
+                    <Route path='/reqFriend' element={<ReqFriend />}></Route>
+                    <Route path='/mypage/*' element={<MyPage />}></Route>
                 </Routes>
             </main>
         </>
