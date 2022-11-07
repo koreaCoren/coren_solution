@@ -1,7 +1,7 @@
 import React from "react";
 
-import "asset/css/friend/friend.css"
-import UserImage from "asset/image/userTest.png"
+import "asset/css/friend/friend.css";
+import UserImage from "asset/image/userTest.png";
 
 const Friend = () => {
     return (
