@@ -12,8 +12,8 @@ const Friend = () => {
                     <div className="content">
                         <div>
                             <h2>회장</h2>
-                            <h3>박경도</h3>
-                            <h4>PKD Company</h4>
+                            <h3>코랜</h3>
+                            <h4>Coren</h4>
                             <h5>010-0000-0000</h5>
                         </div>
                         <div>
@@ -28,8 +28,8 @@ const Friend = () => {
                     <div className="content">
                         <div>
                             <h2>회장</h2>
-                            <h3>박경도</h3>
-                            <h4>PKD Company</h4>
+                            <h3>코랜</h3>
+                            <h4>Coren</h4>
                             <h5>010-0000-0000</h5>
                         </div>
                         <div>

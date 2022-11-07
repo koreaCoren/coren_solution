@@ -20,7 +20,7 @@ const Register = () => {
         if (!emailRegex.test(getEamil)) {
             alert("이메일 형식이 아님 다시 적으셈");
             return;
-        }
+        };
 
         const url = `${process.env.REACT_APP_API_URL}/user/ins_user`;
         const loginData = {
@@ -30,8 +30,16 @@ const Register = () => {
         };
 
         await axios.post(url, loginData).then((res) => {
-            alert("회원가입 완료되었습니다.");
-            nav("/");
+            if (res.data.id === false) {
+                alert("중복된 아이디입니다.");
+                return;
+            } else if (res.data.email === false) {
+                alert("중복된 이메일입니다.");
+                return;
+            } else {
+                alert("회원가입 완료되었습니다.");
+                nav("/");
+            }
         }).catch((error) => {
             console.log(error);
             console.log("되겠냐?");
