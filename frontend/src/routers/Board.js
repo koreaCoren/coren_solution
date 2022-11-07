@@ -17,6 +17,7 @@ const Board = () => {
         await axios.get(url).then((res) => {
             setBoardList(res.data);
         }).catch((error) => {
+            alert("리스트를 불러오는 도중 에러가 발생했습니다.")
             console.log(error);
         });
     };
