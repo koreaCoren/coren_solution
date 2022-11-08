@@ -43,19 +43,19 @@ const Main = (props) => {
     useEffect(() => {
         switch (nowUrl.pathname) {
             case "/":
-                setNav(0)
+                setNav(0);
                 break;
             case "/board":
-                setNav(1)
+                setNav(1);
                 break;
             case "/advertisement":
-                setNav(2)
+                setNav(2);
                 break;
             case "/reqFriend":
-                setNav(3)
+                setNav(3);
                 break;
             case "/mypage":
-                setNav(4)
+                setNav(4);
                 break;
             default:
                 break;
