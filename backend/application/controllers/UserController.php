@@ -2,6 +2,18 @@
 namespace application\controllers;
 
 class UserController extends Controller {
+
+    // 마이페이지
+    public function myPage(){
+        $json = getJson();
+        $token = $this->model->checkToken($json);
+        if($token['result'] === 'ok'){
+            return $this->model->myPage($json);            
+        };
+
+    }
+
+
     // 회원가입
     public function ins_user() {
         $json = getJson();
