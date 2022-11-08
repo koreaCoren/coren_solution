@@ -10,6 +10,7 @@ const Register = () => {
 
     const [getId, setId] = useState();
     const [getPassword, setPassword] = useState();
+    const [getTelll, setTell] = useState();
     const [getEamil, setEmail] = useState();
 
     //회원가입
@@ -26,6 +27,7 @@ const Register = () => {
         const loginData = {
             id: getId,
             pw: getPassword,
+            tell: getTelll,
             email: getEamil,
         };
 
@@ -56,6 +58,9 @@ const Register = () => {
             case "pw":
                 setPassword(value);
                 break;
+            case "tell":
+                setTell(value);
+                break;
             case "email":
                 setEmail(value);
                 break;
@@ -72,6 +77,7 @@ const Register = () => {
                 <form onSubmit={onSubmit}>
                     <input type="text" onChange={onChange} name="id" placeholder="아이디" />
                     <input type="password" onChange={onChange} name="pw" placeholder="비밀번호" />
+                    <input type="text" onChange={onChange} name="tell" placeholder="전화번호" />
                     <input type="text" onChange={onChange} name="email" placeholder="이메일" />
 
                     <button className="buttonBlue" type="submit">가입하기</button>
