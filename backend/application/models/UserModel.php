@@ -3,6 +3,24 @@ namespace application\models;
 use PDO;
 
 class UserModel extends Model {
+    public function myPage(&$param){
+        $sql = "SELECT * FROM member
+                WHERE id = BINARY :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(":id", $param['userId']);
+        $stmt->execute();
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+        $result = [
+            'id' => $data['id'],
+            'email' => $data['email'],
+            'belong' => $data['belong'],
+            'address' => $data['address'],
+            'tell' => $data['tell'],
+        ];
+        
+        return $result;
+    }
+
     // 중복 체크
     public function check_id($checkId){
         $sql = "SELECT * FROM member

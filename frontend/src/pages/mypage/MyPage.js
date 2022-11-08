@@ -9,7 +9,7 @@ const MyPage = () => {
     const [getUserInfo, setUserInfo] = useState("");
 
     const userInfo = async () => {
-        const url = `${process.env.REACT_APP_API_URL}/user/??`;
+        const url = `${process.env.REACT_APP_API_URL}/user/myPage`;
         const userData = {
             token: sessionStorage.getItem("token"),
             userId: sessionStorage.getItem("userId"),
