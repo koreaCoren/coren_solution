@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from 'react-router-dom';
 import "asset/css/friend/friend.css";
 import UserImage from "asset/image/userTest.png";
 
@@ -7,6 +7,7 @@ const Friend = () => {
     return (
         <div className="friend">
             <ul>
+                <li><Link to={`/client/write`}><i className="fa-solid fa-plus"></i><h2>회원 등록</h2></Link></li>
                 <li>
                     <img src={UserImage} alt="" />
                     <div className="content">
