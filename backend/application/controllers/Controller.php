@@ -25,7 +25,9 @@ class Controller {
         }
 
         if(gettype($view) === "string") {
-            require_once $this->getView($view);             
+            //require_once $this->getView($view);     
+            // header("Content-Type:application/json");
+            echo $view;
         } else if(gettype($view) === "object" || gettype($view) === "array") {
             header("Content-Type:application/json");
             echo json_encode($view);
