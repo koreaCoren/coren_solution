@@ -154,12 +154,12 @@ class UserModel extends Model {
         $stmt->bindValue(":id", $param["id"]);        
         $stmt->execute();
         return $stmt->rowcount();
-    }
+    } 
 
-    // 친구 찾기
+    // 친구 찾기 //본인 제외
     public function find_friend(&$param){
         $search = $param["searchUser"];
-        $id = getIuser();
+        $id = $param['userId'];
         $sql = "SELECT id FROM (SELECT id FROM member WHERE id NOT LIKE BINARY '$id') AS t1 WHERE id LIKE BINARY '%$search%'";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();

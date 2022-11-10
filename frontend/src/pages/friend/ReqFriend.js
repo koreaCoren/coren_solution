@@ -92,7 +92,6 @@ const ReqFriend = () => {
         };
 
         await axios.post(url, searchUser).then((res) => {
-            console.log(res.data);
             if (res.data.length === 0) {
                 alert("일치하는 친구가 없습니다.");
             } else {
