@@ -156,7 +156,7 @@ class UserModel extends Model {
         return $stmt->rowcount();
     } 
 
-    // 친구 찾기
+    // 친구 찾기 //본인 제외
     public function find_friend(&$param){
         $search = $param["searchUser"];
         $id = $param['userId'];
