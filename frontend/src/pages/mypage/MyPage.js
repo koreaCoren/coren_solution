@@ -15,7 +15,6 @@ const MyPage = () => {
             userId: sessionStorage.getItem("userId"),
         }
         await axios.post(url, userData).then((res) => {
-            console.log(res.data);
             setUserInfo(res.data);
         }).catch((error) => {
             console.log(error);
