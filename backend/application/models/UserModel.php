@@ -159,7 +159,7 @@ class UserModel extends Model {
     // 친구 찾기
     public function find_friend(&$param){
         $search = $param["searchUser"];
-        $id = getIuser();
+        $id = $param['userId'];
         $sql = "SELECT id FROM (SELECT id FROM member WHERE id NOT LIKE BINARY '$id') AS t1 WHERE id LIKE BINARY '%$search%'";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
