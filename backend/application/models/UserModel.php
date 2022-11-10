@@ -50,11 +50,11 @@ class UserModel extends Model {
         $hashPw = password_hash($pw, PASSWORD_DEFAULT);
         $sql = "INSERT INTO member
                 (
-                    id, pw, email
+                    id, pw, email, tell
                 )
                 VALUES
                 (
-                    :id, '$hashPw', :email
+                    :id, '$hashPw', :email, :tell
                 )
                 ON DUPLICATE KEY
                     UPDATE che = 1
@@ -62,6 +62,9 @@ class UserModel extends Model {
          $stmt = $this->pdo->prepare($sql);
          $stmt->bindValue(":id", $param["id"]);
          $stmt->bindValue(":email", $param["email"]);       
+         //$stmt->bindValue(":belong", $param["belong"]);       
+         //$stmt->bindValue(":address", $param["address"]);       
+         $stmt->bindValue(":tell", $param["tell"]);       
          $row = $stmt->execute();
          return intval($this->pdo->lastInsertId());
     }
@@ -156,7 +159,8 @@ class UserModel extends Model {
     // 친구 찾기
     public function find_friend(&$param){
         $search = $param["searchUser"];
-        $sql = "SELECT id FROM member WHERE id LIKE BINARY '%$search%'";
+        $id = getIuser();
+        $sql = "SELECT id FROM (SELECT id FROM member WHERE id NOT LIKE BINARY '$id') AS t1 WHERE id LIKE BINARY '%$search%'";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_OBJ);
