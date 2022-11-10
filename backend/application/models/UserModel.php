@@ -154,7 +154,7 @@ class UserModel extends Model {
         $stmt->bindValue(":id", $param["id"]);        
         $stmt->execute();
         return $stmt->rowcount();
-    }
+    } 
 
     // 친구 찾기
     public function find_friend(&$param){
