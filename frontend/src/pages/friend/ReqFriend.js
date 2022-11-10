@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import "asset/css/friend/reqFriend.css";
 import axios from "axios";
 import FriendList from "components/FriendList";
 
 const ReqFriend = () => {
+    const nav = useNavigate();
     //친구찾기 버튼
     const [getfind, setFind] = useState(false);
     //친구 검색 인풋
@@ -29,10 +30,8 @@ const ReqFriend = () => {
     const [getResFri, setResFri] = useState([]);
     //친구 리스트
     const [getFriend, setFriend] = useState([]);
-    //친구 리스트 숫자
-    const [getFriendLength, setFindLength] = useState(getFriend.length);
 
-    // 친구 리스트
+    //친구리스트 불러오기
     const getFiendList = async () => {
         const url = `${process.env.REACT_APP_API_URL}/user/reqing_friend`;
         let userState = [{ res: [] }, { req: [] }, { fri: [] }];
@@ -63,6 +62,7 @@ const ReqFriend = () => {
                     }
                 }
             });
+
             setResFri([...userState[0].res]);
             setReqFri([...userState[1].req]);
             setFriend([...userState[2].fri]);
@@ -70,15 +70,9 @@ const ReqFriend = () => {
             console.log(error);
         });
     };
-
     //친구리스트 불러오기
     useEffect(() => {
-        if (getFriend !== getFriendLength) {
-            getFiendList();
-            setFindLength(getFriend.length);
-        } else {
-            return;
-        }
+        getFiendList();
     }, [getFriend]);
 
     //친구 검색
@@ -94,6 +88,7 @@ const ReqFriend = () => {
         const url = `${process.env.REACT_APP_API_URL}/user/find_friend`;
         const searchUser = {
             searchUser: getSearch,
+            userId: sessionStorage.getItem("userId")
         };
 
         await axios.post(url, searchUser).then((res) => {
@@ -136,7 +131,7 @@ const ReqFriend = () => {
             console.log(error);
         });
 
-        window.location.reload();
+        setFind(false);
     };
 
     //친구 요청 취소
@@ -237,7 +232,9 @@ const ReqFriend = () => {
                                         return (
                                             <li key={i}>
                                                 <h3>{a.id}</h3>
-                                                <button onClick={() => { setResponesUser(a.id); }}>친구 요청</button>
+                                                <button onClick={() => {
+                                                    setResponesUser(a.id);
+                                                }}>친구 요청</button>
                                             </li>
                                         );
                                     })}
@@ -254,7 +251,7 @@ const ReqFriend = () => {
 
             {/* 친구요청 */}
             <form onSubmit={firendRequestCancellation}>
-                <FriendList getFriList={getReqFri} setFriend={setCencelFriend} button={"요청취소"} noButton={""} title={"친구요청보냄"}></FriendList>
+                <FriendList getFriList={getReqFri} setFriend={setCencelFriend} button={"요청취소"} noButton={""} title={"친구요청보냄"} setIsFriend={setIsFriend}></FriendList>
             </form >
 
             {/* 친구목록 */}
