@@ -82,7 +82,7 @@ class UserModel extends Model {
         $pwData = $data['pw'];
         if(!password_verify($param["pw"], $pwData)){
             return $fail;
-        } else {           
+        } else {
             $token = getToken(100);
 
             //신규유저 로그인시 수정이 되지 않으므로 체크
