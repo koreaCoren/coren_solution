@@ -1,0 +1,79 @@
+.group {}
+
+.group>nav {
+    display: flex;
+}
+
+.group>nav a {
+    flex: 1;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+    line-height: 40px;
+}
+
+.group>nav a:nth-child(1) {
+    border-right: 1px solid #ccc;
+}
+
+/* .friend ul {
+    display: flex;
+    flex-direction: column;
+}
+
+.friend ul li {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    gap: 15px;
+}
+
+.friend ul li>img {
+    width: 86px;
+    height: 86px;
+    border-radius: 5px;
+}
+
+.friend ul li .content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.friend ul li .content>div {}
+
+.friend ul li .content>div h2 {
+    padding: 1px 7px;
+    border: 1px solid var(--bt-color-t1);
+    border-radius: 30px;
+    color: var(--bt-color-t1);
+    display: inline-block;
+}
+
+.friend ul li .content>div h3 {
+    font-size: 16px;
+    padding: 5px 0px;
+}
+
+.friend ul li .content>div h4 {
+    font-size: 12px;
+    padding: 5px 0px;
+}
+
+.friend ul li .content>div h5 {
+    font-size: 12px;
+}
+
+.friend ul li .content>div a {}
+
+.friend ul li .content>div a i {
+    background-color: var(--bt-color-t1);
+    color: #fff;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 20px;
+} */

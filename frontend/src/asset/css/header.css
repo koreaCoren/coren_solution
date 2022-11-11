@@ -68,7 +68,7 @@ header .bg.on {
 
 header .scrollTop {
     position: fixed;
-    bottom: 15px;
+    bottom: 72px;
     right: 15px;
     cursor: pointer;
 }

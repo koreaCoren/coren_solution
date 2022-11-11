@@ -4,13 +4,13 @@ import { Link, Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import axios from 'axios';
 
 import Board from './Board';
-import Friend from 'pages/friend/Friend';
+import Group from 'pages/Group/Group';
 import Advertisement from 'pages/advertisement/Advertisement';
-import ReqFriend from 'pages/friend/ReqFriend';
-
-import "asset/css/main.css"
+import ReqFriend from 'pages/friend/Friend';
 import MyPage from 'pages/mypage/MyPage';
 
+
+import "asset/css/main.css"
 const Main = (props) => {
     const nav = useNavigate();
     const nowUrl = useLocation();
@@ -68,22 +68,22 @@ const Main = (props) => {
                 loginOut={props.loginOut}
             ></Header>
             <main>
-                <nav>
-                    <ul>
-                        <li><Link to="/" className={getNav === 0 ? "on" : ""}>홈</Link></li>
-                        <li><Link to="/board" className={getNav === 1 ? "on" : ""}>게시판</Link></li>
-                        <li><Link to="/advertisement" className={getNav === 2 ? "on" : ""}>전광판</Link></li>
-                        <li><Link to="/reqFriend" className={getNav === 3 ? "on" : ""}>친구</Link></li>
-                        <li><Link to="/mypage" className={getNav === 4 ? "on" : ""}>MY</Link></li>
-                    </ul>
-                </nav>
                 <Routes>
-                    <Route path='/*' element={<Friend />}></Route>
+                    <Route path='/*' element={<Group />}></Route>
                     <Route path='/board/*' element={<Board />}></Route>
                     <Route path='/advertisement' element={<Advertisement />}></Route>
                     <Route path='/reqFriend' element={<ReqFriend />}></Route>
                     <Route path='/mypage/*' element={<MyPage />}></Route>
                 </Routes>
+                <nav>
+                    <ul>
+                        <li><Link to="/" className={getNav === 0 ? "on" : ""}><i className="fa-solid fa-house"></i></Link></li>
+                        <li><Link to="/board" className={getNav === 1 ? "on" : ""}><i className="fa-solid fa-clipboard"></i></Link></li>
+                        <li><Link to="/advertisement" className={getNav === 2 ? "on" : ""}><i className="fa-solid fa-rectangle-ad"></i></Link></li>
+                        <li><Link to="/reqFriend" className={getNav === 3 ? "on" : ""}><i className="fa-solid fa-user-group"></i></Link></li>
+                        <li><Link to="/mypage" className={getNav === 4 ? "on" : ""}><i className="fa-solid fa-ellipsis"></i></Link></li>
+                    </ul>
+                </nav>
             </main>
         </>
     );
