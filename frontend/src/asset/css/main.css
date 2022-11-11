@@ -1,4 +1,11 @@
+main {
+    padding-bottom: 57px;
+}
+
 main>nav {
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
     background-color: var(--sub-color);
 }
 
@@ -13,9 +20,16 @@ main>nav>ul>li {
 
 main>nav>ul>li>a {
     width: 100%;
-    line-height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 main>nav>ul>li>a.on {
-    border-bottom: 3px solid var(--bt-color-t1);
+    border-top: 3px solid var(--bt-color-t1);
+}
+
+main>nav>ul>li>a>i {
+    font-size: 24px;
+    padding: 15px 0px;
 }
