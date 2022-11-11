@@ -2,15 +2,46 @@
 namespace application\controllers;
 
 class UserController extends Controller {
+
+    // 마이페이지
+    public function myPage(){
+        $json = getJson();
+        $token = $this->model->checkToken($json);
+        if($token['result'] === 'ok'){
+            return $this->model->myPage($json);            
+        };
+
+    }
+
+
     // 회원가입
     public function ins_user() {
         $json = getJson();
+        $checkId = $json['id'];
+        $checkEmail = $json['email'];
+        $result = [
+            'id' => true,
+            'email' => true,
+        ];
+
+        if($this->model->check_id($checkId) === 1){
+            $result['id'] = false;
+            return $result;
+        }else if($this->model->check_email($checkEmail) === 1){
+            $result['email'] = false;
+            return $result;
+        };
         return [_RESULT => $this->model->ins_user($json)];
     }
     // 로그인 체크
     public function sel_user(){
         $json = getJson();
         return $this->model->sel_user($json);
+    }
+    // 토큰 체크
+    public function checkToken(){
+        $json = getJson();
+        return $this->model->checkToken($json);
     }
 
     // 로그아웃(토큰 삭제)
@@ -65,10 +96,5 @@ class UserController extends Controller {
         $json = getjson();
         return $this->model->accept_friend($json);
     }
-
-    //토큰 체크
-    public function check_token(){
-        $json = getJson();
-        return $this->model->check_token($json);
-    }
+    
 }
