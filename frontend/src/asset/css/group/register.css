@@ -1,0 +1,52 @@
+form {
+    display: flex;
+    flex-direction: column;
+    padding: 0px 15px;
+}
+
+form span {
+    line-height: 40px;
+}
+
+form input {
+    border: none;
+    background-color: #f3f3f3;
+    line-height: 40px;
+    width: 100%;
+    border-radius: 5px !important;
+    padding: 5px 10px;
+}
+
+form .select {
+    position: relative;
+}
+
+form select {
+    border: none;
+    background-color: #f3f3f3;
+    line-height: 40px;
+    width: 100%;
+    border-radius: 5px !important;
+    padding: 5px 10px;
+}
+
+form .select i {
+    position: absolute;
+    top: 42%;
+    right: 15px;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: #888;
+}
+
+form button {
+    width: 100%;
+    text-align: center;
+    background-color: var(--bt-color-t1);
+    color: #fff;
+    line-height: 40px;
+    border-radius: 5px;
+    font-family: var(--main-font);
+    cursor: pointer;
+    margin-top: 20px;
+}
