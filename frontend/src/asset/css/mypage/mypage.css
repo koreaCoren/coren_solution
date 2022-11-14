@@ -52,3 +52,7 @@
     font-size: 18px;
     color: #aaa;
 }
+
+.profileImg{
+    display:none;
+}

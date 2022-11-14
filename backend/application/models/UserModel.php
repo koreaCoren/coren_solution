@@ -260,5 +260,15 @@ class UserModel extends Model {
         $stmt->execute();
         return intval($this->pdo->lastInsertId());
     }
-   
+
+    public function profileInsImg(&$param){
+        /*$sql = "UPDATE t_user
+                SET user_img = :user_img
+                WHERE uuid = :uuid";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(":user_img", $param["user_img"]);
+        $stmt->bindValue(":uuid", $param["uuid"]);
+        $stmt->execute();*/
+        return "ss";
+    }
 }
