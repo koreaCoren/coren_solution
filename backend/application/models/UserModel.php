@@ -3,6 +3,30 @@ namespace application\models;
 use PDO;
 
 class UserModel extends Model {
+
+    // 중복 체크
+    public function ins_client(&$param){
+        $sql = "INSERT INTO clients 
+            (
+                `id`, `name`, `tel`, `position`, `company`, `group`, `profile`
+            ) 
+            VALUES 
+            (
+                :id, :name, :tel, :position, :company, :group, :profile
+            )";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(":id", $param['userId']);
+        $stmt->bindValue(":name", $param['name']);
+        $stmt->bindValue(":tel", $param['tel']);
+        $stmt->bindValue(":position", $param['position']);
+        $stmt->bindValue(":company", $param['company']);
+        $stmt->bindValue(":group", $param['group']);
+        $stmt->bindValue(":profile", $param['profile']);
+        $stmt->execute();
+        $row = $stmt->rowCount();
+        return $row;
+    }
+
     public function myPage(&$param){
         $sql = "SELECT * FROM member
                 WHERE id = BINARY :id";
