@@ -4,6 +4,23 @@ form {
     padding: 0px 15px;
 }
 
+form .profiles {
+    padding: 20px 0px 0px;
+    text-align: center;
+}
+
+form .profiles i {
+    width: 150px;
+    height: 150px;
+    background-color: #eee;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 100px;
+    color: #fff;
+}
+
 form span {
     line-height: 40px;
 }
