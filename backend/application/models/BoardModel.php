@@ -26,6 +26,35 @@ class BoardModel extends Model {
         $stmt->bindValue(":cre_date", $param["date"]);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }  
+
+    public function del_board(&$param){
+        $sql = "DELETE FROM board WHERE i_board = :i_board and id = BINARY :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(":i_board", $param["boardNum"]);        
+        $stmt->bindValue(":id", $param["userId"]);        
+        $stmt->execute();
+        return $stmt->rowcount();
+    }
+    public function check_board(&$param){
+        $sql = "SELECT * FROM board WHERE i_board = :i_board and id = BINARY :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(":i_board", $param["boardNum"]);        
+        $stmt->bindValue(":id", $param["userId"]);    
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_OBJ);
+    }
+
+
+    public function upd_board(&$param){
+        $sql = "UPDATE board SET title = :title, ctnt = :ctnt WHERE i_board = :i_board and id = BINARY :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(":i_board", $param["boardNum"]); 
+        $stmt->bindValue(":id", $param["userId"]);    
+        $stmt->bindValue(":title", $param["title"]);    
+        $stmt->bindValue(":ctnt", $param["ctnt"]);                
+        $stmt->execute();
+        return $stmt->rowcount();
     }
 
 }
