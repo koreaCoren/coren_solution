@@ -3,6 +3,13 @@ namespace application\controllers;
 
 class UserController extends Controller {
 
+    // 회원등록
+    public function ins_client(){
+        $json = getJson();
+        
+        return $this->model->ins_client($json);            
+    }
+
     // 마이페이지
     public function myPage(){
         $json = getJson();

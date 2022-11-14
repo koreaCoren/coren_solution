@@ -12,12 +12,16 @@ const Register = () => {
     const memberRegister = async (e) => {
         e.preventDefault();
 
-        const url = `${process.env.REACT_APP_API_URL}/board/del_board`;
+        const url = `${process.env.REACT_APP_API_URL}/user/del_board`;
 
         const memberData = {
+            userId: sessionStorage("userId"),
             name: getName,
             tel: getTel,
-            group: getGroup
+            position: getPosition,
+            company: getCompany,
+            group: getGroup,
+            profile: getProfile,
         }
 
         await axios.post(url, memberData).then((res) => {
