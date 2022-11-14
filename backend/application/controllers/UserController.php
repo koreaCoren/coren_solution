@@ -20,6 +20,35 @@ class UserController extends Controller {
 
     }
 
+    // 프로필 이미지 업로드
+    public function profileInsImg(){
+        $json = getJson(); //배열형
+        $image_parts = explode(";base64,", $json['image']); //[0]파일명 및 타입 ;base 65 [1]이미지 로 나눔
+        $image_type_aux = explode("image/", $image_parts[0]);  //[0]데이터 [1]파일확장자 로 나눔
+        $image_type = $image_type_aux[1];      
+        $image_base64 = base64_decode($image_parts[1]); //$image_parts[1] 이미지를 디코딩
+        $dirPath = _IMG_PATH . "/" . $productId;
+        $filePath = $dirPath . "/" . uniqid() . "." . $image_type; 
+        //폴더 안에 파일 삭제 후에 새로운 파일 추가
+        rmdirAll($dirPath);
+        if(!is_dir($dirPath)) {
+            mkdir($dirPath, 0777, true);
+        }
+        $filename = explode("/", $filePath);
+        //$file = _IMG_PATH . "/" . $productId . "/" . $type . "/" . uniqid() . "." . $image_type;
+        //$file = "static/" . uniqid() . "." . $image_type;
+        $result = file_put_contents($filePath, $image_base64);
+        if($result){
+            $param = [
+                'uuid' => $productId,
+                'user_img' => $filename[3],
+            ];
+            $this->model->profileInsImg($param);
+            return [_RESULT => $filePath];
+        }
+        return [_RESULT => 0];
+    }
+
 
     // 회원가입
     public function ins_user() {
