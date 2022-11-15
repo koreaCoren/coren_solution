@@ -1,8 +1,7 @@
 {
   "name": "test-project",
   "version": "0.1.0",
-  "private": true,  
-  "proxy": "http://192.168.0.115",
+  "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -44,5 +43,5 @@
   "main": "index.js",
   "author": "",
   "license": "ISC",
-  "proxy": "http://192.168.0.86"
+  "proxy": "http://192.168.0.115"
 }
