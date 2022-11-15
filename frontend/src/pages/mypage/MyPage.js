@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 
 const MyPage = () => {
     const [getUserInfo, setUserInfo] = useState();
+    const [getProfileImage, setProfileImage] = useState("");
 
     const userInfo = async () => {
         const url = `${process.env.REACT_APP_API_URL}/user/mypage`;
@@ -25,10 +26,56 @@ const MyPage = () => {
         userInfo();
     }, [])
 
+    const onFileChange = (e) => {
+        const url = `${process.env.REACT_APP_API_URL}/user/profileInsImg`;
+
+        const { target: { files }, } = e;
+        const theFile = files[0];
+        const reader = new FileReader();
+        const formData = new FormData();
+        formData.append('img', theFile);
+
+        reader.onloadend = (finishedEvent) => {
+            const {
+                currentTarget: { result },
+            } = finishedEvent;
+            setProfileImage(result);
+        };
+        reader.readAsDataURL(theFile);
+
+        const image = {
+            userId: sessionStorage.getItem("userId"),
+            profileImage: formData.get("img"),
+            test: formData
+        }
+
+        axios.post(url, image).then((res) => {
+            console.log(res.data);
+        }).catch((error) => {
+            console.log(error);
+        })
+
+        console.log(formData.get("img"));
+    }
+    const onClearPhoto = () => {
+        if (getProfileImage !== "") {
+            setProfileImage("");
+        }
+    }
+
     return (
         <>
             <div className="profile">
-                <i className="fa-solid fa-user"></i>
+                {
+                    getProfileImage === ""
+                        ? <i className="fa-solid fa-user">
+                            <input type="file" accept="image/*" onChange={onFileChange} />
+                        </i>
+                        : <div className='myImage'>
+                            <img src={getProfileImage} alt="" />
+                            <input type="file" accept="image/*" onChange={onFileChange} />
+                        </div>
+                }
                 <h2>{getUserInfo?.id}</h2>
             </div>
             <div className="userInfo">

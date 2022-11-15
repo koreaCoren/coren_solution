@@ -1,15 +1,15 @@
-form {
+.loginContainer form {
     display: flex;
     flex-direction: column;
     padding: 0px 15px;
 }
 
-form .profiles {
+.loginContainer form .profiles {
     padding: 20px 0px 0px;
     text-align: center;
 }
 
-form .profiles i {
+.loginContainer form .profiles i {
     width: 150px;
     height: 150px;
     background-color: #eee;
@@ -21,11 +21,11 @@ form .profiles i {
     color: #fff;
 }
 
-form span {
+.loginContainer form span {
     line-height: 40px;
 }
 
-form input {
+.loginContainer form input {
     border: none;
     background-color: #f3f3f3;
     line-height: 40px;
@@ -34,11 +34,11 @@ form input {
     padding: 5px 10px;
 }
 
-form .select {
+.loginContainer form .select {
     position: relative;
 }
 
-form select {
+.loginContainer form select {
     border: none;
     background-color: #f3f3f3;
     line-height: 40px;
@@ -47,7 +47,7 @@ form select {
     padding: 5px 10px;
 }
 
-form .select i {
+.loginContainer form .select i {
     position: absolute;
     top: 42%;
     right: 15px;
@@ -56,7 +56,7 @@ form .select i {
     color: #888;
 }
 
-form button {
+.loginContainer form button {
     width: 100%;
     text-align: center;
     background-color: var(--bt-color-t1);
