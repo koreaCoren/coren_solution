@@ -1,15 +1,15 @@
-.loginContainer form {
+.profileContainer form {
     display: flex;
     flex-direction: column;
     padding: 0px 15px;
 }
 
-.loginContainer form .profiles {
+.profileContainer form .profiles {
     padding: 20px 0px 0px;
     text-align: center;
 }
 
-.loginContainer form .profiles i {
+.profileContainer form .profiles i {
     width: 150px;
     height: 150px;
     background-color: #eee;
@@ -21,11 +21,11 @@
     color: #fff;
 }
 
-.loginContainer form span {
+.profileContainer form span {
     line-height: 40px;
 }
 
-.loginContainer form input {
+.profileContainer form input {
     border: none;
     background-color: #f3f3f3;
     line-height: 40px;
@@ -34,11 +34,11 @@
     padding: 5px 10px;
 }
 
-.loginContainer form .select {
+.profileContainer form .select {
     position: relative;
 }
 
-.loginContainer form select {
+.profileContainer form select {
     border: none;
     background-color: #f3f3f3;
     line-height: 40px;
@@ -47,7 +47,7 @@
     padding: 5px 10px;
 }
 
-.loginContainer form .select i {
+.profileContainer form .select i {
     position: absolute;
     top: 42%;
     right: 15px;
@@ -56,7 +56,7 @@
     color: #888;
 }
 
-.loginContainer form button {
+.profileContainer form button {
     width: 100%;
     text-align: center;
     background-color: var(--bt-color-t1);
