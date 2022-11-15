@@ -5,11 +5,6 @@
         $data = json_decode(stripcslashes($reqBody), true);
         return $data;
     }
-    function getJson2() {
-        $test = file_get_contents('php://input');
-        
-        return print_r($test);
-    }
     
     function getParam($key) {
         return isset($_GET[$key]) ? $_GET[$key] : "";

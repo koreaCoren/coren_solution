@@ -33,9 +33,6 @@ class Controller {
             echo json_encode($view);
         }        
     }
-    private function chkLoginUrl() {
-
-    }
     
     protected function addAttribute($key, $val) {
         $this->$key = $val;
