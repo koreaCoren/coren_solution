@@ -8,7 +8,7 @@
             "name": "Listen for Xdebug",
             "type": "php",
             "request": "launch",
-            "port": 9003,
+            "port": 9001,
             "hostname": "localhost"
         },
         {
@@ -36,7 +36,7 @@
             ],
             "program": "",
             "cwd": "${workspaceRoot}",
-            "port": 9003,
+            "port": 9001,
             "serverReadyAction": {
                 "pattern": "Development Server \\(http://localhost:([0-9]+)\\) started",
                 "uriFormat": "http://localhost:%s",
