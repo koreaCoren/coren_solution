@@ -24,7 +24,7 @@
         return $getUrl !== "" ? explode('/', $getUrl) : "";
     }
 
-    function getMethod() {        
+    function getMethod() {
         return $_SERVER['REQUEST_METHOD'];
     }
 
