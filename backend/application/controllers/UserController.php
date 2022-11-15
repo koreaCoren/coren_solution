@@ -22,8 +22,9 @@ class UserController extends Controller {
 
     // 프로필 이미지 업로드
     public function profileInsImg(){
-        $json = getjson();
-
+        $urlPaths = getUrlPaths();
+        // $userId = $json['userId'];
+        $userId = $urlPaths[2];
         $img_name = $_FILES["img"]["name"]; // $_FILES["포스트된 이미지의 이름"]["name=파일이름?"]
         $last_index = mb_strrpos($img_name, ".");
         $ext = mb_substr($img_name, $last_index);
@@ -35,10 +36,12 @@ class UserController extends Controller {
         $tmp_img = $_FILES['img']['tmp_name'];
         $imageUpload = move_uploaded_file($tmp_img, $target_full_path . "/" .$target_filenm); //파일이동 성공시 true, 실패시 false
         echo $tmp_img . "---------" . $target_full_path . "----------" .$target_filenm;
-        
+        $param = [
+            "userId" => $userId,
+            "imgName" => $target_filenm
+        ];
 
-        return $target_filenm;
-       
+        return $this->model->profileInsImg($param);
     }
 
 
