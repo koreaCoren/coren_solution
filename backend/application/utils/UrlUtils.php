@@ -1,7 +1,7 @@
 <?php
     
     function getJson() {
-        $reqBody = file_get_contents('php://input');
+        $reqBody = file_get_contents('php://input');        
         $data = json_decode(stripcslashes($reqBody), true);
         return $data;
     }
