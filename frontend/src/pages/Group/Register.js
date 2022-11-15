@@ -115,7 +115,7 @@ const Register = () => {
     }
 
     return (
-        <>
+        <div className='profileContainer'>
             <form onSubmit={memberRegister}>
                 <div className="profiles">
                     <i className="fa-solid fa-user"
@@ -143,7 +143,7 @@ const Register = () => {
                 </div>
                 <button>저장하기</button>
             </form>
-        </>
+        </div>
     );
 };
 
