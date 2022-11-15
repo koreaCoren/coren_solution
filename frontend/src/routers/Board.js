@@ -13,7 +13,7 @@ const Board = () => {
     const nav = useNavigate();
     const [getBoardList, setBoardList] = useState([]);
     const getBoard = async () => {
-        const url = `${process.env.REACT_APP_API_URL}/Board/sel_board`;
+        const url = `/MVC/backend/Board/sel_board`;
         await axios.get(url).then((res) => {
             setBoardList(res.data);
         }).catch((error) => {

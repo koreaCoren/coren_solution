@@ -18,7 +18,7 @@ const Register = () => {
     const memberRegister = async (e) => {
         e.preventDefault();
 
-        const url = `${process.env.REACT_APP_API_URL}/user/ins_client`;
+        const url = `/MVC/backend/user/ins_client`;
 
         const memberData = {
             userId: sessionStorage.getItem("userId"),
@@ -64,7 +64,7 @@ const Register = () => {
 
     /*const imgChange = async (e) => {
         //console.log(e.target.files[0]);
-        const url = `${process.env.REACT_APP_API_URL}/user/profileInsImg`;
+        const url = `/MVC/backend/user/profileInsImg`;
         const formData = new FormData();
         formData.append('file', e.target.files[0]);
         
@@ -85,15 +85,15 @@ const Register = () => {
         const theFile = files[0];
         const reader = new FileReader();
         reader.onloadend = (finishedEvent) => {
-        const {
-            currentTarget: { result },
-        } = finishedEvent;
-        setAttachment(result);
-        console.log(result);
+            const {
+                currentTarget: { result },
+            } = finishedEvent;
+            setAttachment(result);
+            console.log(result);
         };
         reader.readAsDataURL(theFile);
 
-        const url = `${process.env.REACT_APP_API_URL}/user/profileInsImg`;
+        const url = `/MVC/backend/user/profileInsImg`;
         console.log(attachment);
         await axios.post(url, attachment).then((res) => {
 
@@ -105,7 +105,7 @@ const Register = () => {
 
     const onClearPhoto = () => {
         if (attachment !== "") {
-        setAttachment("");
+            setAttachment("");
         }
     }
 
@@ -119,11 +119,11 @@ const Register = () => {
             <form onSubmit={memberRegister}>
                 <div className="profiles">
                     <i className="fa-solid fa-user"
-                    onClick={insertImg}></i>
+                        onClick={insertImg}></i>
                 </div>
                 <input type="file" accept='image/*'
-                className='profileImg' ref={fileInput}
-                onChange={onFileChange} />
+                    className='profileImg' ref={fileInput}
+                    onChange={onFileChange} />
                 <img src={attachment} />
                 <span>이름</span>
                 <input onChange={onChange} name='name' type="text" placeholder='이름' />

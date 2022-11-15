@@ -10,7 +10,7 @@ const MyPage = () => {
     const [getProfileImage, setProfileImage] = useState("");
 
     const userInfo = async () => {
-        const url = `${process.env.REACT_APP_API_URL}/user/mypage`;
+        const url = `/MVC/backend/user/mypage`;
         const userData = {
             token: sessionStorage.getItem("loginToken"),
             userId: sessionStorage.getItem("userId"),
@@ -42,11 +42,11 @@ const MyPage = () => {
         reader.readAsDataURL(theFile);
         const userId = sessionStorage.getItem("userId");
         axios.post(`/MVC/backend/user/profileInsImg/${userId}`, formData)
-        .then((res) => {
-            console.log(res.date);
-        }).catch((error) => {
-            console.log(error);
-        })
+            .then((res) => {
+                console.log(res.date);
+            }).catch((error) => {
+                console.log(error);
+            })
 
         console.log(formData.get("img"));
     }
@@ -75,7 +75,7 @@ const MyPage = () => {
                 <ul>
                     <li>
                         <div>testImg</div>
-                        <img src={getUserInfo?.img}/>
+                        <img src={getUserInfo?.img} />
                     </li>
                     <li>
                         <div><i className="fa-solid fa-phone"></i>전화번호 </div>

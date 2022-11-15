@@ -23,7 +23,7 @@ const Register = () => {
             return;
         };
 
-        const url = `${process.env.REACT_APP_API_URL}/user/ins_user`;
+        const url = `/MVC/backend/user/ins_user`;
         const loginData = {
             id: getId,
             pw: getPassword,
