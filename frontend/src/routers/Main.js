@@ -17,7 +17,7 @@ const Main = (props) => {
     const [getNav, setNav] = useState(0);
 
     const tokenCheck = async () => {
-        const url = `${process.env.REACT_APP_API_URL}/user/checkToken`;
+        const url = `/MVC/backend/user/checkToken`;
         const tokenData = {
             token: sessionStorage.getItem("loginToken"),
             userId: sessionStorage.getItem("userId"),

@@ -33,7 +33,7 @@ const ReqFriend = () => {
 
     //친구리스트 불러오기
     const getFiendList = async () => {
-        const url = `${process.env.REACT_APP_API_URL}/user/reqing_friend`;
+        const url = `/MVC/backend/user/reqing_friend`;
         let userState = [{ res: [] }, { req: [] }, { fri: [] }];
 
         const user = {
@@ -85,7 +85,7 @@ const ReqFriend = () => {
             return;
         }
 
-        const url = `${process.env.REACT_APP_API_URL}/user/find_friend`;
+        const url = `/MVC/backend/user/find_friend`;
         const searchUser = {
             searchUser: getSearch,
             userId: sessionStorage.getItem("userId")
@@ -119,7 +119,7 @@ const ReqFriend = () => {
     const firendRequest = async (e) => {
         e.preventDefault();
 
-        const url = `${process.env.REACT_APP_API_URL}/user/req_friend`;
+        const url = `/MVC/backend/user/req_friend`;
         const friend = {
             requestUser: sessionStorage.getItem("userId"),
             responseUser: getResponesUser,
@@ -138,7 +138,7 @@ const ReqFriend = () => {
     const firendRequestCancellation = async (e) => {
         e.preventDefault();
 
-        const url = `${process.env.REACT_APP_API_URL}/user/deny_friend`;
+        const url = `/MVC/backend/user/deny_friend`;
         const friend = {
             requestUser: sessionStorage.getItem("userId"),
             responseUser: getCencelFriend,
@@ -153,7 +153,7 @@ const ReqFriend = () => {
 
     //친구 삭제
     const deleteFriend = async (deleteFri) => {
-        const url = `${process.env.REACT_APP_API_URL}/user/delete_friend`;
+        const url = `/MVC/backend/user/delete_friend`;
         const friend = {
             requestUser: sessionStorage.getItem("userId"),
             responseUser: deleteFri,
@@ -170,7 +170,7 @@ const ReqFriend = () => {
     const firendReponse = async (e) => {
         e.preventDefault();
 
-        const url = `${process.env.REACT_APP_API_URL}/user/accept_friend`;
+        const url = `/MVC/backend/user/accept_friend`;
         const friend = {
             requestUser: sessionStorage.getItem("userId"),
             responseUser: getFirendReponse,

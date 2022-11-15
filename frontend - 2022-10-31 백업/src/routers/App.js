@@ -26,7 +26,7 @@ const App = () => {
     const loginOut = async (e) => {
         e.preventDefault();
 
-        const url = `${process.env.REACT_APP_API_URL}/user/break_token`;
+        const url = `/MVC/backend/user/break_token`;
         const userId = sessionStorage.getItem('userId');
         const Data = {
             userId: userId

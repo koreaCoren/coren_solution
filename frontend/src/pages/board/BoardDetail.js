@@ -13,7 +13,7 @@ const BoardDetail = (props) => {
     const boardDelete = async () => {
         const ok = window.confirm("정말로 삭제 하시겠습니까?");
         if (ok) {
-            const url = `${process.env.REACT_APP_API_URL}/board/del_board`;
+            const url = `/MVC/backend/board/del_board`;
             const user = {
                 userId: sessionStorage.getItem("userId"),
                 boardNum: props.getBoardList[id]?.i_board
