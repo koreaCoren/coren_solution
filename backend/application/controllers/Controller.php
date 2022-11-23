@@ -1,14 +1,14 @@
 <?php
 namespace application\controllers;
 
-class Controller {    
+class Controller {
     protected $model;
     private static $needLoginUrlArr = [];
 
-    public function __construct($action, $model) {    
+    public function __construct($action, $model) {   
         if(!isset($_SESSION)) {
             session_start();
-        }    
+        }
         $urlPaths = getUrl();
         foreach(static::$needLoginUrlArr as $url) {
             if(strpos( $urlPaths, $url) === 0 && !isset($_SESSION[_LOGINUSER]) ) {
