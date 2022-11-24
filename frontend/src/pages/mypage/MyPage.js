@@ -10,13 +10,14 @@ const MyPage = () => {
     const [getProfileImage, setProfileImage] = useState("");
 
     const userInfo = async () => {
-        const url = `${process.env.REACT_APP_API_URL}/user/mypage`;
+        const url = `/MVC/backend/user/mypage`;
         const userData = {
             token: sessionStorage.getItem("loginToken"),
             userId: sessionStorage.getItem("userId"),
         }
         await axios.post(url, userData).then((res) => {
             setUserInfo(res.data);
+            console.log(res.data);
         }).catch((error) => {
             console.log(error);
         })
@@ -27,14 +28,11 @@ const MyPage = () => {
     }, [])
 
     const onFileChange = (e) => {
-        const url = `${process.env.REACT_APP_API_URL}/user/profileInsImg`;
-
         const { target: { files }, } = e;
         const theFile = files[0];
         const reader = new FileReader();
         const formData = new FormData();
         formData.append('img', theFile);
-
         reader.onloadend = (finishedEvent) => {
             const {
                 currentTarget: { result },
@@ -78,6 +76,10 @@ const MyPage = () => {
             </div>
             <div className="userInfo">
                 <ul>
+                    <li>
+                        <div>testImg</div>
+                        <img src={getUserInfo?.img} />
+                    </li>
                     <li>
                         <div><i className="fa-solid fa-phone"></i>전화번호 </div>
                         <h3>{getUserInfo?.tell}</h3>

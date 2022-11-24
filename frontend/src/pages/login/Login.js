@@ -15,7 +15,7 @@ const Login = (props) => {
     const onSubmit = async (e) => {
         e.preventDefault();
 
-        const url = `${process.env.REACT_APP_API_URL}/user/sel_user`;
+        const url = `/MVC/backend/user/sel_user`;
         const loginData = {
             id: getId,
             pw: getPassword,

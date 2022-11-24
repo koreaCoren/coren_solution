@@ -34,15 +34,29 @@ class UserModel extends Model {
         $stmt->bindValue(":id", $param['userId']);
         $stmt->execute();
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
+        $imgPath = REQ_IMG_PATH . "/profileImg" . "/" . $data['id'] . "/" . $data['img'];
         $result = [
             'id' => $data['id'],
             'email' => $data['email'],
             'belong' => $data['belong'],
             'address' => $data['address'],
             'tell' => $data['tell'],
+            'img' => $imgPath
         ];
         
         return $result;
+    }
+
+    //프로필 이미지 업로드
+    public function profileInsImg(&$param){
+        $sql = "UPDATE member
+                SET img = :img
+                WHERE id = :id"; 
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(":img", $param['imgName']);
+        $stmt->bindValue(":id", $param['userId']);
+        $stmt->execute();
+        return $stmt->rowCount();
     }
 
     // 중복 체크
@@ -260,5 +274,4 @@ class UserModel extends Model {
         $stmt->execute();
         return intval($this->pdo->lastInsertId());
     }
-   
 }
