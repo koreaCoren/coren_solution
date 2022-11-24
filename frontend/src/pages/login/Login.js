@@ -29,7 +29,6 @@ const Login = (props) => {
                 props.setLoginCheck(true);
                 nav("/");
             } else {
-                console.log(res.data);
                 alert("아이디 또는 비밀번호 틀립니다.");
             }
         }).catch((error) => {

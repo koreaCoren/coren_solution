@@ -54,8 +54,6 @@ const MyPage = () => {
         }).catch((error) => {
             console.log(error);
         })
-
-        console.log(formData.get("img"));
     }
     const onClearPhoto = () => {
         if (getProfileImage !== "") {
