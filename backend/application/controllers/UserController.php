@@ -20,6 +20,19 @@ class UserController extends Controller {
 
     }
 
+    // 프로필 이미지 업로드
+    public function profileInsImg(){
+        $urlPaths = getUrlPaths();
+        $userId = $urlPaths[2];
+        $fileNm = create_img($userId, "profileImg");
+        $param = [
+            "userId" => $userId,
+            "imgName" => $fileNm
+        ];
+
+        return $this->model->profileInsImg($param);
+    }
+
 
     // 회원가입
     public function ins_user() {

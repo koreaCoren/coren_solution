@@ -21,7 +21,7 @@ const BoardWrite = () => {
 
         let days = new Date();
 
-        const url = `${process.env.REACT_APP_API_URL}/board/ins_board`;
+        const url = `/MVC/backend/board/ins_board`;
         const boardData = {
             id: sessionStorage.getItem("userId"),
             title: getTitle,

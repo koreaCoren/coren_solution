@@ -1,6 +1,9 @@
 <?php
+    
     function getJson() {
-        return json_decode(file_get_contents('php://input'), true);
+        $reqBody = file_get_contents('php://input');        
+        $data = json_decode(stripcslashes($reqBody), true);
+        return $data;
     }
     
     function getParam($key) {
@@ -16,7 +19,7 @@
         return $getUrl !== "" ? explode('/', $getUrl) : "";
     }
 
-    function getMethod() {        
+    function getMethod() {
         return $_SERVER['REQUEST_METHOD'];
     }
 

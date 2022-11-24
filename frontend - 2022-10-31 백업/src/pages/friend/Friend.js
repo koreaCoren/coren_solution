@@ -34,7 +34,7 @@ const Friend = () => {
 
     // 친구 리스트
     const getFiendList = async () => {
-        const url = `${process.env.REACT_APP_API_URL}/user/reqing_friend`;
+        const url = `/MVC/backend/user/reqing_friend`;
         let userState = [{ res: [] }, { req: [] }, { fri: [] }];
 
         const user = {
@@ -91,7 +91,7 @@ const Friend = () => {
             return;
         }
 
-        const url = `${process.env.REACT_APP_API_URL}/user/find_friend`;
+        const url = `/MVC/backend/user/find_friend`;
         const searchUser = {
             searchUser: getSearch,
         };
@@ -124,7 +124,7 @@ const Friend = () => {
     const firendRequest = async (e) => {
         e.preventDefault();
 
-        const url = `${process.env.REACT_APP_API_URL}/user/req_friend`;
+        const url = `/MVC/backend/user/req_friend`;
         const friend = {
             requestUser: sessionStorage.getItem("userId"),
             responseUser: getResponesUser,
@@ -143,7 +143,7 @@ const Friend = () => {
     const firendRequestCancellation = async (e) => {
         e.preventDefault();
 
-        const url = `${process.env.REACT_APP_API_URL}/user/deny_friend`;
+        const url = `/MVC/backend/user/deny_friend`;
         const friend = {
             requestUser: sessionStorage.getItem("userId"),
             responseUser: getCencelFriend,
@@ -158,7 +158,7 @@ const Friend = () => {
 
     //친구 삭제
     const deleteFriend = async (deleteFri) => {
-        const url = `${process.env.REACT_APP_API_URL}/user/delete_friend`;
+        const url = `/MVC/backend/user/delete_friend`;
         const friend = {
             requestUser: sessionStorage.getItem("userId"),
             responseUser: deleteFri,
@@ -175,7 +175,7 @@ const Friend = () => {
     const firendReponse = async (e) => {
         e.preventDefault();
 
-        const url = `${process.env.REACT_APP_API_URL}/user/accept_friend`;
+        const url = `/MVC/backend/user/accept_friend`;
         const friend = {
             requestUser: sessionStorage.getItem("userId"),
             responseUser: getFirendReponse,
