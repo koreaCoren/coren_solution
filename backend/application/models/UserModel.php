@@ -274,4 +274,19 @@ class UserModel extends Model {
         $stmt->execute();
         return intval($this->pdo->lastInsertId());
     }
+
+    //회원정보 리스트
+    public function clients_list(&$param){
+        $sql = "SELECT *
+                FROM clients WHERE id = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindvalue("id", $param["userId"]);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+}
+
+    //회원이미지
+    public function ins_clients_img(&$param){
+        
+    }
 }

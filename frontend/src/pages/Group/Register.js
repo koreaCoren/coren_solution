@@ -93,11 +93,15 @@ const Register = () => {
         };
         reader.readAsDataURL(theFile);
 
-        const url = `/MVC/backend/user/profileInsImg`;
-        console.log(attachment);
-        await axios.post(url, attachment).then((res) => {
+        const imgForm = {
+            imgName : attachment,
+            cid : "123"
+        }
 
+        const url = `/MVC/backend/user/ins_clients_img`;
+        await axios.post(url, imgForm).then((res) => {
             console.log(res.data);
+            console.log("base64" + attachment);
         }).catch((error) => {
             console.log(error);
         })

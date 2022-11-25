@@ -27,28 +27,31 @@ const MyPage = () => {
         userInfo();
     }, [])
 
-    const onFileChange = (e) => {
-        const { target: { files }, } = e;
+    const [attachment, setAttachment] = useState("");
+    const onFileChange = async (event) => {
+        const { target: { files }, } = event;
         const theFile = files[0];
         const reader = new FileReader();
-        const formData = new FormData();
-        formData.append('img', theFile);
-        reader.onloadend = (finishedEvent) => {
+        reader.onloadend = async (finishedEvent) => {
             const {
                 currentTarget: { result },
             } = finishedEvent;
-            setProfileImage(result);
+            setAttachment(result);
+            await console.log(result);
         };
         reader.readAsDataURL(theFile);
-        const userId = sessionStorage.getItem("userId");
-        axios.post(`/MVC/backend/user/profileInsImg/${userId}`, formData)
-            .then((res) => {
-                console.log(res.date);
-            }).catch((error) => {
-                console.log(error);
-            })
 
-        console.log(formData.get("img"));
+        const imgForm = {
+            imgName : attachment,
+            userId : sessionStorage.getItem("userId"),
+        }
+
+        const url = `/MVC/backend/user/profileInsImg`;
+        await axios.post(url, imgForm).then((res) => {
+            console.log(res.data);
+        }).catch((error) => {
+            console.log(error);
+        })
     }
     const onClearPhoto = () => {
         if (getProfileImage !== "") {
@@ -60,12 +63,13 @@ const MyPage = () => {
         <>
             <div className="profile">
                 {
-                    getProfileImage === ""
+                    getUserInfo?.img.includes('img') !== true
                         ? <i className="fa-solid fa-user">
+                            <img src= {getProfileImage} alt="" />
                             <input type="file" accept="image/*" onChange={onFileChange} />
                         </i>
                         : <div className='myImage'>
-                            <img src={getProfileImage} alt="" />
+                            <img src= {getUserInfo?.img} alt="" />
                             <input type="file" accept="image/*" onChange={onFileChange} />
                         </div>
                 }
@@ -73,10 +77,6 @@ const MyPage = () => {
             </div>
             <div className="userInfo">
                 <ul>
-                    <li>
-                        <div>testImg</div>
-                        <img src={getUserInfo?.img} />
-                    </li>
                     <li>
                         <div><i className="fa-solid fa-phone"></i>전화번호 </div>
                         <h3>{getUserInfo?.tell}</h3>
