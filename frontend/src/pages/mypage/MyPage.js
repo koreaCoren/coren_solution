@@ -17,7 +17,8 @@ const MyPage = () => {
         }
         await axios.post(url, userData).then((res) => {
             setUserInfo(res.data);
-            console.log(res.data);
+            // setProfileImage(res.data);
+            console.log(getProfileImage);
         }).catch((error) => {
             console.log(error);
         })
@@ -43,7 +44,7 @@ const MyPage = () => {
         const userId = sessionStorage.getItem("userId");
         axios.post(`/MVC/backend/user/profileInsImg/${userId}`, formData)
             .then((res) => {
-                console.log(res.date);
+                console.log(res.data);
             }).catch((error) => {
                 console.log(error);
             })
@@ -55,15 +56,20 @@ const MyPage = () => {
             setProfileImage("");
         }
     }
-
+    console.log(getProfileImage);
     return (
         <>
             <div className="profile">
                 {
                     getProfileImage === ""
-                        ? <i className="fa-solid fa-user">
-                            <input type="file" accept="image/*" onChange={onFileChange} />
-                        </i>
+                        ? getUserInfo?.img === ""
+                            ? <i className="fa-solid fa-user">
+                                <input type="file" accept="image/*" onChange={onFileChange} />
+                            </i>
+                            : <div className='myImage'>
+                                <img src={getUserInfo?.img} alt="" />
+                                <input type="file" accept="image/*" onChange={onFileChange} />
+                            </div>
                         : <div className='myImage'>
                             <img src={getProfileImage} alt="" />
                             <input type="file" accept="image/*" onChange={onFileChange} />
@@ -73,10 +79,6 @@ const MyPage = () => {
             </div>
             <div className="userInfo">
                 <ul>
-                    <li>
-                        <div>testImg</div>
-                        <img src={getUserInfo?.img} />
-                    </li>
                     <li>
                         <div><i className="fa-solid fa-phone"></i>전화번호 </div>
                         <h3>{getUserInfo?.tell}</h3>
