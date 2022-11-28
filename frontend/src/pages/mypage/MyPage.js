@@ -10,15 +10,13 @@ const MyPage = () => {
     const [getProfileImage, setProfileImage] = useState("");
 
     const userInfo = async () => {
-        const url = `/MVC/backend/user/mypage`;
+        const url = `${process.env.REACT_APP_API_URL}/user/mypage`;
         const userData = {
             token: sessionStorage.getItem("loginToken"),
             userId: sessionStorage.getItem("userId"),
         }
         await axios.post(url, userData).then((res) => {
             setUserInfo(res.data);
-            // setProfileImage(res.data);
-            console.log(getProfileImage);
         }).catch((error) => {
             console.log(error);
         })
@@ -26,9 +24,10 @@ const MyPage = () => {
 
     useEffect(() => {
         userInfo();
-    }, [])
+    }, [getProfileImage])
 
     const onFileChange = (e) => {
+        const url = `${process.env.REACT_APP_API_URL}/user/profileInsImg/${sessionStorage.getItem("userId")}`;
         const { target: { files }, } = e;
         const theFile = files[0];
         const reader = new FileReader();
@@ -41,37 +40,24 @@ const MyPage = () => {
             setProfileImage(result);
         };
         reader.readAsDataURL(theFile);
-        const userId = sessionStorage.getItem("userId");
-        axios.post(`/MVC/backend/user/profileInsImg/${userId}`, formData)
-            .then((res) => {
-                console.log(res.data);
-            }).catch((error) => {
-                console.log(error);
-            })
-
-        console.log(formData.get("img"));
-    }
-    const onClearPhoto = () => {
-        if (getProfileImage !== "") {
-            setProfileImage("");
-        }
+        axios.post(url, formData).then((res) => {
+            setProfileImage(res.data);
+        }).catch((error) => {
+            console.log(error);
+        })
     }
     console.log(getProfileImage);
     return (
         <>
             <div className="profile">
                 {
-                    getProfileImage === ""
-                        ? getUserInfo?.img === ""
-                            ? <i className="fa-solid fa-user">
-                                <input type="file" accept="image/*" onChange={onFileChange} />
-                            </i>
-                            : <div className='myImage'>
-                                <img src={getUserInfo?.img} alt="" />
-                                <input type="file" accept="image/*" onChange={onFileChange} />
-                            </div>
-                        : <div className='myImage'>
+                    getUserInfo?.img.includes('jpg') !== true
+                        ? <i className="fa-solid fa-user">
                             <img src={getProfileImage} alt="" />
+                            <input type="file" accept="image/*" onChange={onFileChange} />
+                        </i>
+                        : <div className='myImage'>
+                            <img src={getUserInfo?.img} alt="" />
                             <input type="file" accept="image/*" onChange={onFileChange} />
                         </div>
                 }

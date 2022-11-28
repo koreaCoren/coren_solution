@@ -3,22 +3,22 @@ import React from 'react';
 import "asset/css/group/register.css"
 import { useState } from 'react';
 import axios from 'axios';
-import { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
+    const nav = useNavigate();
     const [getName, setName] = useState("");
     const [getTel, setTel] = useState("");
     const [getPosition, setPosition] = useState("");
     const [getCompany, setCompany] = useState("");
     const [getGroup, setGroup] = useState("1번");
     const [getProfile, setProfile] = useState("");
-    const fileInput = useRef(null);
-    const [getImg, setImg] = useState("");
+    const [getProfileImage, setProfileImage] = useState("");
 
     const memberRegister = async (e) => {
         e.preventDefault();
 
-        const url = `/MVC/backend/user/ins_client`;
+        const url = `${process.env.REACT_APP_API_URL}/user/ins_client`;
 
         const memberData = {
             userId: sessionStorage.getItem("userId"),
@@ -31,8 +31,7 @@ const Register = () => {
         }
 
         await axios.post(url, memberData).then((res) => {
-            console.log(res.data);
-            console.log(memberData);
+            nav("/");
         }).catch((error) => {
             console.log(error);
         })
@@ -62,69 +61,37 @@ const Register = () => {
         }
     };
 
-    /*const imgChange = async (e) => {
-        //console.log(e.target.files[0]);
-        const url = `/MVC/backend/user/profileInsImg`;
-        const formData = new FormData();
-        formData.append('file', e.target.files[0]);
-        
-        //for(const key of formData.entries()){
-        //    console.log(key[0] + ', ' + key[1]);
-        //}
-
-        await axios.post(url, formData).then((res) => {
-            console.log(res.data);
-        }).catch((error) => {
-            console.log(error);
-        })
-    } */
-
-    const [attachment, setAttachment] = useState("");
-    const onFileChange = async (event) => {
-        const { target: { files }, } = event;
+    const onFileChange = (e) => {
+        const url = `${process.env.REACT_APP_API_URL}/user/profileInsImg/${sessionStorage.getItem("userId")}`;
+        const { target: { files }, } = e;
         const theFile = files[0];
         const reader = new FileReader();
+        const formData = new FormData();
+        formData.append('img', theFile);
         reader.onloadend = (finishedEvent) => {
             const {
                 currentTarget: { result },
             } = finishedEvent;
-            setAttachment(result);
-            console.log(result);
+            setProfileImage(result);
         };
         reader.readAsDataURL(theFile);
-
-        const url = `/MVC/backend/user/profileInsImg`;
-        console.log(attachment);
-        await axios.post(url, attachment).then((res) => {
-
-            console.log(res.data);
-        }).catch((error) => {
-            console.log(error);
-        })
-    }
-
-    const onClearPhoto = () => {
-        if (attachment !== "") {
-            setAttachment("");
-        }
-    }
-
-    const insertImg = (e) => {
-        fileInput.current.click();
-        console.log()
     }
 
     return (
         <div className='profileContainer'>
             <form onSubmit={memberRegister}>
                 <div className="profiles">
-                    <i className="fa-solid fa-user"
-                        onClick={insertImg}></i>
+                    {
+                        getProfileImage === ""
+                            ? <i className="fa-solid fa-user">
+                                <input type="file" accept="image/*" onChange={onFileChange} />
+                            </i>
+                            : <div className='myImage'>
+                                <img src={getProfileImage} alt="" />
+                                <input type="file" accept="image/*" onChange={onFileChange} />
+                            </div>
+                    }
                 </div>
-                <input type="file" accept='image/*'
-                    className='profileImg' ref={fileInput}
-                    onChange={onFileChange} />
-                <img src={attachment} />
                 <span>이름</span>
                 <input onChange={onChange} name='name' type="text" placeholder='이름' />
                 <span>전화번호</span>

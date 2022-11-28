@@ -21,6 +21,61 @@
     color: #fff;
 }
 
+
+.profileContainer form .profiles>i {
+    width: 150px;
+    height: 150px;
+    background-color: #eee;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 100px;
+    color: #fff;
+    position: relative;
+}
+
+.profileContainer form .profiles>i>input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    border-radius: 50% !important;
+    font-size: 0;
+    line-height: 0px;
+}
+
+.profileContainer form .profiles>.myImage {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+}
+
+
+.profileContainer form .profiles>.myImage img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.profileContainer form .profiles>.myImage>input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    border-radius: 50% !important;
+    font-size: 0;
+    line-height: 0px;
+}
+
 .profileContainer form span {
     line-height: 40px;
 }
