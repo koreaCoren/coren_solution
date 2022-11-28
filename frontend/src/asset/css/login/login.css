@@ -1,9 +1,9 @@
-.loginContainer{
+.loginContainer {
     padding: 0px 15px;
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     background-color: var(--main-color);
     width: 100%;
     height: 100%;
@@ -13,12 +13,12 @@
     flex-direction: column;
 }
 
-.loginContainer > h2{
+.loginContainer>h2 {
     font-size: 30px;
     text-align: center;
 }
 
-.loginContainer > form{
+.loginContainer>form {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -29,27 +29,7 @@
     width: 100%;
 }
 
-.loginContainer > form > input{
-    border: none;
-    background-color: #fafafa;
-    line-height: 40px;
-    width: 95%;
-    border-radius: 5px;
-    padding: 5px 10px;
-}
-
-.loginContainer > form > button.buttonBlue{
-    width: 95%;
-    text-align: center;
-    background-color: var(--bt-color-t1);
-    color: #fff;
-    line-height: 40px;
-    border-radius: 5px;
-    font-family: var(--main-font);
-    cursor: pointer;
-}
-
-.loginContainer > form > .buttonGary{
+.loginContainer>form>.buttonGary {
     width: 95%;
     text-align: center;
     background-color: var(--bt-color-t2);
@@ -59,7 +39,7 @@
     cursor: pointer;
 }
 
-.loginContainer > form > .recover{
+.loginContainer>form>.recover {
     font-size: 12px;
     color: #777;
 }

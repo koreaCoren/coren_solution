@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 
 import "asset/css/login/login.css";
 import axios from "axios";
+import LoginButton from "components/button/LoginButton";
+import Input from "components/input/input";
 
 const Register = () => {
     const nav = useNavigate();
@@ -23,7 +25,7 @@ const Register = () => {
             return;
         };
 
-        const url = `/MVC/backend/user/ins_user`;
+        const url = `${process.env.REACT_APP_API_URL}/user/ins_user`;
         const loginData = {
             id: getId,
             pw: getPassword,
@@ -75,12 +77,12 @@ const Register = () => {
                 <h2>회원가입</h2>
 
                 <form onSubmit={onSubmit}>
-                    <input type="text" onChange={onChange} name="id" placeholder="아이디" />
-                    <input type="password" onChange={onChange} name="pw" placeholder="비밀번호" />
-                    <input type="text" onChange={onChange} name="tell" placeholder="전화번호" />
-                    <input type="text" onChange={onChange} name="email" placeholder="이메일" />
+                    <Input type="text" name="id" onChange={onChange} placeholder="아이디" />
+                    <Input type="password" name="pw" onChange={onChange} placeholder="비밀번호" />
+                    <Input type="text" name="tell" onChange={onChange} placeholder="전화번호" />
+                    <Input type="text" name="email" onChange={onChange} placeholder="이메일" />
 
-                    <button className="buttonBlue" type="submit">가입하기</button>
+                    <LoginButton text="가입하기" type="submit" />
                     <button type="button" className="buttonGary" onClick={() => { nav(-1); }}>뒤로가기</button>
                 </form>
             </div>
