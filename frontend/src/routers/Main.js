@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Header from 'components/Header';
+import Header from 'components/common/Header';
 import { Link, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -17,7 +17,7 @@ const Main = (props) => {
     const [getNav, setNav] = useState(0);
 
     const tokenCheck = async () => {
-        const url = `/MVC/backend/user/checkToken`;
+        const url = `${process.env.REACT_APP_API_URL}/user/checkToken`;
         const tokenData = {
             token: sessionStorage.getItem("loginToken"),
             userId: sessionStorage.getItem("userId"),

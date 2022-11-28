@@ -5,6 +5,9 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import "asset/css/login/login.css";
 import axios from "axios";
 
+import LoginButton from "components/button/LoginButton";
+import Input from "components/input/input";
+
 const Login = (props) => {
     const nav = useNavigate();
 
@@ -15,7 +18,7 @@ const Login = (props) => {
     const onSubmit = async (e) => {
         e.preventDefault();
 
-        const url = `/MVC/backend/user/sel_user`;
+        const url = `${process.env.REACT_APP_API_URL}/user/sel_user`;
         const loginData = {
             id: getId,
             pw: getPassword,
@@ -58,10 +61,10 @@ const Login = (props) => {
                 <h2>회원수첩</h2>
 
                 <form onSubmit={onSubmit}>
-                    <input type="text" onChange={onChange} name="id" placeholder="아이디" value={getId} />
-                    <input type="password" onChange={onChange} name="pw" placeholder="비밀번호" value={getPassword} />
+                    <Input type="text" name="id" placeholder="아이디" value={getId} setValue={setId} onChange={onChange} />
+                    <Input type="password" name="pw" onChange={onChange} placeholder="비밀번호" value={getPassword} />
 
-                    <button className="buttonBlue" type="submit">로그인</button>
+                    <LoginButton text="로그인" type="submit" />
                     <Link to="/register" className="buttonGary">회원가입</Link>
                     <Link to="/recover" className="recover">아이디 / 비밀번호 찾기</Link>
                 </form>
