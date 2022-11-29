@@ -10,14 +10,13 @@ const MyPage = () => {
     const [getProfileImage, setProfileImage] = useState("");
 
     const userInfo = async () => {
-        const url = `/MVC/backend/user/mypage`;
+        const url = `${process.env.REACT_APP_API_URL}/user/mypage`;
         const userData = {
             token: sessionStorage.getItem("loginToken"),
             userId: sessionStorage.getItem("userId"),
         }
         await axios.post(url, userData).then((res) => {
             setUserInfo(res.data);
-            console.log(res.data);
         }).catch((error) => {
             console.log(error);
         })
@@ -25,11 +24,8 @@ const MyPage = () => {
 
     useEffect(() => {
         userInfo();
-    }, [])
+    }, [getProfileImage])
 
-    const [attachment, setAttachment] = useState("");
-    const onFileChange = async (event) => {
-        const { target: { files }, } = event;
         const theFile = files[0];
         const reader = new FileReader();
         reader.onloadend = async (finishedEvent) => {
@@ -41,35 +37,20 @@ const MyPage = () => {
         };
         reader.readAsDataURL(theFile);
 
-        const imgForm = {
-            imgName : attachment,
-            userId : sessionStorage.getItem("userId"),
-        }
-
-        const url = `/MVC/backend/user/profileInsImg`;
-        await axios.post(url, imgForm).then((res) => {
-            console.log(res.data);
-        }).catch((error) => {
-            console.log(error);
-        })
-    }
-    const onClearPhoto = () => {
-        if (getProfileImage !== "") {
-            setProfileImage("");
-        }
     }
 
     return (
         <>
             <div className="profile">
                 {
-                    getUserInfo?.img.includes('img') !== true
+
+                    getUserInfo?.img.includes('jpg') !== true
                         ? <i className="fa-solid fa-user">
-                            <img src= {getProfileImage} alt="" />
+                            <img src={getProfileImage} alt="" />
                             <input type="file" accept="image/*" onChange={onFileChange} />
                         </i>
                         : <div className='myImage'>
-                            <img src= {getUserInfo?.img} alt="" />
+                            <img src={getUserInfo?.img} alt="" />
                             <input type="file" accept="image/*" onChange={onFileChange} />
                         </div>
                 }

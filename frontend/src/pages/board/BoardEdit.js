@@ -17,7 +17,7 @@ const BoardEdit = (props) => {
 
     const boardValue = async () => {
 
-        const url = `/MVC/backend/board/check_board`;
+        const url = `${process.env.REACT_APP_API_URL}/board/check_board`;
         const boardData = {
             userId: sessionStorage.getItem("userId"),
             boardNum: props.getBoardList[id]?.i_board
@@ -38,7 +38,7 @@ const BoardEdit = (props) => {
     const onSubmit = async (e) => {
         e.preventDefault();
 
-        const url = `/MVC/backend/board/upd_board`;
+        const url = `${process.env.REACT_APP_API_URL}/board/upd_board`;
         const boardData = {
             userId: sessionStorage.getItem("userId"),
             title: getTitle,
