@@ -26,31 +26,24 @@ const MyPage = () => {
         userInfo();
     }, [getProfileImage])
 
-    const onFileChange = (e) => {
-        const url = `${process.env.REACT_APP_API_URL}/user/profileInsImg/${sessionStorage.getItem("userId")}`;
-        const { target: { files }, } = e;
         const theFile = files[0];
         const reader = new FileReader();
-        const formData = new FormData();
-        formData.append('img', theFile);
-        reader.onloadend = (finishedEvent) => {
+        reader.onloadend = async (finishedEvent) => {
             const {
                 currentTarget: { result },
             } = finishedEvent;
-            setProfileImage(result);
+            setAttachment(result);
+            await console.log(result);
         };
         reader.readAsDataURL(theFile);
-        axios.post(url, formData).then((res) => {
-            setProfileImage(res.data);
-        }).catch((error) => {
-            console.log(error);
-        })
+
     }
 
     return (
         <>
             <div className="profile">
                 {
+
                     getUserInfo?.img.includes('jpg') !== true
                         ? <i className="fa-solid fa-user">
                             <img src={getProfileImage} alt="" />

@@ -6,8 +6,7 @@ class UserController extends Controller {
     // 회원등록
     public function ins_client(){
         $json = getJson();
-        
-        return $this->model->ins_client($json);            
+        return $this->model->ins_client($json);
     }
 
     // 마이페이지
@@ -20,16 +19,15 @@ class UserController extends Controller {
 
     }
 
-    // 프로필 이미지 업로드
+    // 프로필 이미지 업로드//
     public function profileInsImg(){
-        $urlPaths = getUrlPaths();
-        $userId = $urlPaths[2];
-        $fileNm = create_img($userId, "profileImg");
+        $json = getjson();
+        $imgName = $json['imgName'];
+        $file = create_b64_img($json['userId'], $json['imgName'], "profileImg");
         $param = [
-            "userId" => $userId,
-            "imgName" => $fileNm
+            'userId' => $json['userId'],
+            'imgName' => $file
         ];
-
         return $this->model->profileInsImg($param);
     }
 
@@ -117,4 +115,16 @@ class UserController extends Controller {
         return $this->model->accept_friend($json);
     }
     
+    //회원정보 리스트
+    public function clients_list(){
+        $json = getjson();
+        return $this->model->clients_list($json);
+    }
+
+    //회원 이미지
+    public function ins_clients_img(){
+        $json = getjson();
+        create_b64_img($json['cid'], $json['imgname'], "clientsImg");
+        return $this->model->ins_clients_img($json);
+    }
 }
