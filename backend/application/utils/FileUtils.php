@@ -62,7 +62,7 @@ function create_b64_img($id, $b64img, $folderPath){
     return $fileNm;
 }
 
-//기존 이미지 삭제
+//기존 이미지 삭제//
 function rmdirAll($dir) {
     if(!is_dir($dir)) { return; }
     $dirs = dir($dir);

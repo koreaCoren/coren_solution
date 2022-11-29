@@ -19,7 +19,7 @@ class UserController extends Controller {
 
     }
 
-    // 프로필 이미지 업로드
+    // 프로필 이미지 업로드//
     public function profileInsImg(){
         $json = getjson();
         $imgName = $json['imgName'];
